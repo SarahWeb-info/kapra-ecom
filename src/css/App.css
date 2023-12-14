@@ -1,0 +1,52 @@
+:root{
+    --color :#222222; 
+    --bg : white;
+    --highlighter : #fdc2ab;
+    --grayBase : #f6f6f8 ;
+    --alert : red;
+  }
+
+.alertColor{
+    color: var(--alert) !important;
+}
+.alertBg{
+    color: var(--bg);
+    background-color: var(--alert);
+}  
+.myBadge{
+    position: absolute;
+    right : 0;
+    top : -30%;
+    width: fit-content;
+    height: auto;
+    border-radius: 20%;
+    padding: 1.5px 3px;
+    line-height: 1;
+    font-size: 0.7rem;
+    text-transform: lowercase;
+}
+.noBtn{
+    border: none;
+    outline: none;
+    font-weight: bolder;
+    font-size: 2rem;
+    background-color: transparent;
+    color : var(--color);
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+.noBtn > button {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: fit-content;
+}
+.full-Block{
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.full-X-Block{
+    width: 100% !important;
+}

@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+UI Structure :
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+:root
+page font size : 16px
+text color : #222222
+btnBgColor : #212b36
+highlighter color : #fdc2ab
+white base color : #ffffff
+grayish base color : #f6f6f8
+text weight of menu link : #ededed
+font :  Montserrat;
 
-## Available Scripts
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+); 
 
-In the project directory, you can run:
+css styles components :  : 
+    - navbar        (fixed)
+    - footer        (fixed)
+    - leftMenu      ()
+    - rightMenu
+    - centerConfirmationDialog
+    - center banner
+    - topAlert
+    - ad
+    - bellAlert
 
-### `npm start`
+1-  UI project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+analysing pages/tabs/links
+1- home - 
+2 - product links (grids with load more button) (catagories,collections,sale pages, latest , product Page , best seller ) , 
+3 - account links (sign up , login , notification settings ) ,
+4 -  order links (track order , cart , my order(all , recieved , reveiwed ) , wishlist ) , 
+5 - search result page (static filter grid page )
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+NOTE : search result and product links have the same UI
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-fixed oneline disclaimer and Navbar
+- there are no dropdowns in navbar in desktop
+    -disclaimer is an auto caruosal (full screen with two slides)
+    - Navbar responsive (navbar menu collapse on desktop else svg three lines)
 
-### `npm run build`
+    elements = navmenu , submenu , close button , back button , open sub menu button , hamburger threeline button 
+        logo - desktop logo , mobile logo
+        
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+    -mobile navbar(-inline flex)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+        - menu lines (with 1/3 width scrollY menu in >660 px and 70vw at <660px, X close btn or onBlur close menu )(rest of the screen blur , black fade shadow)(menu comes in transform left to 0 ) . in mobile all the product catagory links , wishlist ,cart , orders , login/sign , help ,contact Info is in menu navbar
+           - the submenu replaces the menu list with back btn available 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+        - mobile logo center
+        - at 776 px , the third part of the inline flex shriks from 5 tab to 2 . (search & cart)
+                -search :
+                    - search input , filter page , quick links
+                    -  (with 1/3 width scrollY search menu right in >660 px and 70vw at <660px, X close btn or onBlur close menu )(rest of the screen blur , black fade shadow)(menu comes in transform right to 0 )
+                -cart :
+                    -show items in cart  
+                    -  (with 1/3 width scrollY search menu right in >660 px and 70vw at <660px, X close btn or onBlur close menu )(rest of the screen blur , black fade shadow)(menu comes in transform right to 0 )
 
-### `npm run eject`
+    -desktop navbar  
+    -(2 inline flex)
+        - 1 inline 
+            desktop logo  and inline page (search , track order ,login , wishlist ,cart)
+        - 2 inline 
+            all the links of product catageries of the nav menu bar    
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- footer :
+    mobile footer 
+        - acordian with three headings 
+            information
+            customer care 
+            contact us 
+        - coloumn of logo with social media links
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+    desktop footer 
+        - column flex with three headings 
+            information
+            customer care 
+            contact us         
+        - row of logo with social media links    
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+    Copyright 100vw footer oneline        
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- ABSOLUTE BANNER :
+        -Left bottom bell icon (fixed , with collapsable subscription message on home page and price drop alert on product page, transition , icon + p + btn + closeBtn ) 
+        - irritating closable(closes & appears after 1 min) fixed border-radius:3.34vw ad div . {img+ column(p , title) + closeBtn} 
 
-## Learn More
+- notification Alert : 
+    column(
+        <p>never miss a sale !
+        <button>Later</button> 
+        <button>allow</button> this goes to the browser setting ? 
+    )
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Home : 
+    mobile veiw:
+    carousal  (promotions of all catagory outfits) ( all of the slides -> {next prev buttons , open link slide buttons and slide titles} )
+    
+    grids :  (2 repeats)
+        in desktop : 
+            row { h3 , pairButtons(sale/new) , arrows}
+            row {bannerImg , carousel }
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+        on mobile :(following lines in rows)
+            {h3 catagroy heading 
+            banner img with links button and zooming img on hover
+            two buttons (linked with the content of the following carousal) the carousal is an ongoing loop
+            dynamic two slide carousal with wishlist and cart button on both slides and next/prev button on consective slides .}
 
-### Code Splitting
+            arrows animates on bannerImg hover and carousal slide hover , 
+            carousel content changes on pairButton selection (Onchange: animation transition with slide down, fade , change , slide up)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    ad video
 
-### Analyzing the Bundle Size
+    h3
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+    <!-- catagory grid -->
+    h3 LOOKBOOK
+    column in mobile , row in desktop -> {inline flex with 2 div - last div is again a column of 2 divs , inline flex with 2 div - first div is again a column of 2 divs}
 
-### Making a Progressive Web App
+    div -> row in desktop and colum in mobile(customer care feature1 , customer care feature2 , input with form button )div with highligh color and white font 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+-grid/filter Collection page :
+    row{h1 , row{veiwstyle , filter btn (with opens a filter form )}}
 
-### Advanced Configuration
+    row{img , img, img}   ( each img has wishlist and add to cart btn )[Add to card has confirmation dialog box and wishlist does work directly]
+    row{img , img, img}
+    row{img , img, img}
+    row{img , img, img}
+        loadMoreBtn
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
+- product page :
+    breadcrumb [ backBtn , home , lastpagelink , productHading]
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+    div{            // row in desktop , column in mobile
+        div 1 :
+        mobile -> columInvert{ row{3 imgs} , bigImg}
+        desktop-> row{{ column{3 imgs} , bigImg}}
+        ,
+        div 2 :
+        (
+            row { h1(productName) , wishlistBtn }
+            p -> product Code
+            row { price , availability }
+            hr
+            column {size , row{sizeOptions}}
+            small(00 product left )
+            row{ input(-) , label , input(+) }
+            add to cart button 
+            accordian { product detail  , Shipping and handling }
+            p -> ppl veiwing 
+            )
+    }   
 
-### `npm run build` fails to minify
+    div{                // new/sale tag on slides if present , wishlist btn and add to card btn on slides
+        row{ h3(similar items) , arrows}
+        carouasal ( two slides in <1030 px , else 4 slides )
+    }
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+    div{                // new/sale tag on slides if present , wishlist btn and add to card btn on slides
+        row{ h3(recent veiwed products) , arrows}
+        carouasal ( two slides in <1030 px , else 4 slides )
+    }
+
+
+-wishlist page 
+
+        h1(My Wishlist)
+        button to add selected entries to cart (disabled , on able when enteries of tables are selected )
+        table with dynamic enteries 
+
