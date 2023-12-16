@@ -100,11 +100,11 @@ function MyNavbar() {
           
           myDropdown.style.display = "none";
           myNavitem.style.backgroundColor = "transparent";
-          
         }else{
           
           myNavitem.style.backgroundColor = "var(--grayBase)";
           myDropdown.style.display = "block";
+          myDropdown.style.animation = "slideIn 1s 1";
         }
       }  
     }
