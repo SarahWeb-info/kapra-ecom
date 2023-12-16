@@ -1,10 +1,14 @@
 import React , {useState , useEffect} from 'react';
 import '../css/navbar.css';
 import Carousel from 'react-bootstrap/Carousel';
-import { BsFilterLeft , BsX , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart } from "react-icons/bs";
+import { BsFilterLeft , BsX , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart ,BsChevronRight} from "react-icons/bs";
 import SearchDiv from './SearchSideDiv';
 import LoginDiv from './LoginSideDiv';
 import CartDiv from './CheckoutSideDiv';
+
+import BrandMobile from '../imgs/smpLogo-Mobile.png';
+import BrandDesktop from '../imgs/smpLogo-desktop.png';
+import smpImg1 from '../imgs/img1.jpg';
 
 function MyNavbar() {
 
@@ -17,7 +21,6 @@ function MyNavbar() {
 
   const openFadeBg =(x)=>{
     setActiveDiv(x);
-    console.log(`x is ${x} and show active div : ${activeDiv}`);
     
     setFadeBg('translateY(0)');
     
@@ -59,8 +62,57 @@ function MyNavbar() {
     setActiveDiv("");
   }
 
+  const toggleDropdown =(e)=>{
+
+    const myNavitem = e.currentTarget.closest('.myNavitem');
+    
+    if(myNavitem){
+      
+      // for styling parent divs of navitems
+      if(myNavitem && myNavitem.classList.contains('firstDropParent')){
+      
+        const allNavItems = document.querySelectorAll('.dropParent');
+        
+        const activeParent = myNavitem.closest('.dropParent');
+        if(activeParent && activeParent.classList.contains('active')){
+          activeParent.classList.remove('active');
+
+          allNavItems.forEach((allDivs) => {
+            allDivs.style.display = 'block';
+          });
+        }else{
+          activeParent.classList.add('active');
+
+          allNavItems.forEach((allDivs) => {
+            if (allDivs !== activeParent) {
+              allDivs.style.display = 'none';
+            }
+          });
+          
+        }
+      }  
+      
+      //for collapse/expand of dropdowns
+      const myDropdown = myNavitem.nextElementSibling;
+      if (myDropdown && myDropdown.classList.contains('myDropdown')) {
+        
+        if(myDropdown.style.display === "block"){
+          
+          myDropdown.style.display = "none";
+          myNavitem.style.backgroundColor = "transparent";
+          
+        }else{
+          
+          myNavitem.style.backgroundColor = "var(--grayBase)";
+          myDropdown.style.display = "block";
+        }
+      }  
+    }
+}
+
+
   return (
-    <div className='myNavBar'>
+    <div className='fixed-top'>
       <div className='fadeBg' onClick={hideFadeBg} style={{transform:`${fadeBg}`}}></div>
 
       <div className="sideMenu" style={{right : `${showSearch}`}}>
@@ -95,91 +147,112 @@ function MyNavbar() {
       </div>
       <div className='col'>
         <div className='full-X-Block d-inline-flex justify-content-center  justify-content-lg-start  align-items-center '>
-          logo
+          <img className='d-lg-none' src={BrandMobile} alt="Brand logo" />
+          <img className='d-none d-lg-block' src={BrandDesktop} alt="Brand logo" />
         </div>
       </div>
       <div className='col'>
         <div className='full-X-Block d-inline-flex justify-content-end align-items-center '>
           <button className='noBtn' onClick={()=>openFadeBg("search")} ><BsSearch /></button>
-          <a href=""  className='noBtn d-lg-block'><BsTruck /></a>
-          <button className='noBtn d-lg-block'  onClick={()=>openFadeBg("login")} ><BsPerson /></button>
-          <a href="" className='noBtn d-lg-block+'><BsHeart /></a>
+          <a href=""  className='noBtn d-none d-lg-block'><BsTruck /></a>
+          <button className='noBtn d-none d-lg-block'  onClick={()=>openFadeBg("login")} ><BsPerson /></button>
+          <a href="" className='noBtn d-none d-lg-block'><BsHeart /></a>
           <button className='noBtn'  onClick={()=>openFadeBg("cart")} ><BsCart /></button>
         </div>
       </div>
     </div>
 
-    <div className='d-flex flex-column flex-lg-row navMenu' style={{transform: `${showNav}`}}>
-      <div className='noBtn d-inline-flex justify-content-end align-items-center d-lg-none'>
-        <BsX onClick={()=>hideFadeBg("nav")} />
-      </div>
+    <div className='myNav' style={{transform: `${showNav}`}}>
       
-      <div className='navLinks'>
+      <button className='crossBtn d-lg-none' >
+        <BsX onClick={()=>hideFadeBg("nav")} />
+      </button>
+      
+      <div className='myNavitem dropParent'>
         <a href="http://" className='alertColor'>Sale</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://" className='alertColor'>Flat 30% & 40%</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">New IN</a>
       </div>
       
-      <div className='navLinks'>
-        <a href="http://">Winter 2023</a>
-        <span className="myBadge alertBg">on Sale</span>
-        
-        <div className='myNavDropdown'>
+      <div className='dropParent'>
+      
+        <div className='firstDropParent myNavitem d-inline-flex justify-content-between align-items-center '>
+          <a href="http://">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
+          <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
+        </div>
+
+        <div className='myDropdown align-content-start'>
           
-          <div className='d-inline-flex'>
-            
-            <div className='px-1 d-flex flex-column justify-content-start align-content-start'>
-              <b>Winter</b>
-              <a href="http://">Sweaters</a>
-              <a href="http://">Coats</a>
-              <a href="http://">Jackets</a>
+            <div className='d-flex flex-column align-items-start'>
+
+              <div className='myNavitem  d-inline-flex justify-content-between align-items-center'>
+                <a href="http://">Women</a>
+                <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
+              </div>
+
+              <div className='myDropdown'>
+
+                <div className='d-flex flex-column align-items-start'>
+                  <a href="http://"  className='myNavitem' >Sweaters</a>
+                  <a href="http://"  className='myNavitem'>Coats</a>
+                  <a href="http://" className='myNavitem'>Jackets</a>
+                </div>
+
+              </div>
+
             </div>
 
-            <div className='px-1 d-flex flex-column justify-content-start align-content-start'>
-              <b>Winter</b>
-              <a href="http://">Sweaters</a>
-              <a href="http://">Coats</a>
-              <a href="http://">Jackets</a>
+            <div>
+
+              <div className='myNavitem  d-inline-flex justify-content-between align-items-center'>
+                <a href="http://">Men</a>
+                <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
+              </div>
+
+              <div className='myDropdown'>
+  
+                  <div className='d-flex flex-column align-items-start'>
+                    <a href="http://"  className='myNavitem' >Sweaters</a>
+                    <a href="http://"  className='myNavitem'>Coats</a>
+                    <a href="http://" className='myNavitem'>Jackets</a>
+                  </div>
+  
+              </div>
             </div>
 
-            <div className='px-1 d-flex flex-column  justify-content-start align-content-start'>
-              <img src="../imgs/img1.jpg" alt="Sample Img" />
-            </div>
+            <img src={smpImg1} alt="Sample Img" className='navImgs' />
           
-          </div>
-
         </div>
 
       </div>
       
-      <div className='navLinks'>
-        <a href="http://">OuterWear</a>
-        <span className="myBadge alertBg">on Sale</span>
+      <div className='myNavitem dropParent'>
+        <a href="http://">OuterWear<sup className="myBadge alertBg">on Sale</sup></a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">Unstitched</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">Mak</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">Man</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">home</a>
       </div>
       
-      <div className='navLinks'>
+      <div className='myNavitem dropParent'>
         <a href="http://">Handbags</a>
       </div>
 

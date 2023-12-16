@@ -4,6 +4,7 @@
     --highlighter : #fdc2ab;
     --grayBase : #f6f6f8 ;
     --alert : red;
+    --borderColor : rgba(34, 34, 34, 0.432);
   }
 
 .alertColor{
@@ -14,9 +15,6 @@
     background-color: var(--alert);
 }  
 .myBadge{
-    position: absolute;
-    right : 0;
-    top : -30%;
     width: fit-content;
     height: auto;
     border-radius: 20%;
@@ -49,4 +47,21 @@
 
 .full-X-Block{
     width: 100% !important;
+}
+.crossBtn {
+    position: relative;
+    width: 100%;
+    display: inline-flex;
+    justify-content:flex-end;
+    align-items: center;
+    border: 0px;
+    background-color: transparent;
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: 0.2s;
+    margin : 1vh 0 2vh 0;
+}
+
+.crossBtn:hover{
+    background-color: var(--grayBase);
 }
