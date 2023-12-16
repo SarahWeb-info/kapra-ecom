@@ -79,6 +79,7 @@ function MyNavbar() {
 
           allNavItems.forEach((allDivs) => {
             allDivs.style.display = 'block';
+            
           });
         }else{
           activeParent.classList.add('active');
@@ -98,8 +99,12 @@ function MyNavbar() {
         
         if(myDropdown.style.display === "block"){
           
-          myDropdown.style.display = "none";
-          myNavitem.style.backgroundColor = "transparent";
+          myDropdown.style.animation = "slideOut 1s 1";  
+          setTimeout(() => {
+            myDropdown.style.display = "none";
+            myNavitem.style.backgroundColor = "transparent";
+          }, 1000);
+          
         }else{
           
           myNavitem.style.backgroundColor = "var(--grayBase)";
