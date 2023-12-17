@@ -1,0 +1,189 @@
+.dialogAd{
+    box-sizing: border-box;
+    width: 96%;
+    max-width: 800px;
+    height: auto;
+    margin: 30vh auto;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--color);
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+    z-index: 102;
+}
+.dialogAd>div{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+.dialogAd span{
+    display: inline-flex;
+    align-items: center;
+}
+
+.dialogAd button{
+    background-color: var(--color);
+    color: var(--bg);
+    transition: background 1s;
+}
+
+.dialogAd button:hover{
+    background-color: var(--borderColor);
+    border: 0.3px solid var(--color);
+}
+
+.dialogAd>button{
+    position: absolute;
+    z-index: 1;
+    right : 0;
+    top : 0;
+    font-weight: bolder;
+    font-size: 2rem;
+    padding: 3px;
+    margin: 0px;
+    line-height: 0;
+    border: 0px;
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.dialogBanner p{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 1%;
+    font-size: 2rem;
+    color: var(--bg);
+    white-space : pre;
+}
+.dialogBanner img{
+    width: 100%;
+    height: 100%;
+}
+
+.dialogAdInput{
+    border-radius: 3.34vw;
+    border: 1px solid var(--color);
+    padding: 3px;
+    width: auto;
+    max-width: 80%;
+    overflow: hidden;
+}
+
+.dialogAdInput input{
+    border: 0px;
+}
+.dialogAdInput input:focus-visible{
+    outline: 0px;
+    border: 0px;
+}
+
+.dialogAdInput button{
+    border-radius: 3.34vw;
+    border: 1px solid var(--color);
+    background-color: var(--color);
+    color: var(--bg);
+    -webkit-box-shadow: inset 1px 3px 21px 6px #000000; 
+    box-shadow: inset 1px 3px 21px 6px #000000;
+    font-size: small;
+}
+
+.bellAd{
+    z-index: 102;   
+    position: fixed;
+    bottom: 15px;
+    left : 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin: 0;
+    height: fit-content;
+    width: auto;
+    background-color: transparent;
+}
+.bellAd > div{
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    width: auto;
+    max-width: 90vw;
+    height: auto;
+    padding: 2px;
+    overflow: hidden;
+    box-sizing: border-box;
+    -webkit-box-shadow: 0px 1px 32px 9px rgba(0,0,0,0.27); 
+    box-shadow: 0px 1px 32px 9px rgba(0,0,0,0.27);
+}
+.ad{
+    background-color: var(--bg);
+    color: var(--color);
+    border-radius: 3.34vw;
+}
+.ad img{
+    height: 8vh;
+    width: auto;
+    border-radius: 50%;
+}
+.ad span{
+    width: 60%;
+}
+.ad p{
+    margin: 0;
+    padding: 0;
+}
+.ad button{
+    background-color: var(--grayBase);
+    border: 0px;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+.bell {
+    justify-content: space-between;
+    background-color: gray;
+    border-radius: 12px;
+    transition: 1.5s width;
+}
+
+.bell>span {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    color: var(--bg);
+    background-color: transparent;
+}
+
+.bell p{
+    width: 70%;
+    font-size: small;
+}
+.bell button{
+    margin: auto 3%;
+    border: 0px;
+    border-radius: 3.34vw;
+    background-color: var(--bg);
+    color: var(--color);
+    font-weight: bold;
+}
+.btnBell{
+    padding: 2px;
+    font-size: 2.5rem;
+}
+.bell button:last-child{
+    background-color: transparent !important;
+    font-size: 2.5rem;
+}
+
+@media screen and (min-width : 650px){
+    .dialogAd{   
+        flex-direction: row;
+    }
+    .dialogAd>div{
+        width: 50%;
+    }   
+}

@@ -1,4 +1,4 @@
-import React , {useState , useEffect} from 'react';
+import React , {useState } from 'react';
 import '../css/navbar.css';
 import Carousel from 'react-bootstrap/Carousel';
 import { BsFilterLeft , BsX , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart ,BsChevronRight} from "react-icons/bs";
@@ -187,17 +187,18 @@ function MyNavbar() {
       
       <div className='dropParent'>
       
-        <div className='firstDropParent myNavitem d-inline-flex justify-content-between align-items-center '>
-          <a href="http://">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
+        <div className='firstDropParent myNavitem d-inline-flex justify-content-between align-items-center'>
+          <a href="http://">Winter 2023</a>
+          <sup className="myBadge alertBg">on Sale</sup>
           <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
         </div>
 
-        <div className='myDropdown align-content-start'>
+        <div className='myDropdown align-content-start dropBox'>
           
             <div className='d-flex flex-column align-items-start'>
 
               <div className='myNavitem  d-inline-flex justify-content-between align-items-center'>
-                <a href="http://">Women</a>
+                <a href="http://" className='dropTitle'>Women</a>
                 <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
               </div>
 
@@ -216,7 +217,7 @@ function MyNavbar() {
             <div>
 
               <div className='myNavitem  d-inline-flex justify-content-between align-items-center'>
-                <a href="http://">Men</a>
+                <a href="http://" className='dropTitle'>Men</a>
                 <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
               </div>
 

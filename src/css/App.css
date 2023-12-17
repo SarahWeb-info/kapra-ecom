@@ -7,6 +7,16 @@
     --borderColor : rgba(34, 34, 34, 0.432);
   }
 
+.fadeBg{
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    margin: 0;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.211);
+    position: fixed;
+}
+
 .alertColor{
     color: var(--alert) !important;
 }
@@ -65,3 +75,5 @@
 .crossBtn:hover{
     background-color: var(--grayBase);
 }
+
+
