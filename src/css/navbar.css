@@ -1,7 +1,7 @@
 .ghostNav{
-    height: 25vh;
+    height: var(--navHeight) ;
 }
-
+/* total nav : 21vh , but in small devices 13vh , carousal 5vh , navbg : 8vh ,myNav - 8vh ,  */
 .navCarousel{
     width: 100vw;
     height: 5vh;
@@ -13,6 +13,14 @@
 .navCarousel > .carousel-indicators ,.navCarousel > .carousel-control-prev ,.navCarousel > .carousel-control-next{
     display: none !important;
 }
+.navBg{
+    background-color: var(--bg);
+    z-index: 2;
+    position: relative;
+    overflow: visible;
+    height: 8vh;
+}
+
 
 .myNav{
     display: flex;
@@ -52,6 +60,9 @@
     box-sizing: border-box;
     border-bottom: 1px solid var(--borderColor);
 }
+.myNavitem a{
+    white-space: pre;
+}
 
 .myNavitem:hover{
     background-color: var(--grayBase);
@@ -88,34 +99,39 @@
     display: none;
 }
 
-.sideMenu{
+.crossBtnParent{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    max-width: 400px;
-    height: 100vh;
-    position: absolute;
-    top : 0;
-    transition: 0.8s;
-    background-color: var(--bg);
-    color: var(--color);
-    border: 1px solid var(--color);
-    padding: 1vh 1vw;
-    z-index: 102;
+    border-bottom: 1px solid var(--borderColor);
+    padding-left:2vw;
+    padding-right:2vw;
+}
+.crossBtnParent span{
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.crossBtnParent button{
+    width: fit-content;
 }
 
 @media screen and (min-width : 992px){
     .myNav{
         position: relative;
+        background-color: transparent;
+        background-color: white;
         flex-direction: row;
         flex-wrap: wrap;
-        height: fit-content;
+        height: 8vh;
         width: 100vw;
         max-width: none;
         transform: translateX(0);
         z-index: 1;
-        background-color: transparent;
         border : 0px;
     }
-
+    
     .myNav div {
         margin-right: 1.5vw;
         width: fit-content;

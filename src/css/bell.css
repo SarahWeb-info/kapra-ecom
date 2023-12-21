@@ -13,7 +13,7 @@
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    z-index: 102;
+    z-index: 105;
 }
 .dialogAd>div{
     position: relative;

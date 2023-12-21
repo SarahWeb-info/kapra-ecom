@@ -5,6 +5,9 @@
     --grayBase : #f6f6f8 ;
     --alert : red;
     --borderColor : rgba(34, 34, 34, 0.432);
+    --navHeight : 13vh;
+
+    --collectionDivHeight   : 50vh;   
   }
 
 .fadeBg{
@@ -15,6 +18,11 @@
     z-index: 100;
     background-color: rgba(0, 0, 0, 0.211);
     position: fixed;
+    top : 0 ;
+    left :0;
+}
+.highlighter{
+    color: var(--highlighter);
 }
 
 .alertColor{
@@ -73,7 +81,32 @@
 }
 
 .crossBtn:hover{
-    background-color: var(--grayBase);
+    transform: rotate(180deg);
 }
 
+.tooltip-Parent{
+    width: fit-content;
+    height: 3vh;
+    position: relative;
+    overflow: visible;
+}
 
+.myTooltip{
+    position: absolute;
+    background-color: var(--color);
+    color: var(--bg);
+    border-radius: 8%;
+    padding: 1px 3px;
+    display: none;
+    transition: 1s;
+    /* overflow: visible; */
+}
+
+.tooltip-Parent:hover .myTooltip{
+    display: block;
+}
+@media screen and (min-width : 992px){
+    :root{
+        --navHeight : 21vh;
+      }  
+}

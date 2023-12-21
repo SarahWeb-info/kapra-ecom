@@ -1,0 +1,147 @@
+.sideMenu{
+    width: 100%;
+    max-width: 400px;
+    height: 100vh;
+    position: absolute;
+    top : 0;
+    transition: 0.8s;
+    background-color: var(--bg);
+    color: var(--color);
+    border: 1px solid var(--color);
+    z-index: 102;
+}
+
+.sideMenu a{
+    text-decoration: none;
+    color: var(--color);
+    text-transform: capitalize;
+}
+.sideMenu a:hover{
+    color: var(--highlighter);
+}
+.sideMenuBtns{
+    border-radius: 3.34vw;
+    margin: 2vh 0;
+    background-color: var(--highlighter);
+    border: 0px;
+    color: var(--bg);
+    font-weight: 600;
+    height: 5vh;
+    box-shadow: inset 0 3px 10px #81818133 ,  0 3px 10px #81818133;
+}
+
+.sideMenuBtns:hover{
+    box-shadow: inset 0 5px 18px #81818133 ,  0 3px 10px #81818133;
+}
+
+
+.sideMenuTitles{
+    font-weight: 600;
+    border-top:  1px solid var(--color);
+    border-bottom:  1px solid var(--color);
+    font-size : 1rem;
+    box-shadow: 0 3px 10px #81818133;
+    padding:1vh 2vw ;
+}
+
+.searchSideDiv{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly
+}
+
+.quickList{
+    width: 100%;
+    height: auto;
+    margin: 2vh auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.quickList>div {
+    padding: 2px 3vw ;
+    margin: 2vh auto;
+}
+.quickList>div:first-child{
+    border: 1px solid var(--color);
+    border-radius: 3.34vw;
+}
+.quickList>div:first-child input{
+    border : 0px;
+}
+.quickList>div:first-child input:focus-visible{
+    border: 0px;
+    outline: 0px;
+}
+.quickList>div:nth-child(2){
+    font-size: small;
+    text-transform: capitalize;
+}
+
+.quickProductEg{
+    width: 100%;
+    height: auto;
+    max-height: 55vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    box-shadow: inset 0 3px 10px #81818133;
+}
+.quickProductEg>div{
+    display: flex;
+    padding: 1vw;
+    height: 21vh;
+}
+.quickProductEg>div a{
+    width: 40%;
+    height: auto;
+}
+.quickProductEg img{
+    width: 100%;
+    height: auto;
+}
+
+.loginSideDiv form{
+    padding: 2vh 2vw;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.loginSideDiv>form div{
+    border: 1px solid var(--color);
+    border-radius: 0.2vw;
+    margin: 2vh 0;
+    padding: 0.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 8vh;
+}
+
+.loginSideDiv label{
+    font-size: 1rem;
+}
+
+.loginSideDiv input {
+    display: none;
+    border : 0px;
+}
+.loginSideDiv input:focus-visible{
+    border : 0px;
+    outline: 0px;
+    background-color: var(--grayBase);
+}
+
+.loginSideDiv input:not(:focus-visible) {
+    display: none;
+}
+

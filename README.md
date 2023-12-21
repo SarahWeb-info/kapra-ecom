@@ -178,3 +178,8 @@ NOTE : search result and product links have the same UI
         button to add selected entries to cart (disabled , on able when enteries of tables are selected )
         table with dynamic enteries 
 
+
+backend : 
+1 -the api for product listing is used for pages , home , collection , search sidemenus , filter , bestsellers etc . backend file : getProductList.js
+
+2 -when we click on a specific product , only then the api for product details will be used

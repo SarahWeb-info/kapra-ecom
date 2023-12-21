@@ -7,8 +7,9 @@ export default function Bell() {
     
     const [ showDiv , setShowDiv ] = useState('none');  
     const [ showAd , setShowAd ] = useState(true);    
-    const [ showDialog , setShowDialog ] = useState(true);  
-
+    
+    const [ showDialog , setShowDialog ] = useState();
+      
     const adStatus = localStorage.getItem("adStatus");
 
   const openBellDiv =()=>{
@@ -37,7 +38,7 @@ export default function Bell() {
         setShowDiv('none');
 
         if (adStatus) {
-            setShowDialog(true);
+            setShowDialog(adStatus);
         }
     }, 300000);
 
@@ -63,7 +64,7 @@ export default function Bell() {
     <>
     {showDialog &&
     <>
-    <div className='fadeBg' onClick={hideFadeBg} style={{top : '0px' , left :'0px'}}></div>    
+    <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>    
     
     <div className='dialogAd'>
         <button onClick={hideFadeBg} ><BsX /></button>
@@ -80,7 +81,7 @@ export default function Bell() {
                 <button>Subscribe</button>
             </span>
             <span>
-                <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? true : false)}/>
+                <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? false : true)}/>
                 <label htmlFor="adNoRepeat">Do not show it anymore.</label>
             </span>
         </div>

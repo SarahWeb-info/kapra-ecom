@@ -41,8 +41,6 @@ function MyNavbar() {
   }
 
   const hideFadeBg =(x)=>{
-
-    console.log(`x is ${x} and hide active div : ${activeDiv}`);
     
     setFadeBg('translateY(-100vh)');
     
@@ -115,13 +113,12 @@ function MyNavbar() {
     }
 }
 
-
   return (
-    <div className='fixed-top'>
+    <div className='fixed-top'  style={{zIndex : '102'}}>
       <div className='fadeBg' onClick={hideFadeBg} style={{transform:`${fadeBg}`}}></div>
 
       <div className="sideMenu" style={{right : `${showSearch}`}}>
-        <SearchDiv onClose={()=>hideFadeBg("search")} />
+          <SearchDiv onClose={()=>hideFadeBg("search")}  />
       </div>
 
       <div className="sideMenu" style={{right : `${showLogin}`}}>
@@ -146,7 +143,7 @@ function MyNavbar() {
         </Carousel.Item>
       </Carousel>
 
-    <div className='py-1 px-3 row align-items-center'>
+    <div className='navBg py-1 px-3 row align-items-center'>
       <div className='col d-lg-none'>
         <button className='noBtn' onClick={()=>openFadeBg("nav")}><BsFilterLeft /></button>
       </div>
@@ -158,21 +155,44 @@ function MyNavbar() {
       </div>
       <div className='col'>
         <div className='full-X-Block d-inline-flex justify-content-end align-items-center '>
-          <button className='noBtn' onClick={()=>openFadeBg("search")} ><BsSearch /></button>
-          <a href=""  className='noBtn d-none d-lg-block'><BsTruck /></a>
-          <button className='noBtn d-none d-lg-block'  onClick={()=>openFadeBg("login")} ><BsPerson /></button>
-          <a href="" className='noBtn d-none d-lg-block'><BsHeart /></a>
-          <button className='noBtn'  onClick={()=>openFadeBg("cart")} ><BsCart /></button>
+          
+          <div className='tooltip-Parent'>
+            <button className='noBtn' onClick={()=>openFadeBg("search")}><BsSearch /></button>
+            <div className='myTooltip'>Search</div>  
+          </div>
+
+          <div className='tooltip-Parent'>
+            <a href=""  className='noBtn d-none d-lg-block'><BsTruck /></a>
+            <div className='myTooltip'>Order Details</div>  
+          </div>
+
+          <div className='tooltip-Parent'>
+            <button className='noBtn d-none d-lg-block' onClick={()=>openFadeBg("login")} ><BsPerson /></button>
+            <div className='myTooltip'>Login</div>  
+          </div>
+
+          <div className='tooltip-Parent'>
+            <a href="" className='noBtn d-none d-lg-block'><BsHeart /></a>
+            <div className='myTooltip'>Wishlist</div>  
+          </div>
+
+          <div className='tooltip-Parent'>
+            <button className='noBtn'  onClick={()=>openFadeBg("cart")} ><BsCart /></button>
+            <div className='myTooltip'>Cart</div>  
+          </div>
+
         </div>
       </div>
     </div>
 
     <div className='myNav' style={{transform: `${showNav}`}}>
-      
-      <button className='crossBtn d-lg-none' >
-        <BsX onClick={()=>hideFadeBg("nav")} />
-      </button>
-      
+           
+      <div className='crossBtnParent  d-lg-none'>
+        <span></span>
+        <button className='crossBtn'  onClick={()=>hideFadeBg("nav")} ><BsX/></button>
+      </div>
+
+
       <div className='myNavitem dropParent'>
         <a href="http://" className='alertColor'>Sale</a>
       </div>
