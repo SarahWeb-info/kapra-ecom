@@ -1,78 +1,107 @@
-import React, { useState } from 'react'
-import Img1 from '../imgs/img1.jpg';
+import React, { useState , useEffect} from 'react';
+// import Img1 from '../imgs/img1.jpg';
 import productsList from '../backend/getProductList';
 import { BsArrowLeftShort ,  BsArrowRightShort , BsHeart , BsCart } from "react-icons/bs";
 
-export default function HomeProductList() {
+export default function HomeProductList({heading='Collection' , bannerImg = "img1"}) {
+  let innerWidth = window.innerWidth;
+  const [productDivSize , setProductDivSize] = useState(40);
+  const [totalProductsVeiw , setTotalProductsVeiw] = useState(productDivSize*2);
+  const [leftArrowOpacity , setLeftArrowOpacity ] = useState(1);
+  const [rightArrowOpacity , setRightArrowOpacity ] = useState(1);
+
+  useEffect(() => {
+    return () => {
+      if (innerWidth < 992) {
+        setProductDivSize(40);
+        setTotalProductsVeiw(productDivSize*2) ;
+      }else{
+        setProductDivSize(20);
+        setTotalProductsVeiw(60) ;
+      }
+    };
+  }, [innerWidth]);
+
+  const [moveLeft, setmoveLeft] = useState(0);
     
-  const [moveLeft, setmoveLeft] = useState(30);
-  
   const leftArrow = () => {
-    let scrollDiv = productsList.length * 25 - 90;
+    let scrollDiv = productsList.length * 40 - totalProductsVeiw;
     scrollDiv = scrollDiv* -1;
-    console.log(scrollDiv);
     if (moveLeft > scrollDiv) {
-      setmoveLeft(moveLeft-30) ;
+      setmoveLeft(moveLeft-totalProductsVeiw) ;
+      setLeftArrowOpacity(1);
+      setRightArrowOpacity(1);
     }else{
-      setmoveLeft(30) ;
+      setRightArrowOpacity(0);
     }
   };
-
+  
   const rightArrow =()=>{
-    if (moveLeft!== 30) {
-      setmoveLeft(moveLeft+30);
+    if (moveLeft!== 0) {
+      setmoveLeft(moveLeft+totalProductsVeiw);
+      setLeftArrowOpacity(1);
+      setRightArrowOpacity(1);
+    }else{
+      setLeftArrowOpacity(0);
     }
   };
 
   return (
-    <>
-      <div className='collectionHeading'>
-        <p>Unstiched</p>
-        <div>
+    <div className='productList-container'>
+
+      <div className='productListBanner'>
+ 
+        <p>{heading}</p>
+        <div className='exploreBanner'>
+            <img src={require(`../imgs/${bannerImg}.jpg`)} alt="" />
+            
+            <a href="http://">Explore</a>
+        </div>
+
+      </div>
+
+    <div className='d-flex flex-column' style={{width:`${totalProductsVeiw}vw`,position : 'relative'}}>
+        
+        <div className='productListStatus'>
           <span>New</span>
           <span>Sale</span>
         </div>
 
-      </div>
-
-      <div className='collectionNavigateArrows'>
-        <span className='leftArrow' onClick={rightArrow}>
-          <BsArrowLeftShort />
-        </span>
-        
-        <span className='rightArrow' onClick={leftArrow}>
-          <BsArrowRightShort />
-        </span>
-      </div>
-
-      <div className='collectionDiv'>
-        <div className='collectionDivBannerImg'>
-          <img src={Img1} alt="" />
+        <div className='product-Arrows'>
+            <span className='leftArrow' onClick={rightArrow} style={{opacity : `${leftArrowOpacity}`}}>
+            <BsArrowLeftShort />
+            </span>
+            
+            <span className='rightArrow' onClick={leftArrow} style={{opacity : `${rightArrowOpacity}` , justifyContent : 'flex-end'} }>
+            <BsArrowRightShort />
+            </span>
         </div>
 
-        <div className='sectionProductDiv'  style={{left : `${moveLeft}vw` }} >
+      <div className='productDiv-container' style={{width:`${totalProductsVeiw}vw`}}>
+
+        <div className='scrollingProductDiv' style={{left : `${moveLeft}vw` }}  >
 
         {productsList &&
           productsList.map((item, index) => (
-                  
-                  <div  key={index} className='productDiv'>
-                    
-                    <div>
-                    <a href="http://"><img src={item.img} alt="" className='productDivImg'  /> </a>
-                      <span className='productDivBtns'>
-                        <button><BsHeart /></button>
-                        <button><BsCart /></button>
-                      </span>
-                    </div>
-                    <a href="http://">{item.title}</a>
-                    <p><span style={{textDecoration:'line-through'}}>{item.currency} {item.discount}</span><span style={{color : 'var(--highlighter)'}}>{item.currency} {item.price}</span></p>
-                  </div>
-                      
-              ))}
-
+            <div  key={index} className='productDiv' style = {{width : `${productDivSize}vw`}}>
+              
+              <div>
+                <a href="http://"><img src={item.img} alt="" className='productDivImg'  /> </a>
+                <span className='productDivBtns'>
+                  <button><BsHeart /></button>
+                  <button><BsCart /></button>
+                </span>
+              </div>
+              <a href="http://">{item.title}</a>
+              <p><span style={{textDecoration:'line-through'}}>{item.currency} {item.discount}</span><span style={{color : 'var(--highlighter)'}}>{item.currency} {item.price}</span></p>
+            
+            </div>
+          )
+        )}
 
         </div>
       </div>
-    </>  
+    </div>  
+    </div>  
   )
 }
