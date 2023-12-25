@@ -6,6 +6,8 @@ import Img3 from '../imgs/img3.jpg';
 import Img4 from '../imgs/img4.jpg';
 import '../css/home.css';
 import HomeProductList from '../components/HomeProductList';
+import CatSlider from '../components/CatSlider';
+
 
 export default function Home() {
 
@@ -16,50 +18,130 @@ export default function Home() {
         <Carousel.Item interval={2000}>
           <div className='exploreBanner topCarousel-inner'>
             <img src={Img1} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer">Explore Now</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
           </div>
         </Carousel.Item>
 
         <Carousel.Item interval={2000}>
           <div className='exploreBanner topCarousel-inner'>
             <img src={Img2} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer">Explore Now</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
           </div>
         </Carousel.Item>
 
         <Carousel.Item interval={2000}>
           <div className='exploreBanner topCarousel-inner'>
             <img src={Img3} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer">Explore Now</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
           </div>
         </Carousel.Item>
         
         <Carousel.Item interval={2000}>
           <div className='exploreBanner topCarousel-inner'>
             <img src={Img4} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer">Explore Now</a>
+            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
           </div>
         </Carousel.Item>
  
       </Carousel>
 
       <HomeProductList heading = "Unstitched"  bannerImg = "img1" />
-      <HomeProductList  heading = "Reading to Wear"  bannerImg = "img2" />
+      <HomeProductList  heading = "Ready to Wear"  bannerImg = "img2" />
 
-      {/* <video src={require(`../imgs/sampleVideo.mp4`)} ></video> */}
       <video
         id="myVideo"
-        controls // Add controls
-        autoPlay // Add autoplay
-        loop // Add loop
+        controls 
+        autoPlay 
+        loop 
         src={require(`../imgs/sampleVideo.mp4`)}
         className='bannerVideo my-5'
       ></video>
 
-      
-      shop by catagroy grid
+      <h3 className='headings w-100 text-center my-3'>Shop by catagory</h3>
+      <CatSlider />
 
-      grid : shoppable lookups
+      <h3 className='headings w-100 text-center my-3'>shoppable lookups</h3>
+
+      <div className='d-flex flex-column flex-lg-row  justify-content-center'>
+
+        <div className='d-flex flex-row gridDiv-container'>
+          
+          <div className='fadeAdDiv gridDivlg' style={{ backgroundImage: `url(${Img1})` }}>
+            
+            <div className='fadeHover'></div>
+            <a className='fadeLabel'>Shop Now</a>
+            <div className='fadeLine'></div>
+
+            <a className='fadeHoverBtn'>Checknow</a>
+        
+          </div>
+
+          <div className='d-flex flex-column'>
+
+            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img2})` }}>
+              
+              <div className='fadeHover'></div>
+              <a className='fadeLabel'>Shop Now</a>
+              <div className='fadeLine'></div>
+
+              <a className='fadeHoverBtn'>Checknow</a>
+          
+            </div>
+
+            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img3})` }}>
+              
+              <div className='fadeHover'></div>
+              <a className='fadeLabel'>Shop Now</a>
+              <div className='fadeLine'></div>
+
+              <a className='fadeHoverBtn'>Checknow</a>
+          
+            </div>
+
+          </div>        
+
+        </div>
+
+        <div className='d-flex flex-row  gridDiv-container'>
+
+          <div className='d-flex flex-column'>
+
+            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img2})` }}>
+              
+              <div className='fadeHover'></div>
+              <a className='fadeLabel'>Shop Now</a>
+              <div className='fadeLine'></div>
+
+              <a className='fadeHoverBtn'>Checknow</a>
+          
+            </div>
+
+            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img3})` }}>
+              
+              <div className='fadeHover'></div>
+              <a className='fadeLabel'>Shop Now</a>
+              <div className='fadeLine'></div>
+
+              <a className='fadeHoverBtn'>Checknow</a>
+          
+            </div>
+
+          </div>        
+
+          <div className='fadeAdDiv gridDivlg' style={{ backgroundImage: `url(${Img1})` }}>
+            
+            <div className='fadeHover'></div>
+            <a className='fadeLabel'>Shop Now</a>
+            <div className='fadeLine'></div>
+
+            <a className='fadeHoverBtn'>Checknow</a>
+        
+          </div>
+        
+        </div>
+      </div>
+
+
 
     </div>
   )

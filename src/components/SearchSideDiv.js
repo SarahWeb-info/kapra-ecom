@@ -65,11 +65,11 @@ export default function CheckoutSideDiv({ onClose }) {
       </div>
       
       <div className='quickList'>
-          <div>
+          <div className='customInputDiv'>
             <input type="text" placeholder='Search' />
-            <a href="http://"></a>
-            <BsSearch/>
+            <button className='noBtn' style={{fontSize : '1rem'}}><BsSearch/></button>
           </div>
+
           <div>
             <span>Quick List :</span>
             <p>            

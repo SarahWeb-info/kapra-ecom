@@ -208,7 +208,7 @@ function MyNavbar() {
       <div className='dropParent'>
       
         <div className='firstDropParent myNavitem d-inline-flex justify-content-between align-items-center'>
-          <a href="http://">Winter 2023</a>
+          <a href="/collection">Winter 2023</a>
           <sup className="myBadge alertBg">on Sale</sup>
           <button className='d-lg-none dropBtn' onClick={(e)=>toggleDropdown(e)}><BsChevronRight /></button>
         </div>
