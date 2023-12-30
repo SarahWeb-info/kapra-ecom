@@ -1,24 +1,32 @@
-import React from 'react';
+import React , {useState , useEffect } from 'react';
 import {  BsX  } from "react-icons/bs";
 import '../css/sidedivs.css';
 
 export default function CheckoutSideDiv({ onClose }) {
 
-    const handleHide = () => {
-        console.log("in handle hide");
-        if (onClose) {
-          onClose();
-        }
-      }
-  
-    const showInput =(e)=>{
-      
-      const inputDiv = e.currentTarget.closest('.inputDiv');
-      const input = inputDiv.querySelector('input');
-      input.style.display = 'block';
+  const [ showDiv , setShowDiv ] = useState(' -100%');
+    
+  useEffect(() => {
+    return () => {
+      setShowDiv('0');
+    };
+  }, []);
+
+  const handleHide = () => {
+    console.log("in handle hide");
+    if (onClose) {
+      onClose();
     }
-      
-    return (
+  }
+
+  const showInput =(e)=>{
+    const inputDiv = e.currentTarget.closest('.inputDiv');
+    const input = inputDiv.querySelector('input');
+    input.style.display = 'block';
+  }
+    
+  return (
+  <div className="sideMenu" style={{right : `${showDiv}`}}>  
     <div className='loginSideDiv' >
       <div className='crossBtnParent'>
         <span>Login</span>
@@ -45,5 +53,6 @@ export default function CheckoutSideDiv({ onClose }) {
         <a href="http://" target="_blank" rel="noopener noreferrer">New Customer? Create an account</a>
       </form>
     </div>
+  </div>  
   )
 }

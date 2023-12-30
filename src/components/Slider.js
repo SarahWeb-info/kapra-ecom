@@ -76,17 +76,19 @@ export default function Slider({ productsList = []}) {
 
         {productsList &&
           productsList.map((item, index) => (
-            <div  key={index} className='productDiv resizeImgHover' style={{width : `${productDiv}vw`}} >
+            <div  key={index} className='productDiv resizeImgHover' style={{width : `${productDiv}vw` , height : 'var(--sliderDivHeight)'}} >
               
               <div>
-                <a href="http://"><img src={item.img} alt="" className='productDivImg'  /> </a>
+                <a href="http://"><img src={item.img} alt=""  /> </a>
                 <span className='productDivBtns'>
                   <button><BsHeart /></button>
                   <button><BsCart /></button>
                 </span>
               </div>
-              <a href="http://">{item.title}</a>
-              <p className='py-1 text-muted'><span style={{textDecoration:'line-through'}}>{item.currency} {item.discount}</span><span style={{color : 'var(--highlighter)'}}>{item.currency} {item.price}</span></p>
+              <span>
+                <a href="http://">{item.title}</a>
+                <p className='py-1 text-muted'><span style={{textDecoration:'line-through'}}>{item.currency} {item.discount}</span><span style={{color : 'var(--highlighter)'}}>{item.currency} {item.price}</span></p>
+              </span>
             
             </div>
           )

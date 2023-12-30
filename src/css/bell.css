@@ -1,24 +1,32 @@
+:root{
+    --dialogWidth : 95%;
+    --dialogHeight : 40vh;
+}
 .dialogAd{
     box-sizing: border-box;
-    width: 96%;
-    max-width: 800px;
+    width: auto;
     height: auto;
-    margin: 30vh auto;
+    max-height: 80vh;
+    margin: 0;
     padding: 0;
+    padding-bottom: 2vh;
     background-color: var(--bg);
     color: var(--color);
-    position: relative;
-
+    position: fixed;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50% , -50%);
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
     z-index: 105;
+    overflow: hidden;
 }
 .dialogAd>div{
     position: relative;
-    width: 100%;
-    text-align: center;
+    width: var(--dialogWidth);
+    height: var(--dialogHeight);
 }
 .dialogAd span{
     display: inline-flex;
@@ -60,9 +68,24 @@
     color: var(--bg);
     white-space : pre;
 }
+.dialogBanner .carousel{
+    height: var(--dialogHeight);
+    width: var(--dialogWidth);
+}
+.dialogBanner .carousel-item>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dialogBanner .carousel img{
+    overflow: hidden;
+    height: var(--dialogHeight) !important;
+    width: auto;
+}
 .dialogBanner img{
-    width: 100%;
-    height: 100%;
+    width: var(--dialogWidth);
+    height: auto;
+    overflow: hidden;
 }
 
 .dialogAdInput{
@@ -180,10 +203,12 @@
 }
 
 @media screen and (min-width : 650px){
+    :root{
+        --dialogWidth : 40vw;
+        --dialogHeight : 80vh;
+    }
     .dialogAd{   
         flex-direction: row;
+        padding: 0;
     }
-    .dialogAd>div{
-        width: 50%;
-    }   
 }

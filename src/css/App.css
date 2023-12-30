@@ -8,8 +8,15 @@
     --navHeight : 13vh;
 
     --sliderDivHeight   : 50vh;   
+    --buttonHeight : 36px;
   }
 
+.inlineCenter{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+} 
+  
 .fadeBg{
     width: 100vw;
     height: 100vh;
@@ -35,6 +42,7 @@
 .myBadge{
     width: fit-content;
     height: auto;
+    max-height: var(--buttonHeight);
     border-radius: 20%;
     padding: 1.5px 3px;
     line-height: 1;
@@ -66,9 +74,15 @@
 .full-X-Block{
     width: 100% !important;
 }
+.yScroll{
+    height: 10rem;
+    overflow-y: auto;
+}
 .crossBtn {
     position: relative;
     width: 100%;
+    height: auto;
+    max-height: var(--buttonHeight);
     display: inline-flex;
     justify-content:flex-end;
     align-items: center;
@@ -118,16 +132,26 @@
     z-index: 2;
     color: var(--bg);
     background-color: var(--color) !important;
-    padding: 1% 2%;
-    font-size: medium;
-    font-weight: 600;
     border-radius: 3.34vw;
+    border: 0.5px solid var(--borderColor);
     transition: 1.5s;
     width: fit-content;
+    height: auto;
+    max-height: var(--buttonHeight);
+    min-width: 10vw;
+    padding: 2px 4px;
+    overflow: hidden;
+    font-weight: 500;
+    font-size: large;
+    text-align: center;
 }
 .customDarkBtn a{
     color: var(--bg);
     text-decoration: none;   
+}
+.customDarkBtn:hover{
+    background-color: var(--borderColor) !important;
+    /* color: var(--color); */
 }
 
 .customInputDiv{
@@ -137,6 +161,8 @@
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.166);
     width: fit-content;
+    height: auto;
+    max-height: var(--buttonHeight);
     padding:0 2%;
     box-sizing: border-box;
 }
@@ -150,8 +176,125 @@
     outline: 0px;
 }
 
+.productDiv{
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+    padding: 0 15px ;
+    margin: 0;
+
+}
+.productDiv a , .shortText{
+    text-decoration: none;
+    color : var(--color);
+    font-weight: 500;
+    font-size: 1.2rem;
+    display: -webkit-box;
+  -webkit-line-clamp: 2; /* Number of lines to show */
+  -webkit-box-orient: vertical;
+  line-height: 1.2; /* Adjust as needed to control line height */
+  overflow: hidden;
+}
+.productDiv a:hover{
+    text-decoration: underline;
+    color: var(--highlighter);
+}
+
+.productDiv>div{
+    background-color: var(--grayBase);
+    width: 100%;
+    height: 70%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.productDivBtns{
+    z-index: 1;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: fit-content;
+    position: absolute;
+    left : 50%;
+    transform: translateX(-50%);
+    bottom: 3%;
+    transition: 1s;
+}
+
+.productDivBtns button{
+    border-radius: 50%;
+    border: 1px solid var(--bg);
+    color : var(--bg);
+    background-color: var(--borderColor);
+}
+
+.productDiv>div:hover .productDivBtns{
+    bottom: 8%;
+}
+.productTag{
+    position: absolute;
+    display: block;
+    z-index: 100;
+    top:0;
+    right: 0;
+    background-color: red;
+    color : white;
+    border-bottom-left-radius: 13%;
+    padding : 3px 5px ;
+}
+.qauntityDiv{
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--bg);
+    color: var(--color);
+    border-radius: 3.34vw;
+    border : 1px double var(--borderColor);
+    transition: background 1s;
+    width: fit-content;
+    height: 5vh;
+    min-width: 10vw;
+    padding: 2px 4px;
+    margin: auto 2px;
+    overflow: hidden;
+    font-size: large;
+}
+
+.qauntityDiv p{
+    margin: 0;
+}
+
+.qauntityDiv button{
+    background-color: transparent !important;
+    color: var(--color) !important;
+    border: 0px;
+    outline: 0px;
+    width: fit-content;
+    height: fit-content;
+    max-height: var(--buttonHeight);
+    padding: 0 10px;
+    margin: 0;  
+    font-size: larger;
+}
+
+.qauntityDiv button:hover{
+    color: var(--highlighter);
+    border: 0px !important;
+    outline: 0px !important;
+}
+
 @media screen and (min-width : 992px){
     :root{
         --navHeight : 21vh;
-      }  
+      }
+      
+      .yScroll{
+        height:auto;
+        min-height: 10vh;
+    }
+      
 }

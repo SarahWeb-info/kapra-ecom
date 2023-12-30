@@ -1,0 +1,75 @@
+.collectionPgTitle{
+  width: 94vw;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-bottom: 2vh;
+  margin: 0 3vw;
+}
+/* d-flex flex-row justify-content-between align-item-center w-100 px-5 */
+.collectionVeiw{
+    border-top: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor);
+    margin: 3px 3vw;
+    padding: 2vh 0;
+    width: 94vw;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.collectionVeiw .productDiv a{
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; 
+  -webkit-box-orient: vertical;
+  line-height: 1; 
+}
+
+.regular{
+  width: 30vw;
+  height: 45vh;
+  margin: 0;
+}
+.regular .productDiv div{
+  height: 70%;
+  width: 100%;
+}
+
+.product {
+  margin : 2vw;
+  width: 40vw;
+  height: 70vh;
+}
+.product div{
+  height: 90%;
+  width: 100%;
+}
+
+.productRow ,.productReverse {
+  width : 80vw !important;
+  height: 70vh;
+  margin : 2vw auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.productRow {
+  flex-direction : row;
+}
+
+.productReverse {
+  flex-direction : row-reverse;
+}
+
+.productReverse div, .productRow div{
+  width: 100%;
+  height: 100%;
+}

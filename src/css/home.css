@@ -189,67 +189,6 @@
     z-index: 0;
 } 
 
-.productDiv{
-    box-sizing: border-box;
-    overflow: hidden;
-    position: relative;
-    height: var(--sliderDivHeight);
-    padding: 0 15px ;
-    margin: 0;
-
-}
-.productDiv a{
-    text-decoration: none;
-    color : var(--color);
-    font-weight: 500;
-    font-size: 1.2rem;
-    display: -webkit-box;
-  -webkit-line-clamp: 2; /* Number of lines to show */
-  -webkit-box-orient: vertical;
-  line-height: 1.2; /* Adjust as needed to control line height */
-  overflow: hidden;
-
-}
-.productDiv a:hover{
-    text-decoration: underline;
-    color: var(--highlighter);
-}
-
-.productDiv>div{
-    background-color: var(--grayBase);
-    width: 100%;
-    height: 70%;
-    margin: 0;
-    padding: 0;
-    position: relative;
-    z-index: 0;
-    overflow: hidden;
-}
-
-.productDivBtns{
-    z-index: 1;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 90%;
-    height: fit-content;
-    position: absolute;
-    left : 50%;
-    transform: translateX(-50%);
-    bottom: 3%;
-    transition: 1s;
-}
-
-.productDivBtns button{
-    border-radius: 50%;
-    border: 1px solid var(--bg);
-    color : var(--bg);
-    background-color: var(--borderColor);
-}
-
-.productDiv>div:hover .productDivBtns{
-    bottom: 8%;
-}
 
 .catDiv{
     width: 30vw;

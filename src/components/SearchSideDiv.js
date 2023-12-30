@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState , useEffect} from 'react';
 import {  BsX , BsSearch } from "react-icons/bs";
 import Img from '../imgs/img1.jpg';
 import '../css/sidedivs.css';
@@ -49,14 +49,23 @@ export default function CheckoutSideDiv({ onClose }) {
       }
     ]
 
+    const [ showDiv , setShowDiv ] = useState(' -100%');
+    
+    useEffect(() => {
+      return () => {
+        setShowDiv('0');
+      };
+    }, []);
+
     const handleHide = () => {
-        console.log("in handle hide");
         if (onClose) {
+          setShowDiv('-100%');
           onClose();
         }
       }
   
-    return (
+   return (
+  <div className="sideMenu" style={{right : `${showDiv}`}}>
     <div className='searchSideDiv'>
       
       <div className='crossBtnParent'>
@@ -90,11 +99,11 @@ export default function CheckoutSideDiv({ onClose }) {
         
         <div className='quickProductEg'>
           
-        {smpData.map((product) => {
+        {smpData.map((product , index) => {
           let priceAfter =parseInt(product.priceBefore, 10) -  (parseInt(product.priceBefore, 10) / parseInt(product.sale, 10));
 
           return (
-            <div key={product.key}>
+            <div key={index}>
 
               <a href=""><img src={product.img} alt="" /></a>
               
@@ -117,5 +126,6 @@ export default function CheckoutSideDiv({ onClose }) {
       </div>
        
     </div>
+  </div> 
   )
 }

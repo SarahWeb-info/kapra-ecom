@@ -36,11 +36,13 @@ export default function Bell() {
     const interval3 = setInterval(() => {
         setShowAd(false);
         setShowDiv('none');
-
-        if (adStatus) {
-            setShowDialog(adStatus);
+        setShowDialog(1);
+        
+        if(adStatus && parseInt(adStatus) === 0){
+            setShowDialog(0);
         }
-    }, 300000);
+
+    }, 10000);
 
     // Clear intervals on component unmount
     return () => {
@@ -56,7 +58,6 @@ export default function Bell() {
       }
     
     const updateAdStatus =(x) =>{
-        console.log(x);
         localStorage.setItem("adStatus", x);
     } 
 
@@ -64,29 +65,30 @@ export default function Bell() {
     <>
     {showDialog &&
     <>
-    <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>    
+    <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>
     
-    <div className='dialogAd'>
-        <button onClick={hideFadeBg} ><BsX /></button>
+        <div className='dialogAd'>
+            <button onClick={hideFadeBg} ><BsX /></button>
+            
+            <div className='dialogBanner'>
+                <img src={Img} alt=""  />
+                <p>AVAILABLE NOW</p>
+            </div>
+            <div className='text-center'>
+                <h4>JOIN OUR MAILING LIST TO </h4>
+                <p>Be the first one to know about the latest trends and promotions.</p>
+                <span className='dialogAdInput'>
+                    <input type="text" placeholder='Your email address'/>
+                    <button>Subscribe</button>
+                </span>
+                <span>
+                    <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? 0 : 1)}/>
+                    <label htmlFor="adNoRepeat">Do not show it anymore.</label>
+                </span>
+            </div>
+        </div>
         
-        <div className='dialogBanner'>
-            <img src={Img} alt=""  />
-            <p>AVAILABLE NOW</p>
-        </div>
-        <div>
-            <h4>JOIN OUR MAILING LIST TO </h4>
-            <p>Be the first one to know about the latest trends and promotions.</p>
-            <span className='dialogAdInput'>
-                <input type="text" placeholder='Your email address'/>
-                <button>Subscribe</button>
-            </span>
-            <span>
-                <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? false : true)}/>
-                <label htmlFor="adNoRepeat">Do not show it anymore.</label>
-            </span>
-        </div>
-    </div>
-    </>
+      </>  
     }
 
     <div className='bellAd'>

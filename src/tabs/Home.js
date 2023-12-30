@@ -1,5 +1,4 @@
 import React from 'react'
-import Carousel from 'react-bootstrap/Carousel';
 import Img1 from '../imgs/img1.jpg';
 import Img2 from '../imgs/img2.jpg';
 import Img3 from '../imgs/img3.jpg';
@@ -8,42 +7,45 @@ import '../css/home.css';
 import HomeProductList from '../components/HomeProductList';
 import CatSlider from '../components/CatSlider';
 
+import MyCarousel from '../components/MyCarousal';
+
 
 export default function Home() {
+
+  let homeBanner = [    {
+    titleContent: null,
+    btnContent: 'Explore Now',
+    link : '/collection' ,
+    imgContent: 'img1',
+    altContent: 'Get Dynamic Web Apps',
+  },
+  {
+    titleContent: null,
+    btnContent: 'Explore Now',
+    link : '/collection' ,
+    imgContent: 'img2',
+    altContent: 'Get Dynamic Web Apps',
+  },
+  {
+    titleContent: null,
+    btnContent: 'Explore Now',
+    link : '/collection' ,
+    imgContent: 'img3',
+    altContent: 'Get Dynamic Web Apps',
+  },
+];
 
   return (
 
     <div>
-     <Carousel className='topCarousel'>
-        <Carousel.Item interval={2000}>
-          <div className='exploreBanner topCarousel-inner'>
-            <img src={Img1} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
-          </div>
-        </Carousel.Item>
-
-        <Carousel.Item interval={2000}>
-          <div className='exploreBanner topCarousel-inner'>
-            <img src={Img2} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
-          </div>
-        </Carousel.Item>
-
-        <Carousel.Item interval={2000}>
-          <div className='exploreBanner topCarousel-inner'>
-            <img src={Img3} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
-          </div>
-        </Carousel.Item>
-        
-        <Carousel.Item interval={2000}>
-          <div className='exploreBanner topCarousel-inner'>
-            <img src={Img4} alt="" />
-            <a href="http://" target="_blank" rel="noopener noreferrer" className='customDarkBtn'>Explore Now</a>
-          </div>
-        </Carousel.Item>
- 
-      </Carousel>
+      
+      <MyCarousel 
+          class1 = "topCarousel" 
+          class2="exploreBanner topCarousel-inner" 
+          classBtn='customDarkBtn' 
+          cusInterval = {2000}  
+          customContent={homeBanner}
+      />
 
       <HomeProductList heading = "Unstitched"  bannerImg = "img1" />
       <HomeProductList  heading = "Ready to Wear"  bannerImg = "img2" />

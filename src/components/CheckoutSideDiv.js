@@ -1,18 +1,25 @@
-import React , {useState} from 'react';
+import React , {useState , useEffect } from 'react';
 import {  BsX , BsFillCartXFill } from "react-icons/bs";
 
 export default function CheckoutSideDiv({ onClose }) {
     const [ emptyCart , setEmptyCart] = useState(true);
-
-    const handleHide = () => {
-        console.log("in handle hide");
-        if (onClose) {
-          onClose();
-        }
-      }
+    const [ showDiv , setShowDiv ] = useState(' -100%');
+    
+    useEffect(() => {
+      return () => {
+        setShowDiv('0');
+      };
+    }, []);
   
+    const handleHide = () => {
+      console.log("in handle hide");
+      if (onClose) {
+        onClose();
+      }
+    }
+      
     return (
-    <>
+    <div className="sideMenu" style={{right : `${showDiv}`}}>
       <div className='crossBtnParent'>
         <span>Shopping Cart</span>
         <button className='crossBtn' onClick={handleHide} ><BsX/></button>
@@ -58,6 +65,6 @@ export default function CheckoutSideDiv({ onClose }) {
 
         </div>
       }
-    </>
+    </div>
   )
 }

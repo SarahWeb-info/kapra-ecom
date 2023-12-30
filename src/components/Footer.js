@@ -113,7 +113,7 @@ export default function Footer() {
 
     <div className='socialDiv'>
       
-      <img src={SmpLogo} alt="" srcset="" />
+      <img src={SmpLogo} alt="" />
       
       <div className='social'>
         

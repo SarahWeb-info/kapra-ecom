@@ -15,49 +15,34 @@ function MyNavbar() {
   const [ activeDiv , setActiveDiv ] = useState("");
   const [ fadeBg , setFadeBg ] = useState('translateY(-100vh)');
   const [ showNav , setShowNav ] = useState();
-  const [ showSearch , setShowSearch ] = useState(' -100%');
-  const [ showLogin , setShowLogin ] = useState('-100%');
-  const [ showCart , setShowCart ] = useState('-100%');
+  const [cart, setCart] = useState(false);
+  const [login, setLogin] = useState(false);
+  const [search, setSearch] = useState(false);
 
-  const openFadeBg =(x)=>{
-    setActiveDiv(x);
-    
-    setFadeBg('translateY(0)');
-    
-    if ( x === "nav" || activeDiv === "nav" ) {
-      setShowNav('translateX(0%)');
-      
-    }else if( x === "cart" || activeDiv === "cart" ){
-      setShowCart('0%');
-      
-    }else if( x === "search"  || activeDiv === "search" ){
-      setShowSearch('0%');
-      
-    }else if( x === "login" || activeDiv === "login"  ){
-      setShowLogin('0%'); 
-    }
-
-
+  const showNavFunc =()=>{
+    setShowNav('translateX(0)');
+  }
+  const hideAll =(x)=>{
+    setFadeBg('translateY(-100vh)');
+    setShowNav('translateX(-100%)');
+    setCart(false);
+    setLogin(false);
+    setSearch(false);
   }
 
-  const hideFadeBg =(x)=>{
-    
-    setFadeBg('translateY(-100vh)');
-    
-    if ( x === "nav"  || activeDiv === "nav" ) {
-      setShowNav('translateX(-100%)');
-      
-    }else if( x === "cart"  || activeDiv === "cart" ){
-      setShowCart('-100%');
-      
-    }else if( x === "search"  || activeDiv === "search" ){
-      setShowSearch('-100%');
-      
-    }else if( x === "login"  || activeDiv === "login" ){
-      setShowLogin('-100%'); 
-    }
-    
-    setActiveDiv("");
+  const openCart =()=>{
+    setFadeBg('translateY(0)');
+    setCart(true);
+  }
+
+  const openLogin =()=>{
+    setFadeBg('translateY(0)');
+    setLogin(true);
+  }
+  
+  const openSearch =()=>{
+    setFadeBg('translateY(0)');
+    setSearch(true);
   }
 
   const toggleDropdown =(e)=>{
@@ -115,19 +100,11 @@ function MyNavbar() {
 
   return (
     <div className='fixed-top'  style={{zIndex : '102'}}>
-      <div className='fadeBg' onClick={hideFadeBg} style={{transform:`${fadeBg}`}}></div>
-
-      <div className="sideMenu" style={{right : `${showSearch}`}}>
-          <SearchDiv onClose={()=>hideFadeBg("search")}  />
-      </div>
-
-      <div className="sideMenu" style={{right : `${showLogin}`}}>
-       <LoginDiv onClose = {()=>hideFadeBg("login")} />
-      </div>
-
-      <div className="sideMenu"  style={{right : `${showCart}`}}>
-        <CartDiv onClose = {()=>hideFadeBg("cart")}  />
-      </div>
+      <div className='fadeBg' onClick={hideAll} style={{transform:`${fadeBg}`}}></div>
+      
+      {search && <SearchDiv onClose={hideAll}  />}
+      {login && <LoginDiv onClose = {hideAll} />}
+      {cart && <CartDiv onClose = {hideAll}  />}
 
       <Carousel className='navCarousel'>
         <Carousel.Item interval={1000}>
@@ -145,7 +122,7 @@ function MyNavbar() {
 
     <div className='navBg py-1 px-3 row align-items-center'>
       <div className='col d-lg-none'>
-        <button className='noBtn' onClick={()=>openFadeBg("nav")}><BsFilterLeft /></button>
+        <button className='noBtn' onClick={showNavFunc}><BsFilterLeft /></button>
       </div>
       <div className='col'>
         <div className='full-X-Block d-inline-flex justify-content-center  justify-content-lg-start  align-items-center '>
@@ -157,7 +134,7 @@ function MyNavbar() {
         <div className='full-X-Block d-inline-flex justify-content-end align-items-center '>
           
           <div className='tooltip-Parent'>
-            <button className='noBtn' onClick={()=>openFadeBg("search")}><BsSearch /></button>
+            <button className='noBtn' onClick={openSearch}><BsSearch /></button>
             <div className='myTooltip'>Search</div>  
           </div>
 
@@ -167,7 +144,7 @@ function MyNavbar() {
           </div>
 
           <div className='tooltip-Parent'>
-            <button className='noBtn d-none d-lg-block' onClick={()=>openFadeBg("login")} ><BsPerson /></button>
+            <button className='noBtn d-none d-lg-block' onClick={openLogin} ><BsPerson /></button>
             <div className='myTooltip'>Login</div>  
           </div>
 
@@ -177,7 +154,7 @@ function MyNavbar() {
           </div>
 
           <div className='tooltip-Parent'>
-            <button className='noBtn'  onClick={()=>openFadeBg("cart")} ><BsCart /></button>
+            <button className='noBtn'  onClick={openCart} ><BsCart /></button>
             <div className='myTooltip'>Cart</div>  
           </div>
 
@@ -189,7 +166,7 @@ function MyNavbar() {
            
       <div className='crossBtnParent  d-lg-none'>
         <span></span>
-        <button className='crossBtn'  onClick={()=>hideFadeBg("nav")} ><BsX/></button>
+        <button className='crossBtn'  onClick={hideAll} ><BsX/></button>
       </div>
 
 

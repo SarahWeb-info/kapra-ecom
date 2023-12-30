@@ -66,7 +66,6 @@ const getDataObj = () => {
 }
 
 let productsList = getDataObj();
-console.log(productsList);
 
 export default  productsList;
 
