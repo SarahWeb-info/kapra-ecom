@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/App.css';
 import MyNavbar from './components/MyNavbar';
-import BellAlert from './components/Bell';
+import DialogAds from './dialogs/Dialogs';
 import Footer from './components/Footer';
 import Home from './tabs/Home' ; 
 import Collection from './tabs/Collection';
@@ -18,7 +18,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <MyNavbar />
-      <BellAlert />
+      <DialogAds />
       <div className='ghostNav'></div>
       <Routes>
         <Route path="/" element={<Home />} />

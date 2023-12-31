@@ -13,6 +13,10 @@
 .navCarousel > .carousel-indicators ,.navCarousel > .carousel-control-prev ,.navCarousel > .carousel-control-next{
     display: none !important;
 }
+.leftText, .rightText{
+    text-align: center;
+} 
+
 .navBg{
     background-color: var(--bg);
     z-index: 2;
@@ -118,6 +122,12 @@
 }
 
 @media screen and (min-width : 992px){
+    .leftText{
+        text-align: left;
+    } 
+    .rightText{
+        text-align: right;
+    }
     .myNav{
         position: relative;
         background-color: transparent;

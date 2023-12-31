@@ -1,0 +1,10 @@
+:root{
+    --fadeBg : translateY(-100vh);/* translateY(0) */
+    --searchDiv : 'none';/* block */   
+    --loginDiv : 'none';/* block */
+    --cartDiv : 'none';/* block */
+}
+
+.searchDiv{
+    display: var(--searchDiv);
+}

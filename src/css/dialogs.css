@@ -2,7 +2,7 @@
     --dialogWidth : 95%;
     --dialogHeight : 40vh;
 }
-.dialogAd{
+.centerDialog{
     box-sizing: border-box;
     width: auto;
     height: auto;
@@ -10,30 +10,32 @@
     margin: 0;
     padding: 0;
     padding-bottom: 2vh;
-    background-color: var(--bg);
-    color: var(--color);
     position: fixed;
     top : 50%;
     left : 50%;
     transform: translate(-50% , -50%);
+}
+.centerDialog>div{
+    position: relative;
+    width: var(--dialogWidth);
+    height: var(--dialogHeight);
+    z-index: 105;
+    overflow: hidden;
+}
+
+.dialogResposive{
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
-    z-index: 105;
-    overflow: hidden;
 }
-.dialogAd>div{
-    position: relative;
-    width: var(--dialogWidth);
-    height: var(--dialogHeight);
-}
+
 .dialogAd span{
     display: inline-flex;
     align-items: center;
 }
 
-.dialogAd button{
+/* .dialogAd button{
     background-color: var(--color);
     color: var(--bg);
     transition: background 1s;
@@ -42,7 +44,7 @@
 .dialogAd button:hover{
     background-color: var(--borderColor);
     border: 0.3px solid var(--color);
-}
+} */
 
 .dialogAd>button{
     position: absolute;

@@ -1,9 +1,9 @@
 import React , {useState , useEffect} from 'react'
 import { BsBellFill , BsX } from "react-icons/bs";
-import "../css/bell.css";
 import Img from "../imgs/img1.jpg";
+import "../css/dialogs.css";
 
-export default function Bell() {
+export default function Dialogs() {
     
     const [ showDiv , setShowDiv ] = useState('none');  
     const [ showAd , setShowAd ] = useState(true);    
@@ -67,28 +67,28 @@ export default function Bell() {
     <>
     <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>
     
-        <div className='dialogAd'>
-            <button onClick={hideFadeBg} ><BsX /></button>
-            
-            <div className='dialogBanner'>
-                <img src={Img} alt=""  />
-                <p>AVAILABLE NOW</p>
-            </div>
-            <div className='text-center'>
-                <h4>JOIN OUR MAILING LIST TO </h4>
-                <p>Be the first one to know about the latest trends and promotions.</p>
-                <span className='dialogAdInput'>
-                    <input type="text" placeholder='Your email address'/>
-                    <button>Subscribe</button>
-                </span>
-                <span>
-                    <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? 0 : 1)}/>
-                    <label htmlFor="adNoRepeat">Do not show it anymore.</label>
-                </span>
-            </div>
-        </div>
+    <div className='dialogAd'>
+        <button onClick={hideFadeBg} ><BsX /></button> 
         
-      </>  
+        <div className='dialogBanner'>
+            <img src={Img} alt=""  />
+            <p>AVAILABLE NOW</p>
+        </div>
+        <div className='text-center'>
+            <h4>JOIN OUR MAILING LIST TO </h4>
+            <p>Be the first one to know about the latest trends and promotions.</p>
+            <span className='dialogAdInput'>
+                <input type="text" placeholder='Your email address'/>
+                <button>Subscribe</button>
+            </span>
+            <span>
+                <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? 0 : 1)}/>
+                <label htmlFor="adNoRepeat">Do not show it anymore.</label>
+            </span>
+        </div>
+    </div>
+    
+    </>  
     }
 
     <div className='bellAd'>

@@ -4,14 +4,14 @@ import { BsHeart , BsCart  } from "react-icons/bs";
 import { SiCodereview } from "react-icons/si";
 import { TfiLayoutColumn2 , TfiLayoutColumn2Alt ,TfiLayoutColumn3 , TfiLayoutColumn3Alt } from "react-icons/tfi";
 import productsList from '../backend/getProductList';
-import ProductDialog from "../components/ProductDialog";
-import CartDiv from '../components/CheckoutSideDiv';
+import ProductDialog from "../dialogs/ProductDialog";
+import CartDiv from '../dialogs/CheckoutSideDiv';
 
 export default function Collection() {
 
   const [ grid3display , setGrid3display ] = useState(true);
   const [ grid2display , setGrid2display ] = useState(false);
-  const [ totalProducts , setTotalProducts ] = useState(false);
+  // const [ totalProducts , setTotalProducts ] = useState(false);
 
   const  selectGrid =(x)=>{
     if(x===2){

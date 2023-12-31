@@ -1,18 +1,17 @@
 import React , {useState } from 'react';
 import '../css/navbar.css';
-import Carousel from 'react-bootstrap/Carousel';
 import { BsFilterLeft , BsX , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart ,BsChevronRight} from "react-icons/bs";
-import SearchDiv from './SearchSideDiv';
-import LoginDiv from './LoginSideDiv';
-import CartDiv from './CheckoutSideDiv';
+import SearchDiv from '../dialogs/SearchSideDiv';
+import LoginDiv from '../dialogs/LoginSideDiv';
+import CartDiv from '../dialogs/CheckoutSideDiv';
 
 import BrandMobile from '../imgs/smpLogo-Mobile.png';
 import BrandDesktop from '../imgs/smpLogo-desktop.png';
 import smpImg1 from '../imgs/img1.jpg';
+import MyCarousal from "./MyCarousal";
 
 function MyNavbar() {
 
-  const [ activeDiv , setActiveDiv ] = useState("");
   const [ fadeBg , setFadeBg ] = useState('translateY(-100vh)');
   const [ showNav , setShowNav ] = useState();
   const [cart, setCart] = useState(false);
@@ -62,7 +61,6 @@ function MyNavbar() {
 
           allNavItems.forEach((allDivs) => {
             allDivs.style.display = 'block';
-            
           });
         }else{
           activeParent.classList.add('active');
@@ -98,7 +96,15 @@ function MyNavbar() {
     }
 }
 
-  return (
+let navCarousalData = [    {
+    titleContent: (<small>Fixed delivery charges,Rs 100/-</small>),
+  },
+  {
+    titleContent: (<small>Best sellers.<a href="">Shop Now!</a></small>),
+  },
+];
+
+return (
     <div className='fixed-top'  style={{zIndex : '102'}}>
       <div className='fadeBg' onClick={hideAll} style={{transform:`${fadeBg}`}}></div>
       
@@ -106,20 +112,12 @@ function MyNavbar() {
       {login && <LoginDiv onClose = {hideAll} />}
       {cart && <CartDiv onClose = {hideAll}  />}
 
-      <Carousel className='navCarousel'>
-        <Carousel.Item interval={1000}>
-          <div className='full-Block d-inline-flex justify-content-center justify-content-md-start align-items-center'>
-            <small>Fixed delivery charges,Rs 100/-</small>
-          </div>
-        </Carousel.Item>
-
-        <Carousel.Item interval={500}>
-          <div className='full-Block d-inline-flex justify-content-center justify-content-md-end align-items-center'>
-            <small>Best sellers.<a href="">Shop Now!</a></small>
-          </div>
-        </Carousel.Item>
-      </Carousel>
-
+      <MyCarousal 
+          class1 = "navCarousel" 
+          cusInterval = {1000}  
+          customContent={navCarousalData}
+      />
+  
     <div className='navBg py-1 px-3 row align-items-center'>
       <div className='col d-lg-none'>
         <button className='noBtn' onClick={showNavFunc}><BsFilterLeft /></button>
@@ -164,11 +162,10 @@ function MyNavbar() {
 
     <div className='myNav' style={{transform: `${showNav}`}}>
            
-      <div className='crossBtnParent  d-lg-none'>
+      <div className='crossBtnParent d-lg-none'>
         <span></span>
         <button className='crossBtn'  onClick={hideAll} ><BsX/></button>
       </div>
-
 
       <div className='myNavitem dropParent'>
         <a href="http://" className='alertColor'>Sale</a>
