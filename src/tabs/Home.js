@@ -4,8 +4,8 @@ import Img2 from '../imgs/img2.jpg';
 import Img3 from '../imgs/img3.jpg';
 import Img4 from '../imgs/img4.jpg';
 import '../css/home.css';
-import HomeProductList from '../components/HomeProductList';
-import CatSlider from '../components/CatSlider';
+import HomeProductList from '../components/sliderLayout/HomeProductList';
+import CatSlider from '../components/sliderLayout/CatSlider';
 
 import MyCarousel from '../components/MyCarousal';
 

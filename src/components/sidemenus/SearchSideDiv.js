@@ -1,7 +1,7 @@
 import React,{useState , useEffect} from 'react';
-import {  BsX , BsSearch } from "react-icons/bs";
-import Img from '../imgs/img1.jpg';
-import '../css/sidedivs.css';
+import { BsSearch } from "react-icons/bs";
+import CrossBTn from '../globalHelpers/CrossBTn';
+import Img from '../../imgs/img1.jpg';
 
 export default function CheckoutSideDiv({ onClose }) {
     const smpData = [
@@ -67,11 +67,8 @@ export default function CheckoutSideDiv({ onClose }) {
    return (
   <div className="sideMenu" style={{right : `${showDiv}`}}>
     <div className='searchSideDiv'>
-      
-      <div className='crossBtnParent'>
-        <span>search our site</span>
-        <button className='crossBtn' onClick={handleHide} ><BsX/></button>
-      </div>
+
+      <CrossBTn title="search our site"  onClose={handleHide} />     
       
       <div className='quickList'>
           <div className='customInputDiv'>

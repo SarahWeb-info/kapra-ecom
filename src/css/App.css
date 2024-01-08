@@ -5,16 +5,40 @@
     --grayBase : #f6f6f8 ;
     --alert : red;
     --borderColor : rgba(34, 34, 34, 0.432);
-    --navHeight : 13vh;
+    
 
     --sliderDivHeight   : 50vh;   
     --buttonHeight : 36px;
   }
 
+.myLabels{
+    white-space: pre;
+    text-decoration: none;
+    color: var(--color);
+    background-color: inherit;
+    text-transform: uppercase;
+    border: 0px;
+    letter-spacing: .2px;
+}
+.myLabels a{
+    text-decoration: none;
+    color: var(--color);
+    background-color: inherit;
+    text-transform: uppercase;
+    border: 0px;
+}
+
 .inlineCenter{
+    width: 100%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+}
+.centerFixed{
+    position: fixed;
+    top : 50%;
+    left : 50%;
+    transform: translate(-50% , -50%);
 }
 .bgLight{
     background-color: var(--bg);
@@ -31,7 +55,7 @@
     height: 100vh;
     box-sizing: border-box;
     margin: 0;
-    z-index: 100;
+    z-index: 11;
     background-color: rgba(0, 0, 0, 0.211);
     position: fixed;
     top : 0 ;
@@ -58,55 +82,20 @@
     font-size: 0.7rem;
     text-transform: lowercase;
 }
-.noBtn{
-    border: none;
-    outline: none;
-    font-weight: bolder;
-    font-size: 2rem;
-    background-color: transparent;
-    color : var(--color);
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-}
-.noBtn > button {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    width: fit-content;
-}
 .full-Block{
+    box-sizing: border-box;
     width: 100% !important;
     height: 100% !important;
 }
 
 .full-X-Block{
+    box-sizing: border-box;
     width: 100% !important;
 }
 .yScroll{
     height: 10rem;
     overflow-y: auto;
 }
-.crossBtn {
-    position: relative;
-    width: 100%;
-    height: auto;
-    max-height: var(--buttonHeight);
-    display: inline-flex;
-    justify-content:flex-end;
-    align-items: center;
-    border: 0px;
-    background-color: transparent;
-    font-size: 2rem;
-    font-weight: bolder;
-    transition: 0.2s;
-    margin : 1vh 0 2vh 0;
-}
-
-.crossBtn:hover{
-    transform: rotate(180deg);
-}
-
 .tooltip-Parent{
     width: fit-content;
     height: 3vh;
@@ -121,7 +110,7 @@
     background-color: var(--color);
     color: var(--bg);
     border-radius: 8%;
-    padding: 1px 3px;
+    padding: 4px;
     display: none;
     transition: 1s;
 }
@@ -129,39 +118,12 @@
 .toolUp{
     top : -100%;
     white-space :pre; 
-
 }
 
 .tooltip-Parent:hover .myTooltip{
     display: block;
 }
 
-.customDarkBtn{
-    text-decoration: none;
-    z-index: 2;
-    color: var(--bg);
-    background-color: var(--color) !important;
-    border-radius: 3.34vw;
-    border: 0.5px solid var(--borderColor);
-    transition: 1.5s;
-    width: fit-content;
-    height: auto;
-    max-height: var(--buttonHeight);
-    min-width: 10vw;
-    padding: 2px 4px;
-    overflow: hidden;
-    font-weight: 500;
-    font-size: large;
-    text-align: center;
-}
-.customDarkBtn a{
-    color: var(--bg);
-    text-decoration: none;   
-}
-.customDarkBtn:hover{
-    background-color: var(--borderColor) !important;
-    /* color: var(--color); */
-}
 
 .customInputDiv{
     display: inline-flex;
@@ -170,9 +132,10 @@
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.166);
     width: fit-content;
+    max-width: 100%;
     height: auto;
     max-height: var(--buttonHeight);
-    padding:0 2%;
+    padding-left:1.5%;
     box-sizing: border-box;
 }
 .customInputDiv input{
@@ -184,6 +147,7 @@
     border: 0px;
     outline: 0px;
 }
+
 
 .productDiv{
     box-sizing: border-box;
@@ -252,9 +216,17 @@
     right: 0;
     background-color: red;
     color : white;
+    border-radius: 0;
     border-bottom-left-radius: 13%;
     padding : 3px 5px ;
 }
+.productTagBottom{
+    top:auto;
+    bottom: 0%;
+    border-bottom-left-radius: 0% !important;
+    border-top-left-radius: 13% !important;
+}
+
 .qauntityDiv{
     display: inline-flex;
     justify-content: space-evenly;
@@ -268,7 +240,7 @@
     height: 5vh;
     min-width: 10vw;
     padding: 2px 4px;
-    margin: auto 2px;
+    margin: 2px;
     overflow: hidden;
     font-size: large;
 }
@@ -305,5 +277,10 @@
         height:auto;
         min-height: 10vh;
     }
-      
+    .productTagBottom{
+        top:0;
+        bottom: auto;
+        border-bottom-left-radius: 13% !important;
+        border-top-left-radius: 0% !important;
+    }     
 }

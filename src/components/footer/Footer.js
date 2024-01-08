@@ -1,43 +1,29 @@
-import React , {useState , useEffect } from 'react';
-import SmpLogo from '../imgs/smpLogo-desktop.png';
-import '../css/footer.css';
-import { BsPlusLg ,BsDashLg , BsWhatsapp  , BsInstagram } from "react-icons/bs";
+import React from 'react';
+import SmpLogo from '../../imgs/smpLogo-desktop.png';
+import './footer.css';
+import { BsWhatsapp  , BsInstagram } from "react-icons/bs";
 import { TiSocialFacebook ,TiSocialLinkedin } from "react-icons/ti";
 
 export default function Footer() {
 
   const handleAccordianDisplay =(e)=>{
-    let accordianItem = e.currentTarget.closest('.accordianItem');
-    let accordianBtn = accordianItem.querySelector('.accordianBtn');
-    let accordianBody = accordianItem.querySelector('.accordianBody');
-    
-    if(accordianBody.style.display === 'none'){
-      accordianBody.style.display = "flex";
-      accordianBtn.style.transform= 'rotate(180deg)';
-      accordianBtn.innerHTML = '-';
-    }else{
-      accordianBody.style.display = "none";
-      accordianBtn.style.transform= 'rotate(-180deg)';
-      accordianBtn.innerHTML = '+';
-    }
+    if (window.innerWidth < 768) {
 
-  }
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 992) {
-      } else {
-      }
-    };
+      let accordianItem = e.currentTarget.closest('.accordianItem');
+      let accordianBtn = accordianItem.querySelector('.accordianBtn');
+      let accordianBody = accordianItem.querySelector('.accordianBody');
       
-    window.addEventListener('resize', handleResize);
-  
-    handleResize();
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
+      if(accordianBody.style.display === 'none'){
+        accordianBody.style.display = "flex";
+        accordianBtn.style.transform= 'rotate(180deg)';
+        accordianBtn.innerHTML = '-';
+      }else{
+        accordianBody.style.display = "none";
+        accordianBtn.style.transform= 'rotate(-180deg)';
+        accordianBtn.innerHTML = '+';
+      }      
+    }
+  }
 
   return (
     <div className='footer'>

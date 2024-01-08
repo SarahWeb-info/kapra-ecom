@@ -1,41 +1,39 @@
 :root{
-    --dialogWidth : 95%;
+    --dialogWidth : 95vw;
     --dialogHeight : 40vh;
 }
-.centerDialog{
+
+.dialog{
     box-sizing: border-box;
+    z-index: 105;
     width: auto;
     height: auto;
     max-height: 80vh;
     margin: 0;
     padding: 0;
     padding-bottom: 2vh;
-    position: fixed;
-    top : 50%;
-    left : 50%;
-    transform: translate(-50% , -50%);
-}
-.centerDialog>div{
-    position: relative;
-    width: var(--dialogWidth);
-    height: var(--dialogHeight);
-    z-index: 105;
-    overflow: hidden;
-}
-
-.dialogResposive{
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     align-items: center;
+    background-color: var(--bg);
+    color : var(--color);
 }
 
-.dialogAd span{
+.dialog>div{
+    position: relative;
+    width: var(--dialogWidth);
+    height: fit-content;
+    overflow: hidden;
+}
+
+/* .dialogAd span{
     display: inline-flex;
     align-items: center;
-}
+} */
 
-/* .dialogAd button{
+/* 
+.dialogAd button{
     background-color: var(--color);
     color: var(--bg);
     transition: background 1s;
@@ -45,21 +43,6 @@
     background-color: var(--borderColor);
     border: 0.3px solid var(--color);
 } */
-
-.dialogAd>button{
-    position: absolute;
-    z-index: 1;
-    right : 0;
-    top : 0;
-    font-weight: bolder;
-    font-size: 2rem;
-    padding: 3px;
-    margin: 0px;
-    line-height: 0;
-    border: 0px;
-    max-width: 35px;
-    max-height: 35px;
-}
 
 .dialogBanner p{
     position: absolute;
@@ -85,37 +68,39 @@
     width: auto;
 }
 .dialogBanner img{
-    width: var(--dialogWidth);
+    /* width: var(--dialogWidth); */
+    width: 100%;
     height: auto;
     overflow: hidden;
 }
 
-.dialogAdInput{
-    border-radius: 3.34vw;
-    border: 1px solid var(--color);
-    padding: 3px;
+.dialogDetail{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.productDetail{
+ padding: 4% 2%;
+}
+.productDetail *{
+    width: 100%;
+}
+.miniCart{
+    background-color: transparent;
+    padding: 1% 0.5%;
     width: auto;
-    max-width: 80%;
-    overflow: hidden;
+    max-width: 350px;
+    min-width: 200px;
+    height: auto;
+    min-height: 350px;
+    box-sizing: border-box;
+    z-index: 120;
+}
+.miniCart>div{
+    padding: 2%;
 }
 
-.dialogAdInput input{
-    border: 0px;
-}
-.dialogAdInput input:focus-visible{
-    outline: 0px;
-    border: 0px;
-}
 
-.dialogAdInput button{
-    border-radius: 3.34vw;
-    border: 1px solid var(--color);
-    background-color: var(--color);
-    color: var(--bg);
-    -webkit-box-shadow: inset 1px 3px 21px 6px #000000; 
-    box-shadow: inset 1px 3px 21px 6px #000000;
-    font-size: small;
-}
 
 .bellAd{
     z-index: 102;   
@@ -204,13 +189,14 @@
     font-size: 2.5rem;
 }
 
-@media screen and (min-width : 650px){
+@media screen and (min-width : 850px){
     :root{
         --dialogWidth : 40vw;
         --dialogHeight : 80vh;
     }
-    .dialogAd{   
+    .dialog{   
         flex-direction: row;
         padding: 0;
     }
+    
 }

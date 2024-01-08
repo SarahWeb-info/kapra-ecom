@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function MiniCart() {
+export default function FilterDiv() {
   return (
     <div>
       

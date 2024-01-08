@@ -1,9 +1,9 @@
 import React , {useState , useEffect} from 'react'
-import { BsBellFill , BsX } from "react-icons/bs";
-import Img from "../imgs/img1.jpg";
-import "../css/dialogs.css";
+import { BsX , BsBellFill } from "react-icons/bs";
+import Img from "../../imgs/img1.jpg";
+import "../../css/dialogs.css";
 
-export default function Dialogs() {
+export default function Promotions() {
     
     const [ showDiv , setShowDiv ] = useState('none');  
     const [ showAd , setShowAd ] = useState(true);    
@@ -44,7 +44,6 @@ export default function Dialogs() {
 
     }, 10000);
 
-    // Clear intervals on component unmount
     return () => {
         clearInterval(interval1);
         clearInterval(interval2);
@@ -67,25 +66,29 @@ export default function Dialogs() {
     <>
     <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>
     
-    <div className='dialogAd'>
-        <button onClick={hideFadeBg} ><BsX /></button> 
+    <div className='centerFixed dialog'>
+        <button onClick={hideFadeBg} className='cross'><BsX /></button>
         
         <div className='dialogBanner'>
             <img src={Img} alt=""  />
             <p>AVAILABLE NOW</p>
         </div>
-        <div className='text-center'>
+
+        <div className='dialogDetail align-items-center'>
+        
             <h4>JOIN OUR MAILING LIST TO </h4>
-            <p>Be the first one to know about the latest trends and promotions.</p>
-            <span className='dialogAdInput'>
+            <p className='text-right'>Be the first one to know about the latest trends and promotions.</p>
+            <div className='customInputDiv'>
                 <input type="text" placeholder='Your email address'/>
-                <button>Subscribe</button>
-            </span>
-            <span>
+                <button className='customDarkBtn'>Subscribe</button>
+            </div>
+            <div className='d-inline-flex'>
                 <input type="checkbox" name="" id="adNoRepeat" onChange={(e) => updateAdStatus(e.target.checked ? 0 : 1)}/>
                 <label htmlFor="adNoRepeat">Do not show it anymore.</label>
-            </span>
+            </div>
+        
         </div>
+    
     </div>
     
     </>  

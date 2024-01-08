@@ -5,7 +5,6 @@ export default function MyCarousal({
     class1 = "" ,
     class2="" ,
     classImg="" ,
-    classP ="",
     classBtn='customDarkBtn' ,
     cusInterval =3000  ,
     customContent
@@ -35,7 +34,7 @@ export default function MyCarousal({
     //   },
     // ];
     
-      return (
+    return (
     <>
     <Carousel className={class1}>
 

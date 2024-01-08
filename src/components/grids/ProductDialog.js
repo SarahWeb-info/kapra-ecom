@@ -1,11 +1,17 @@
-import React,{useState} from 'react';
+import React, {useState ,useEffect} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {  BsX , BsStar ,BsStarFill , BsDashLg , BsPlusLg } from "react-icons/bs";
-import productDetail from '../backend/getProductDetail';
+import productDetail from '../../backend/getProductDetail';
+import TruncateText from '../../backend/TrancateText';
 
 export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,discountPrice}) {
 
   const [quantity, setQuantity] = useState(1);
+  const [ title , setTitle ] = useState(productDetail.title);
+  
+  useEffect(() => {
+    setTitle(TruncateText(title, 100));
+  }, [title]);
 
   const minusQuantity=()=>{
     if (parseInt(quantity)>0) {
@@ -43,26 +49,27 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
     <>
     <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>
 
-      <div className='dialogAd'>
-          <button onClick={hideFadeBg} ><BsX /></button>
-          <div className='dialogBanner'>
+      <div className='centerFixed dialog'>
+        <button onClick={hideFadeBg} className='cross'><BsX /></button>
+        
+        <div className='dialogBanner'>
           
-          <div className='productTag'>40%</div>
-          <Carousel>
-          {productDetail.allImagesArr.map((item, index) => {
-            return(
-              <Carousel.Item key={index}>
-                <div>
-                  <img src={item} alt="" />
-                </div>
-              </Carousel.Item>
-              );
-            })}
-          </Carousel>
-
+          <div className='productTag productTagBottom'>40%</div>
+            <Carousel>
+            {productDetail.allImagesArr.map((item, index) => {
+              return(
+                <Carousel.Item key={index}>
+                  <div>
+                    <img src={item} alt="" />
+                  </div>
+                </Carousel.Item>
+                );
+              })}
+            </Carousel>
           </div>
-          <div className='py-4 px-2 '>
-            <p className='shortText py-4'>{productDetail.title}</p>
+
+          <div className='dialogDetail py-4 px-2'>
+            <strong className='py-4'>{title}</strong>
             <div className='d-flex flex-row justify-content-between'>
               <p>{productDetail.priceCurrency} <span style={{ textDecoration: 'line-through',color : 'red' }}>{origPrice}</span> {discountPrice} </p>
               <p>

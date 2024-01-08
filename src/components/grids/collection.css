@@ -9,7 +9,7 @@
   padding-bottom: 2vh;
   margin: 0 3vw;
 }
-/* d-flex flex-row justify-content-between align-item-center w-100 px-5 */
+
 .collectionVeiw{
     border-top: 1px solid var(--borderColor);
     border-bottom: 1px solid var(--borderColor);

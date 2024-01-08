@@ -1,8 +1,12 @@
 import React from 'react';
 import './css/App.css';
-import MyNavbar from './components/MyNavbar';
-import DialogAds from './dialogs/Dialogs';
-import Footer from './components/Footer';
+import './css/buttons.css';
+
+import MyNavbar from './components/navbar/MyNavbar';
+import Promotions from './components/promotions/Promotions';
+import SideMenus from './components/sidemenus/SideMenus';
+import Footer from './components/footer/Footer';
+
 import Home from './tabs/Home' ; 
 import Collection from './tabs/Collection';
 import Product from './tabs/Product';
@@ -11,15 +15,20 @@ import ContactUs from './tabs/ContactUs';
 import FAQs from './tabs/Faqs';
 import Docs from './tabs/Docs';
 
+import State from './context/frontend/States';
+
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App() {
 
   return (
+    <State>
     <BrowserRouter>
+      <Promotions />
       <MyNavbar />
-      <DialogAds />
       <div className='ghostNav'></div>
+      <SideMenus />
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
@@ -29,7 +38,9 @@ export default function App() {
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/docs" element={<Docs />} />
       </Routes>
+
       <Footer />
     </BrowserRouter>
+    </State>
   );
 }

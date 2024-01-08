@@ -1,0 +1,36 @@
+.crossBtnParent{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1px solid var(--borderColor);
+    padding-left:2vw;
+    padding-right:2vw;
+}
+.crossBtnParent span{
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.crossBtnParent button{
+    width: fit-content;
+}
+.crossBtn {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-height: var(--buttonHeight);
+    display: inline-flex;
+    justify-content:flex-end;
+    align-items: center;
+    border: 0px;
+    background-color: transparent;
+    font-size: 2rem;
+    font-weight: bolder;
+    transition: 0.2s;
+    margin : 1vh 0 2vh 0;
+}
+
+.crossBtn:hover{
+    transform: rotate(180deg);
+}

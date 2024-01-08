@@ -1,10 +1,24 @@
+:root{
+    --navHeight : 18vh;
+}
+
 .ghostNav{
     height: var(--navHeight) ;
 }
-/* total nav : 21vh , but in small devices 13vh , carousal 5vh , navbg : 8vh ,myNav - 8vh ,  */
+
+/* total nav : 21vh , but in small devices 13vh , carousal 5vh , navHeader : 8vh ,myNav - 8vh ,  */
+.myNavbar{
+    position: fixed;
+    top : 0;
+    left : 0 ;
+    z-index: 20;
+    height: var(--navHeight) ;
+    background-color: var(--bg);
+}
+
 .navCarousel{
     width: 100vw;
-    height: 5vh;
+    height: 25%;
     background-color: var(--highlighter);
     color : var(--color);
     padding: 1vh 3vw;
@@ -17,14 +31,40 @@
     text-align: center;
 } 
 
-.navBg{
+.navHeader{
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: var(--bg);
     z-index: 2;
     position: relative;
     overflow: visible;
-    height: 8vh;
+    height: 40%;
+    padding: 1% 3%;
+    margin: 1% 0;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
 }
 
+.navBrand img{
+    height: 100%;
+}
+
+.navFilters{
+    display: inline-flex;
+    align-items:flex-end;
+    justify-content:flex-end;
+}
+.navFilters button , .navFilters a{
+    border: 0;
+    outline: 0;
+    background-color: transparent;
+    color: var(--color);
+    font-size: 1.5rem;
+    padding: 0 0.5vw;
+}
 
 .myNav{
     display: flex;
@@ -40,7 +80,7 @@
     border: 1px solid var(--color);
     padding: 1vh 1vw;
     transform: translateX(-100%);
-    z-index: 102;
+    z-index: 10;
 }
 
 .myNav div{
@@ -51,25 +91,24 @@
     box-sizing: border-box;
 }
 
-.myNav a{
-    text-decoration: none;
-    color: var(--color);
-    text-transform: uppercase;
-    border: 0px;
-}
-
 .myNavitem{
-    padding: 2vw 1vh 1vw 1vh;
+    padding: 2vh 1.5vw ;
     background-color: transparent;
     box-sizing: border-box;
     border-bottom: 1px solid var(--borderColor);
-}
-.myNavitem a{
-    white-space: pre;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 
+
+.myNavitem>button{
+    margin: 0 1.5vw;
+}
 .myNavitem:hover{
-    background-color: var(--grayBase);
+    background-color: var(--grayBase) !important;
 }
 
 .dropBtn{
@@ -101,24 +140,6 @@
 
 .navImgs{
     display: none;
-}
-
-.crossBtnParent{
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border-bottom: 1px solid var(--borderColor);
-    padding-left:2vw;
-    padding-right:2vw;
-}
-.crossBtnParent span{
-    font-size: 1rem;
-    font-weight: 500;
-    text-transform: uppercase;
-}
-.crossBtnParent button{
-    width: fit-content;
 }
 
 @media screen and (min-width : 992px){

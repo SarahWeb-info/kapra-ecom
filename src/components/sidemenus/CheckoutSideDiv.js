@@ -1,5 +1,6 @@
 import React , {useState , useEffect } from 'react';
-import {  BsX , BsFillCartXFill } from "react-icons/bs";
+import CrossBTn from '../globalHelpers/CrossBTn';
+import {  BsFillCartXFill } from "react-icons/bs";
 
 export default function CheckoutSideDiv({ onClose }) {
     const [ emptyCart , setEmptyCart] = useState(true);
@@ -20,10 +21,9 @@ export default function CheckoutSideDiv({ onClose }) {
       
     return (
     <div className="sideMenu" style={{right : `${showDiv}`}}>
-      <div className='crossBtnParent'>
-        <span>Shopping Cart</span>
-        <button className='crossBtn' onClick={handleHide} ><BsX/></button>
-      </div>
+      
+      <CrossBTn title="Shopping Cart"  onClose={handleHide} />     
+      
       {emptyCart && 
         <div className='d-flex flex-column justify-content-center align-items-center'>
           <p className='highlighter' style={{fontSize : '5rem'}}><BsFillCartXFill /></p>

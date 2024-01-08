@@ -2,13 +2,13 @@
     width: 100%;
     max-width: 400px;
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top : 0;
     transition: 0.8s;
     background-color: var(--bg);
     color: var(--color);
     border: 1px solid var(--color);
-    z-index: 102;
+    z-index: 25;
 }
 
 .sideMenu a{

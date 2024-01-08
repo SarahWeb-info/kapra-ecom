@@ -1,6 +1,6 @@
-import React, { useState , useEffect} from 'react';
-import { BsArrowLeftShort ,  BsArrowRightShort , BsHeart , BsCart } from "react-icons/bs";
-import productsList from '../backend/getProductList';
+import React, { useState } from 'react';
+import { BsArrowLeftShort ,  BsArrowRightShort } from "react-icons/bs";
+import productsList from '../../backend/getProductList';
 
 export default function CatSlider() {
 

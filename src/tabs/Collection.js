@@ -1,19 +1,21 @@
 import React , {useState} from 'react';
-import "../css/collection.css";
+import "../components/grids/collection.css";
 import { BsHeart , BsCart  } from "react-icons/bs";
 import { SiCodereview } from "react-icons/si";
-import { TfiLayoutColumn2 , TfiLayoutColumn2Alt ,TfiLayoutColumn3 , TfiLayoutColumn3Alt } from "react-icons/tfi";
+
+import FilterBar from '../components/grids/FilterBar';
 import productsList from '../backend/getProductList';
-import ProductDialog from "../dialogs/ProductDialog";
-import CartDiv from '../dialogs/CheckoutSideDiv';
+import ProductDialog from "../components/grids/ProductDialog";
+import CartDiv from '../components/sidemenus/CheckoutSideDiv';
+import MiniCart from "../components/grids/MiniCart";
 
 export default function Collection() {
 
+  const totalProducts  = productsList.length;
   const [ grid3display , setGrid3display ] = useState(true);
   const [ grid2display , setGrid2display ] = useState(false);
-  // const [ totalProducts , setTotalProducts ] = useState(false);
-
-  const  selectGrid =(x)=>{
+  
+  const selectGrid =(x)=>{
     if(x===2){
       setGrid2display(true);
       setGrid3display(false);
@@ -27,18 +29,32 @@ export default function Collection() {
   const [ productId , setProductId ] = useState(0);
   const [origPrice, setOrigPrice] = useState("");
   const [discount, setDiscount] = useState("");
-  
+
   const showDialogFunc =(id , origPrice , discountPrice)=>{
     setProductId(id );
     setOrigPrice(origPrice);
     setDiscount(discountPrice);
     setShowDialog(true);
   }
-
-  const hideFadeBg =()=>{   
+  
+  const hideDialog =()=>{   
     setShowDialog(false);
   }
 
+  const [ showMiniCart, setShowMiniCart] = useState(false);
+  const [ productTitle , setProductTitle ] = useState(0);
+  
+  const showMiniCartFunc =(title ,currency , origPrice , discountPrice)=>{
+    setProductTitle(title);
+    setOrigPrice(currency + origPrice);
+    setDiscount(currency + discountPrice);
+    setShowMiniCart(true);
+  }
+  
+  const hideMiniCart =()=>{   
+    setShowMiniCart(false);
+  }
+  
   const [ fadeBg , setFadeBg ] = useState('translateY(-100vh)');
   const [cart, setCart] = useState(false);
   
@@ -51,30 +67,31 @@ export default function Collection() {
     setFadeBg('translateY(-100vh)');
     setCart(false);
   }
+  
+  const showProduct = 6;
+  const [lastNumber, setlastNumber] = useState(showProduct);
+
+  const nextBtn =()=>{
+    if(lastNumber+showProduct < totalProducts){
+      setlastNumber(lastNumber+showProduct);
+    }
+  }
 
   return (
     <div>
-      {showDialog && <ProductDialog  onClose={()=>hideFadeBg()} goToCart={showCart} itemId={productId }  origPrice={origPrice} discountPrice={discount} />}
+
+      {showDialog && <ProductDialog  onClose={()=>hideDialog()} goToCart={showCart} itemId={productId }  origPrice={origPrice} discountPrice={discount} />}
+      {showMiniCart && <MiniCart  onClose={()=>hideMiniCart()} goToCart={showCart} propTitle = {productTitle} origPrice={origPrice} discountPrice={discount} />}
+      
       <div className='fadeBg' onClick={hideAll} style={{transform:`${fadeBg}`}}></div>
       {cart && <CartDiv onClose = {hideAll}  />}
-      <div className='collectionPgTitle'>
-        <div>
-          <h1>Collection</h1>
-          <small>{productsList.length} Products</small>
-        </div>
-        <div>
-          <button className='noBtn px-2' onClick={()=>selectGrid(2)}>
-            {!grid2display ? <TfiLayoutColumn2 /> : <TfiLayoutColumn2Alt />}
-          </button>
 
-          <button className='noBtn  px-2' onClick={()=>selectGrid(4)}>
-            {!grid3display ? <TfiLayoutColumn3 /> : <TfiLayoutColumn3Alt />}
-          </button>
-        </div>
-      </div>
-     <div className='collectionVeiw'>
+      <FilterBar grid2display={grid2display} grid3display={grid3display} selectGrid={selectGrid} />    
+    
+    <div className='collectionVeiw'>
+      
       {productsList &&
-        productsList.map((item, index) => {
+        productsList.slice(0, lastNumber).map((item, index) => {
           
           let productStyle = "product";
 
@@ -89,7 +106,6 @@ export default function Collection() {
           }else{
             productStyle = "regular";
           }
-          
           return (
             <div key={index} className={`productDiv resizeImgHover ${productStyle}`}>
                 <div>
@@ -104,7 +120,7 @@ export default function Collection() {
                       <button onClick={()=>showDialogFunc(item.id ,item.discount ,item.price  )}>
                         <SiCodereview />
                       </button>
-                      <button>
+                      <button onClick={()=>showMiniCartFunc(item.title ,item.currency ,item.discount ,item.price  )}>
                         <BsCart />
                       </button>
                     </span>
@@ -126,6 +142,13 @@ export default function Collection() {
           );
         })}
     </div>
+      
+      <div className='inlineCenter py-2'>
+        {lastNumber+showProduct < totalProducts && 
+        <button className='customDarkBtn'  onClick={nextBtn}>More Products</button>
+        }
+      </div>
+
     </div>
   )
 }

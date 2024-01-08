@@ -1,6 +1,5 @@
 import React , {useState , useEffect } from 'react';
-import {  BsX  } from "react-icons/bs";
-import '../css/sidedivs.css';
+import CrossBTn from '../globalHelpers/CrossBTn';
 
 export default function CheckoutSideDiv({ onClose }) {
 
@@ -28,10 +27,7 @@ export default function CheckoutSideDiv({ onClose }) {
   return (
   <div className="sideMenu" style={{right : `${showDiv}`}}>  
     <div className='loginSideDiv' >
-      <div className='crossBtnParent'>
-        <span>Login</span>
-        <button className='crossBtn' onClick={handleHide} ><BsX/></button>
-      </div>
+    <CrossBTn title="Login"  onClose={handleHide} />     
 
       <form action="">
 
