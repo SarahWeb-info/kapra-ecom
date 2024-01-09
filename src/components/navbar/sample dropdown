@@ -1,0 +1,17 @@
+            <div className='dropParent'>
+              <DropLink 
+                title = "more Sale"
+                titleClass = "alertColor"
+                link = "http://"
+                tag = "Flat"
+                onClick = {(e)=>toggleDropdown(e)}
+                dataAttr ="drop1"
+              />
+              <div className='myDropdown'>
+                <div className='dropList'>
+                  <a href="http://"  className='myNavitem' >Sweaters</a>
+                  <a href="http://"  className='myNavitem'>Coats</a>
+                  <a href="http://" className='myNavitem'>Jackets</a>
+                </div>
+              </div>
+            </div>

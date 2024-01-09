@@ -24,10 +24,9 @@ export default function App() {
   return (
     <State>
     <BrowserRouter>
-      <Promotions />
       <MyNavbar />
-      <div className='ghostNav'></div>
       <SideMenus />
+      {/* <Promotions /> */}
 
       <Routes>
         <Route path="/" element={<Home />} />
