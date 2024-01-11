@@ -1,6 +1,6 @@
 import React, {useState ,useEffect} from 'react';
 import {  BsX , BsDashLg , BsPlusLg } from "react-icons/bs";
-import TruncateText from '../../backend/TrancateText';
+import TruncateText from '../../functions/TrancateText';
 
 export default function MiniCart({ onClose , goToCart , propTitle , origPrice ,discountPrice}) {
 

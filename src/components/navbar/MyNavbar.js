@@ -1,4 +1,4 @@
-import React , { useState , useEffect , useContext  } from 'react';
+import React , { useState , useEffect , useContext , useRef  } from 'react';
 import context from '../../context/frontend/context';
 
 import './navbar.css';
@@ -7,52 +7,49 @@ import { BsFilterLeft , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart ,BsChev
 
 import BrandMobile from '../../imgs/smpLogo-Mobile.png';
 import BrandDesktop from '../../imgs/smpLogo-desktop.png';
-import smpImg1 from '../../imgs/img1.jpg';
 import MyCarousal from "../MyCarousal";
+import {categoryList , navCarouselData} from '../../backend/navData';
+import handleResize from '../../functions/handleResize';
+import TruncateText from '../../functions/TrancateText';
 
 function MyNavbar() {
-  let windowWidth = window.innerWidth; 
-  const [mobileSetup, setMobileSetup] = useState(true);
+
+  const [mobileSetup, setMobileSetup] = useState(handleResize);
   
-  useEffect(() => {
-    const screenSettings = () => {
-      if (windowWidth < 992) {
-        setMobileSetup(true);
-      } else {
-        setMobileSetup(false);
+  const [shortenedNavLength , setShortenedNavLength] = useState(categoryList.length);
+
+  const navResponsiveSetup =()=>{
+    for(let i in categoryList){
+    
+      if (i*150> window.innerWidth) {
+        setShortenedNavLength(i);
+        break; 
       }
     }
-  
-    screenSettings();
-  
-    const handleResize = () => {
-      windowWidth = window.innerWidth;
-      screenSettings();
-    };
-  
-    window.addEventListener('resize', handleResize);
-  
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [windowWidth]);
+  }
 
   const [navbarPosition, setNavbarPosition] = useState('relative');
-
+  
   const handleScroll = () => {
     const scrollPosition = window.scrollY || document.documentElement.scrollTop;
     const threshold = Math.min(window.innerHeight / 2, 500);
-
+    
     setNavbarPosition(scrollPosition >= threshold ? 'fixed' : 'relative');
   };
-
+  
   useEffect(() => {
+    window.addEventListener('resize', () => setMobileSetup(handleResize));
     window.addEventListener('scroll', handleScroll);
-
+    
+    if (!mobileSetup) {
+      navResponsiveSetup();
+    }
+    
     return () => {
+      window.removeEventListener('resize', () => setMobileSetup(handleResize));
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [window.innerWidth]);
     
   const { updateCart , updateLogin , updateSearch } = useContext(context);
   const [ showNav , setShowNav ] = useState();
@@ -81,46 +78,44 @@ function MyNavbar() {
     setShowNav('translateX(-100%)');
   }
 
-  const toggleDropdown =(e)=>{
+  const toggleDropdown = (e) =>{
     if (mobileSetup) {
   
-    const myNavitem = e.currentTarget.closest('.myNavitem');
-    const activeDropParent = myNavitem.closest('.dropParent');
-    const allDropParents = document.querySelectorAll('.dropParent');
-    
-    if(myNavitem){
+      const myNavitem = e.currentTarget.closest('.myNavitem');
+      const activeNavParent = myNavitem.closest('.dropParent');
 
-      if(myNavitem.classList.contains('active')){
-          myNavitem.classList.remove('active');
-          if (myNavitem.classList.contains('dropParent1')) {
+      const allDropParents = document.querySelectorAll('.dropParent');
+
+      if(myNavitem){
+
+        if(myNavitem.classList.contains('active')){
+
+          myNavitem.nextElementSibling.style.animation = 'slideOut 0.6s 1';
+
+          setTimeout(() => {
+
+            myNavitem.classList.remove('active');
             // show all the other dropParent
-            allDropParents.forEach(element => {
-                element.style.display = 'block';
+            allDropParents.forEach((element) => {
+              element.style.display = 'block';
             });
-          }
+            
+            }, 600);
+
         }else{
+          activeNavParent.style.display = 'block';
           myNavitem.classList.add('active');
-          if (myNavitem.classList.contains('dropParent1')) {
-            // hide all the other dropParent
-            allDropParents.forEach(element => {
-              if (element !== activeDropParent) {
-                element.style.display = 'none';
-              }
-            });
-          }
+          // hide all the other dropParent
+          allDropParents.forEach(element => {
+            if (element !== activeNavParent) {
+              element.style.display = 'none';
+            }
+          });
         }
-    }
-  }  
-}
+      }
+    }  
+  }
 
-
-let navCarousalData = [    {
-    titleContent: (<small>Fixed delivery charges,Rs 100/-</small>),
-  },
-  {
-    titleContent: (<small>Best sellers.<a href="">Shop Now!</a></small>),
-  },
-];
 
 return (
   <div className='myNavbar full-X-Block'  style={{ position: navbarPosition }}>
@@ -128,7 +123,7 @@ return (
     <MyCarousal 
         class1 = "navCarousel" 
         cusInterval = {1000}  
-        customContent={navCarousalData}
+        customContent={navCarouselData}
     />
   
     <div className='navHeader'>
@@ -182,561 +177,75 @@ return (
       </div>
     </div>
 
-    <div className='myNav myLabels' style={{transform: `${showNav}`}}  role='navigation' >
+   <div className='myNav myLabels' style={{transform: `${showNav}`}}  role='navigation' >
       {mobileSetup && 
         <CrossBTn  onClose={hideNavFunc} />     
       }   
     
-    <div className='dropParent'>
-      
-      <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-        <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-        {mobileSetup && 
-          <button className='dropBtn'><BsChevronRight /></button>
-        }   
-      </div>
+    {    
+      categoryList && categoryList.slice(0, shortenedNavLength).map((item, index) => {  
 
-      <div className='myDropdown align-content-start dropBox'>
+        let shortenedName = item.CatagoryName;
+        
+        if (shortenedName.includes('-')) {
+          shortenedName = shortenedName.split('-')[1];
+        }
+
+        if (shortenedName.length > 13) {
+          shortenedName = TruncateText(shortenedName, 11);
+        }
+
+    return (
+      <div key={index} className='dropParent'>
+
+        <div className='myNavitem' onClick={(e) => toggleDropdown(e)}>
+        
+          <a href="/collection" >
+            {shortenedName}
+          </a>
+        
+          {mobileSetup && 
+            <button className='dropBtn'><BsChevronRight /></button>
+          }   
+        
+        </div>
+        
+        <div className="myDropdown" >
         
           <div className='droplist'>
-            <div>
-              <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                <a href="http://" className='dropTitle'>Women</a>
-                {mobileSetup && 
-                  <button className='dropBtn'><BsChevronRight /></button>
-                }   
-              </div>
-
-              <div className='myDropdown'>
-
-                <div className='droplist'>
-                  <a href="http://"  className='myNavitem' >Sweaters</a>
-                  <a href="http://"  className='myNavitem'>Coats</a>
-                  <a href="http://" className='myNavitem'>Jackets</a>
-                </div>
-
-              </div>
-            </div>
-
-            <div>
-              <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                <a href="http://" className='dropTitle'>Men</a>
-                {mobileSetup && 
-                  <button className='dropBtn'><BsChevronRight /></button>
-                }   
-              </div>
-
-              <div className='myDropdown'>
-  
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-  
-              </div>
-              
-            </div>
-    
+            {item.CatagoryList.map((element, subIndex) => (
+              <a key={subIndex} href="/product" className='myNavitem'>{element.name}</a>
+            ))}
+          </div>
+        
         </div>
 
-          {!mobileSetup && 
-            <img src={smpImg1} alt="Sample Img" className='navImgs' />
-          }    
-        
       </div>
+    );
+  })}
 
-    </div>
-        
+  {!mobileSetup && (
     <div className='dropParent'>
-      
-      <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-        <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-        {mobileSetup && 
-          <button className='dropBtn'><BsChevronRight /></button>
-        }   
+
+      <div className='myNavitem' onClick={(e) => toggleDropdown(e)}>
+        <button className='myLabels'>More<BsChevronRight /></button>
       </div>
 
-      <div className='myDropdown align-content-start dropBox'>
-        
-          <div className='droplist'>
-            <div>
-              <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                <a href="http://" className='dropTitle'>Women</a>
-                {mobileSetup && 
-                  <button className='dropBtn'><BsChevronRight /></button>
-                }   
-              </div>
+      <div className="myDropdown">
+        <div className='droplist'>
 
-              <div className='myDropdown'>
+        {
+        categoryList && categoryList.slice(shortenedNavLength, categoryList.length).map((item, index) => (
+          <a key={index} href="http://" className='myNavitem'>{item.CatagoryName}jj</a>
+        ))
+        }
 
-                <div className='droplist'>
-                  <a href="http://"  className='myNavitem' >Sweaters</a>
-                  <a href="http://"  className='myNavitem'>Coats</a>
-                  <a href="http://" className='myNavitem'>Jackets</a>
-                </div>
-
-              </div>
-            </div>
-
-            <div>
-              <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                <a href="http://" className='dropTitle'>Men</a>
-                {mobileSetup && 
-                  <button className='dropBtn'><BsChevronRight /></button>
-                }   
-              </div>
-
-              <div className='myDropdown'>
-  
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-  
-              </div>
-              
-            </div>
-    
         </div>
-
-          {!mobileSetup && 
-            <img src={smpImg1} alt="Sample Img" className='navImgs' />
-          }    
-        
       </div>
-
     </div>
-    
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
+  )}
 
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-      
-      <div className='dropParent'>
-      
-        <div className='dropParent1 myNavitem'  onClick={(e)=>toggleDropdown(e)}>
-          <a href="/collection">Winter 2023<sup className="myBadge alertBg">on Sale</sup></a>
-          {mobileSetup && 
-            <button className='dropBtn'><BsChevronRight /></button>
-          }   
-        </div>
-
-        <div className='myDropdown align-content-start dropBox'>
-          
-            <div className='droplist'>
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Women</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-
-                  <div className='droplist'>
-                    <a href="http://"  className='myNavitem' >Sweaters</a>
-                    <a href="http://"  className='myNavitem'>Coats</a>
-                    <a href="http://" className='myNavitem'>Jackets</a>
-                  </div>
-
-                </div>
-              </div>
-
-              <div>
-                <div className='dropParent2 myNavitem' onClick={(e)=>toggleDropdown(e)}>
-                  <a href="http://" className='dropTitle'>Men</a>
-                  {mobileSetup && 
-                    <button className='dropBtn'><BsChevronRight /></button>
-                  }   
-                </div>
-
-                <div className='myDropdown'>
-    
-                    <div className='droplist'>
-                      <a href="http://"  className='myNavitem' >Sweaters</a>
-                      <a href="http://"  className='myNavitem'>Coats</a>
-                      <a href="http://" className='myNavitem'>Jackets</a>
-                    </div>
-    
-                </div>
-                
-              </div>
-      
-          </div>
-
-            {!mobileSetup && 
-              <img src={smpImg1} alt="Sample Img" className='navImgs' />
-            }    
-          
-        </div>
-
-      </div>
-    
-    </div>
+</div>
     
   </div>
   );

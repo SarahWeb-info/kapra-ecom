@@ -34,6 +34,13 @@
     justify-content: center;
     align-items: center;
 }
+/* .inlineBetween{
+    width: 100%;
+    display: inline-flex;
+    justify-content:space-between;
+    align-items: center;
+} */
+
 .centerFixed{
     position: fixed;
     top : 50%;
@@ -106,7 +113,7 @@
 
 .myTooltip{
     font-size: 0.8rem !important ;
-    position: absolute;
+    position: absolute !important;
     background-color: var(--color);
     color: var(--bg);
     border-radius: 8%;
@@ -114,16 +121,14 @@
     display: none;
     transition: 1s;
 }
-
 .toolUp{
-    top : -100%;
+    top : -100% !important;
     white-space :pre; 
 }
 
 .tooltip-Parent:hover .myTooltip{
     display: block;
 }
-
 
 .customInputDiv{
     display: inline-flex;
@@ -148,14 +153,12 @@
     outline: 0px;
 }
 
-
 .productDiv{
     box-sizing: border-box;
     overflow: hidden;
     position: relative;
     padding: 0 15px ;
     margin: 0;
-
 }
 .productDiv a , .shortText{
     text-decoration: none;

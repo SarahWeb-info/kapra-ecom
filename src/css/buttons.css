@@ -44,10 +44,10 @@
     transition: 1.5s;
     width: fit-content;
     min-width: 12vw;
-    max-width: 15vw;
+    max-width: 100px;
     height: auto;
     max-height: var(--buttonHeight);
-    padding: 2px auto;
+    padding: 6px 3px;
     overflow: hidden;
     font-weight: 500;
     font-size: medium;
