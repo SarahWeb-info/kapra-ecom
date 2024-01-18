@@ -1,7 +1,6 @@
 :root{
     --navHeight : 12vh;
 }
-
 .myNavbar {height: var(--navHeight);}
 .navCarousel{height: 4vh ;max-height: 30px;}
 .navHeader{height: 8vh;min-height: 30px;max-height: 45px;}
@@ -18,29 +17,22 @@
     width: 100vw;
     background-color: var(--highlighter);
     color : var(--color);
-    padding: 1vh 3vw;
+    padding: 1vh 3vw;   
+    .carousel-indicators ,.carousel-control-prev ,.carousel-control-next{
+        display: none !important;
+    }
+    .leftText, .rightText{
+        text-align: center;
+    } 
 }
-
-.navCarousel > .carousel-indicators ,.navCarousel > .carousel-control-prev ,.navCarousel > .carousel-control-next{
-    display: none !important;
-}
-.leftText, .rightText{
-    text-align: center;
-} 
 
 .navHeader{
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--bg);
     z-index: 2;
+    background-color: var(--bg);
     position: relative;
     overflow: visible;
     padding: 1% 3%;
     margin: 1% 0;
-    box-sizing: border-box;
-    display: inline-flex;
-    align-items: center;
     width: 100%;
 }
 
@@ -52,14 +44,15 @@
     display: inline-flex;
     align-items:flex-end;
     justify-content:flex-end;
-}
-.navFilters button , .navFilters a{
-    border: 0;
-    outline: 0;
-    background-color: transparent;
-    color: var(--color);
-    font-size: 1.5rem;
-    padding: 0 0.5vw;
+    
+    button , a{
+        border: 0;
+        outline: 0;
+        background-color: transparent;
+        color: var(--color);
+        font-size: 1.5rem;
+        padding: 0 0.5vw;
+    }
 }
 
 .myNav{
@@ -82,22 +75,11 @@
 .myNavitem{
     min-width: 200px;
     width: 100%;
-    position: relative;
     height: auto;
+    position: relative;
     padding: 2vh 1.5vw ;
-    box-sizing: border-box;
-
     background-color: transparent;
     border-bottom: 1px solid var(--borderColor);
-
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.myNavitem:hover{
-    background-color: var(--grayBase) !important;
 }
 
 .dropBtn{
@@ -112,6 +94,10 @@
     display: none;
 }
 
+.myNavitem:hover{
+    background-color: var(--grayBase) !important;
+}
+
 .droplist{
     display: flex;
     flex-direction: column;
@@ -123,47 +109,33 @@
     background-color : var(--grayBase) !important;
     flex-direction: row-reverse !important;
     justify-content: flex-end !important;
-}
-.myNavitem.active .dropBtn{
-    transform: rotate(180deg);
-}
-.myNavitem.active ~ .myDropdown{
-    display: block; 
-    animation: slideIn 1s 1;
+    .dropBtn{
+        transform: rotate(180deg);
+    }
+     ~ .myDropdown{
+        display: block; 
+        animation: slideIn 1s 1;
+    }
 }
 
-@keyframes slideIn {
-    0%{
-        transform: translateX(-100%);
-    }
-    100%{
-        transform: translateX(0%);
-    }
-}
-@keyframes slideOut {
-    0%{
-        transform: translateX(0%);
-    }
-    100%{
-        transform: translateX(-100%);
-    }
-}
 
 @media screen and (min-width : 992px){
     :root{
         --navHeight : 20vh;
         max-height: 200px;
         min-height: 150px;
-    }
-    
-    .myNav{height: 8vh;}
+    }       
+    .myNav{height: fit-content;}
 
-    .leftText{
-        text-align: left;
-    } 
-    .rightText{
-        text-align: right;
+    .navCarousel{
+        .leftText{
+            text-align: left;
+        } 
+        .rightText{
+            text-align: right;
+        }
     }
+
     .myNav{
         overflow: visible;
         position: relative  ;
@@ -187,9 +159,9 @@
         max-height: 5vh !important;
     }
    
-    .dropParent:hover .myDropdown {
+    /* .dropParent:hover .myDropdown {
         display: inline-flex;
-    }
+    } */
 
     .myNavitem{
         border: 0px;
@@ -197,7 +169,7 @@
         position: relative;
         width: fit-content;
         min-width: 100px;
-        max-width: 150px;
+        /* max-width: 150px; */
     }
     .myNavitem:hover{
         background-color: transparent !important;
@@ -207,21 +179,20 @@
         top : 100%;
         left : 50%;
         transform: translateX(-50%);
-
-        transition: display 0.2s;
-        background-color: var(--grayBase);
-        height: auto;
+        transition: display 1s ;
+        height: fit-content;
+        min-height: 300px;
         max-height: 75vh;
         width: fit-content;
         max-width: 100vw;
         overflow-y: auto;
         padding: 2vw;
         /* margin-top: 1vh; */
-        z-index: 30;
-
+        z-index: 30;    
     }
     .myNavitem ~ .myDropdown{
         animation: none;
+        box-shadow: var(--shadow);
     }
     
     .navImgs{
@@ -230,9 +201,16 @@
         max-width: 25vw;
         height: auto;
     }
-
-
+    
     .droplist{
         flex-direction: column;
+        a{
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        a:hover{
+            font-weight: 600;
+        }
     }
+
 }

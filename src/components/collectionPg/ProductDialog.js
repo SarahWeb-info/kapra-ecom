@@ -2,7 +2,7 @@ import React, {useState ,useEffect} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {  BsX , BsStar ,BsStarFill , BsDashLg , BsPlusLg } from "react-icons/bs";
 import productDetail from '../../backend/getProductDetail';
-import TruncateText from '../../functions/TrancateText';
+import TruncateText from '../../frontendFunc/TrancateText';
 
 export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,discountPrice}) {
 

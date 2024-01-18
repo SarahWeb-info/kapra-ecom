@@ -1,0 +1,35 @@
+.qauntityDiv{
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--font);
+    border-radius: 3.34vw;
+    border : 0.6px solid var(--borderColor);
+    transition: background 1s;
+    width: fit-content;
+    min-width: 10vw;
+    height: auto;
+    max-height: var(--buttonHeight);
+    overflow: hidden;
+    box-shadow: var(--shadowIn);
+}
+
+.qauntityDiv p{
+    margin: 0;
+}
+
+.qauntityDiv button{
+    border: 0px;
+    outline: 0px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px;
+    margin: 0;  
+    font-size: larger;
+}
+
+.qauntityDiv button:hover{
+    color: var(--colorInverse);
+    border: 0px !important;
+    outline: 0px !important;
+}

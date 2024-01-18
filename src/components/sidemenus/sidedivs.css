@@ -48,7 +48,7 @@
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    box-sizing: border-box;
+    
     display: flex;
     flex-direction: column;
     justify-content: space-evenly
@@ -80,7 +80,7 @@
     max-height: 55vh;
     overflow-x: hidden;
     overflow-y: auto;
-    box-sizing: border-box;
+    
     box-shadow: inset 0 3px 10px #81818133;
 }
 .quickProductEg>div{

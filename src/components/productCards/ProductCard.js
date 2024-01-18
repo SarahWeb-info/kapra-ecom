@@ -1,29 +1,30 @@
-import React from 'react';
-import { BsHeart, BsCart } from 'react-icons/bs';
+import React , {useState} from 'react';
+import { BsHeart, BsCart , BsStarFill , BsDashLg , BsPlusLg} from 'react-icons/bs';
 import { SiCodereview } from 'react-icons/si';
 import './productCard.css';
 import TruncateText from '../../frontendFunc/TrancateText';
 import StarRating from './StarRating';
 
-export default function ProductCardLight({ myCard  , detailFunc = null , miniCartFunc = null }) {
+export default function ProductDialog({ myCard  , detailFunc = null , miniCartFunc = null , cartFunc = null  }) {
 
-  const { main, colouredDiv, img , title =null , para = null , prices = null , rating = null } = myCard;
+  const { main, colouredDiv, img , title =null , para = null , prices = null , rating = null  ,availability = null , quantity = false , cartBtn = null , additionaldata = null } = myCard;
   
   return (
-    <div className={`productCard ${main.mainClass}`} style={main.style} >
+    <div className={`${main.mainClass}`} style={main.style} >
     { colouredDiv && <div className={`colouredDiv ${colouredDiv.additionalClass}`}></div> }
 
     { img && cardImg( img , miniCartFunc , detailFunc ) }
 
     { title && cardTitle( title ) }
     { para && cardPara( para ) }
-  
-    <div className='cardBody'>
-      { prices && cardPrice( prices ) }
-      { rating && cardRating( rating ) }
-    </div>
 
-    <button className='customDarkBtn col-hoverBtn'>EXPLORE</button>
+    { prices && cardPrice( prices ) }
+    { availability && cardAvailability(availability) }
+
+    { rating && cardRating( rating ) }
+    { quantity && quantityDiv()}
+    { cartBtn && <button className='customDarkBtn col-hoverBtn cartBtn'>{cartBtn}</button> }
+    { additionaldata && <div className='additionaldata'>{additionaldata}</div> }
     
   </div>
   );
@@ -74,6 +75,22 @@ function cardPara(paraInfo) {
   return <span className='productPara'>{shortenedText}</span>;
 }
 
+function cardAvailability(stockInfo) {
+  
+    return( 
+        <div className='yScroll'>
+            {stockInfo.slice(0, 12).map((item, index) => {
+            return(
+                <div  key={index}>
+                <b>{item.attr} :</b><span>{item.value}</span>
+                </div>  
+            );
+            })}
+        </div>  
+    );
+
+} 
+
 function cardPrice(priceInfo) {
   return (
   <span className={`${priceInfo.show}`}>
@@ -92,4 +109,27 @@ function cardRating(rating) {
       <StarRating totalStars={rating.total} goldenStars ={rating.achieved} />
     </div>
   );
+}
+
+function quantityDiv() {
+
+    let quantity = 1 ;
+
+    const minusQuantity=()=>{
+        if (parseInt(quantity)>0) {
+            quantity-- ; 
+         }
+    }
+    
+    const plusQuantity=()=>{
+        quantity++ ; 
+    }
+    
+    return (
+      <div className='qauntityDiv'>
+        <button onClick={minusQuantity}><BsDashLg /></button>
+        <p>{quantity}</p>
+        <button onClick={plusQuantity}><BsPlusLg /></button>
+      </div>
+  )
 }

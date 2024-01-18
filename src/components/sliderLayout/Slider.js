@@ -1,99 +1,108 @@
 import React, { useState , useEffect} from 'react';
-import { BsArrowLeftShort ,  BsArrowRightShort , BsHeart , BsCart } from "react-icons/bs";
+import { BsArrowLeftShort ,  BsArrowRightShort } from "react-icons/bs";
+import ProductCardLight from "../productCards/ProductCardLight";
+import './slider.css';
 
 export default function Slider({ productsList = []}) {
 
-  const [productDiv , setProductDiv ] = useState(0);
-  const [totalProductsVeiw , setTotalProductsVeiw] = useState(0);
+  const [productDiv , setProductDiv ] = useState();
+  const [leftPosition ,setLeftPosition ] = useState(0);
+  let marginPx = 4 ;
+
   const [leftArrowOpacity , setLeftArrowOpacity ] = useState(1);
   const [rightArrowOpacity , setRightArrowOpacity ] = useState(1);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 992) {
-        setProductDiv(40);
-        setTotalProductsVeiw(80);
+    let sliderContainer = document.getElementsByClassName("sliderProductCard-Container")[0];
+    let sliderContainerSize = sliderContainer.getBoundingClientRect().width;
+
+    const resizeProductCard = () => {
+      if (window.innerWidth < 650) {
+        setProductDiv(sliderContainerSize/2);
       } else {
-        setProductDiv(20);
-        setTotalProductsVeiw(60);
+        setProductDiv(sliderContainerSize/3);
       }
     };
   
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', resizeProductCard);
   
-    handleResize();
+    resizeProductCard();
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', resizeProductCard);
     };
   }, []);
 
-  const [moveLeft, setmoveLeft] = useState(0);
+  //if I click on left Arrow , the setLeftPosition goes in minus
+  const sliderNavLeft = () => {
+
+    let sizeOfScrollingDiv = productsList.length * (productDiv+marginPx) ;
     
-  const leftArrow = () => {
-    let scrollDiv = productsList.length * 40 - totalProductsVeiw;
-    scrollDiv = scrollDiv* -1;
-    if (moveLeft > scrollDiv) {
-      setmoveLeft(moveLeft-totalProductsVeiw) ;
+    sizeOfScrollingDiv = -1 * sizeOfScrollingDiv ;
+    
+    let markUpPos = leftPosition- (productDiv+marginPx) 
+    
+    if (sizeOfScrollingDiv !== markUpPos) {
+      setLeftPosition(leftPosition-productDiv-marginPx );
       setLeftArrowOpacity(1);
       setRightArrowOpacity(1);
     }else{
       setRightArrowOpacity(0);
     }
+
   };
   
-  const rightArrow =()=>{
-    if (moveLeft!== 0) {
-      setmoveLeft(moveLeft+totalProductsVeiw);
+  const sliderNavRight =()=>{
+    if ((Math.floor(leftPosition)) < 1  ) {
+      setLeftPosition(leftPosition+productDiv+marginPx );
       setLeftArrowOpacity(1);
       setRightArrowOpacity(1);
     }else{
-      setLeftArrowOpacity(0);
-    }
-  };
+        setLeftArrowOpacity(0);
+      }
+
+    };
   
 
   return (
-    <div className='d-flex flex-column' style={{width:`${totalProductsVeiw}vw`,position : 'relative'}}>
-        
-        <div className='productListStatus'>
-          <span>New</span>
-          <span>Sale</span>
-        </div>
+    <div className='slider'>
 
-        <div className='product-Arrows'>
-            <span className='leftArrow' onClick={rightArrow} style={{opacity : `${leftArrowOpacity}`}}>
+        <div className='inlineCenter sliderNavigations'>
+            <span className='sliderNavLeft' onClick={sliderNavRight} style={{opacity : `${leftArrowOpacity}`}}>
             <BsArrowLeftShort />
             </span>
             
-            <span className='rightArrow' onClick={leftArrow} style={{opacity : `${rightArrowOpacity}` , justifyContent : 'flex-end'} }>
+            <span className='sliderNavRight' onClick={sliderNavLeft} style={{opacity : `${rightArrowOpacity}` , textAlign : 'right'} }>
             <BsArrowRightShort />
             </span>
         </div>
 
-      <div className='productDiv-container' style={{width:`${totalProductsVeiw}vw`}}>
+      <div className='sliderProductCard-Container'>
 
-        <div className='scrollingProductDiv' style={{left : `${moveLeft}vw` }}  >
+        <div className='sliderInner' style={{left : `${leftPosition}px` }}>
 
         {productsList &&
-          productsList.map((item, index) => (
-            <div  key={index} className='productDiv resizeImgHover' style={{width : `${productDiv}vw` , height : 'var(--sliderDivHeight)'}} >
-              
-              <div>
-                <a href="http://"><img src={item.img} alt=""  /> </a>
-                <span className='productDivBtns'>
-                  <button><BsHeart /></button>
-                  <button><BsCart /></button>
-                </span>
-              </div>
-              <span>
-                <a href="http://">{item.title}</a>
-                <p className='py-1 text-muted'><span style={{textDecoration:'line-through'}}>{item.currency} {item.discount}</span><span style={{color : 'var(--highlighter)'}}>{item.currency} {item.price}</span></p>
-              </span>
+          productsList.map((item, index) => {
+            let styling = {
+              width: `${productDiv - marginPx}px`,
+              minWidth: `${productDiv - marginPx}px`,
+              marginRight: `${marginPx + marginPx}px`,
+            };
             
-            </div>
-          )
-        )}
+            let myCard = {
+              main: { mainClass: "productCard columnBetween productColumn-imgHover", style: styling },
+              colouredDiv: { additionalClass: "noColour" },
+              img: { imgSrc: `${item.img}`, imgBtns: ['cart', 'heart', 'detail'] },
+              para: { para: `${item.title}`, maxlength: 60 },
+              prices: { currency: `${item.currency}`, discount: `${item.discount}`, origPrice: `${item.price}`, show: "full" },
+            };
 
+            return (
+              <ProductCardLight
+                key={index}
+                myCard={myCard}
+              />
+            );
+          })}
         </div>
       </div>
     </div>  

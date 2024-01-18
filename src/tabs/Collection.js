@@ -1,13 +1,12 @@
 import React , {useState} from 'react';
-import "../components/grids/collection.css";
-import { BsHeart , BsCart  } from "react-icons/bs";
-import { SiCodereview } from "react-icons/si";
+import "../components/collectionPg/collection.css";
 
-import FilterBar from '../components/grids/FilterBar';
+import FilterBar from '../components/collectionPg/FilterBar';
 import productsList from '../backend/getProductList';
-import ProductDialog from "../components/grids/ProductDialog";
+import ProductDialog from "../components/collectionPg/ProductDialog";
 import CartDiv from '../components/sidemenus/CheckoutSideDiv';
-import MiniCart from "../components/grids/MiniCart";
+import MiniCart from "../components/collectionPg/MiniCart";
+import ProductCardLight from './../components/productCards/ProductCardLight';
 
 export default function Collection() {
 
@@ -88,67 +87,56 @@ export default function Collection() {
 
       <FilterBar grid2display={grid2display} grid3display={grid3display} selectGrid={selectGrid} />    
     
-    <div className='collectionVeiw'>
-      
-      {productsList &&
-        productsList.slice(0, lastNumber).map((item, index) => {
-          
-          let productStyle = "product";
-
-          if (!grid3display) {
-            if ((index + 1) % 4 === 0) {
-              productStyle = "productRow";
-            } else if ((index + 1) % 4 === 2) {
-              productStyle = "product";
-            } else if ((index + 1) % 4 === 3) {
-              productStyle = "productReverse";
-            }
-          }else{
-            productStyle = "regular";
-          }
-          return (
-            <div key={index} className={`productDiv resizeImgHover ${productStyle}`}>
-                <div>
-                  <a href="http://">
-                    <img src={item.img} alt="" />
-                  </a>
-                  <span className='productDivBtns'>
-                    <button>
-                      <BsHeart />
-                    </button>
-                    <span>
-                      <button onClick={()=>showDialogFunc(item.id ,item.discount ,item.price  )}>
-                        <SiCodereview />
-                      </button>
-                      <button onClick={()=>showMiniCartFunc(item.title ,item.currency ,item.discount ,item.price  )}>
-                        <BsCart />
-                      </button>
-                    </span>
-                  </span>
-                </div>
-                <span >
-                  <a href="http://">{item.title}</a>
-                  <p className='py-1 text-muted'>
-                    <span style={{ textDecoration: 'line-through' }}>
-                      {item.currency} {item.discount}
-                    </span>
-                    <span style={{ color: 'var(--highlighter)' }}>
-                      {item.currency} {item.price}
-                    </span>
-                  </p>
-                </span>
-              </div>
+      <div className='collectionVeiw'>
               
-          );
-        })}
-    </div>
-      
-      <div className='inlineCenter py-2'>
-        {lastNumber+showProduct < totalProducts && 
-        <button className='customDarkBtn'  onClick={nextBtn}>More Products</button>
-        }
+      {productsList &&
+          productsList.slice(0, lastNumber).map((item, index) => {
+            let styling = {
+              width: `20vw`,
+              minWidth: `20vw`,
+              height : '40vh',
+              marginRight: `10px`,
+              marginTop: `10px`,
+            };
+            
+            if (!grid3display) {
+              styling = {
+                width: `40vw`,
+                minWidth: `20vw`,
+                height : '40vh',
+                marginRight: `10px`,
+                marginTop: `10px`,
+              };
+            }
+
+            let myCard = {
+              main: { mainClass: "productCard-Column", style: styling },
+              colouredDiv: { additionalClass: "noColour" },
+              img: { imgSrc: `${item.img}`, imgBtns: ['cart', 'detail'] },
+              para: { para: `${item.title}`, maxlength: 60 },
+              prices: { currency: `${item.currency}`, discount: `${item.discount}`, origPrice: `${item.price}`, show: "full" },
+            };
+
+            return (
+              <ProductCardLight
+                key={index}
+                myCard={myCard}
+                hoverBtn = {false}
+                detailFunc = {()=> showDialogFunc( `${item.id}` , `${item.discount}` , `${item.price}`  )}
+                miniCartFunc = {()=>showMiniCartFunc( `${item.title}` , `${item.currency}` , `${item.discount}` , `${item.price}` )}
+              />
+            );
+          })}
+
       </div>
 
-    </div>
-  )
+         
+      <div className='columnCenter py-2'>
+        {lastNumber+showProduct < totalProducts && 
+        <button className='customDarkBtn'  onClick={nextBtn}>More Products</button>
+        } 
+      </div>
+
+    </div>  
+  );
 }

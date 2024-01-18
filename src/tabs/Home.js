@@ -1,14 +1,10 @@
 import React from 'react'
-import Img1 from '../imgs/img1.jpg';
-import Img2 from '../imgs/img2.jpg';
-import Img3 from '../imgs/img3.jpg';
-import Img4 from '../imgs/img4.jpg';
-import '../css/home.css';
-import HomeProductList from '../components/sliderLayout/HomeProductList';
-import CatSlider from '../components/sliderLayout/CatSlider';
 
+import HomeSliderContainer from '../components/sliderLayout/HomeSliderContainer';
 import MyCarousel from '../components/MyCarousal';
+import ProductCard2 from '../components/productCards/ProductCard2';
 
+import '../css/home.css';
 
 export default function Home() {
 
@@ -47,8 +43,8 @@ export default function Home() {
           customContent={homeBanner}
       />
 
-      <HomeProductList heading = "Unstitched"  bannerImg = "img1" />
-      <HomeProductList  heading = "Ready to Wear"  bannerImg = "img2" />
+      <HomeSliderContainer heading = "Unstitched"  bannerImg = "img1" />
+      <HomeSliderContainer heading = "Ready to Wear"  bannerImg = "img2" />
 
       <video
         id="myVideo"
@@ -59,86 +55,39 @@ export default function Home() {
         className='bannerVideo my-5'
       ></video>
 
-      <h3 className='headings w-100 text-center my-3'>Shop by catagory</h3>
-      <CatSlider />
+      <h3 className='myLabels w-100 text-center my-3'>Shop by catagory</h3>
 
-      <h3 className='headings w-100 text-center my-3'>shoppable lookups</h3>
+      <HomeSliderContainer mainClass = "catSliderContainer" />
 
-      <div className='d-flex flex-column flex-lg-row  justify-content-center'>
+      <h3 className='myLabels w-100 text-center my-3'>shoppable lookups</h3>
 
-        <div className='d-flex flex-row gridDiv-container'>
-          
-          <div className='fadeAdDiv gridDivlg' style={{ backgroundImage: `url(${Img1})` }}>
-            
-            <div className='fadeHover'></div>
-            <a className='fadeLabel'>Shop Now</a>
-            <div className='fadeLine'></div>
+      <div className='d-flex flex-column flex-lg-row  justify-content-center' style={{gap : '2px'}}>
 
-            <a className='fadeHoverBtn'>Checknow</a>
+        <div className='gridDiv-container'>
         
-          </div>
+          <ProductCard2 customClass1 = "gridDivlg" />
 
           <div className='d-flex flex-column'>
 
-            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img2})` }}>
-              
-              <div className='fadeHover'></div>
-              <a className='fadeLabel'>Shop Now</a>
-              <div className='fadeLine'></div>
+            <ProductCard2 />
 
-              <a className='fadeHoverBtn'>Checknow</a>
-          
-            </div>
-
-            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img3})` }}>
-              
-              <div className='fadeHover'></div>
-              <a className='fadeLabel'>Shop Now</a>
-              <div className='fadeLine'></div>
-
-              <a className='fadeHoverBtn'>Checknow</a>
-          
-            </div>
+            <ProductCard2 />
 
           </div>        
 
         </div>
 
-        <div className='d-flex flex-row  gridDiv-container'>
+        <div className='gridDiv-container'>
 
           <div className='d-flex flex-column'>
 
-            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img2})` }}>
-              
-              <div className='fadeHover'></div>
-              <a className='fadeLabel'>Shop Now</a>
-              <div className='fadeLine'></div>
+            <ProductCard2 />
 
-              <a className='fadeHoverBtn'>Checknow</a>
-          
-            </div>
-
-            <div className='fadeAdDiv gridDiv' style={{ backgroundImage: `url(${Img3})` }}>
-              
-              <div className='fadeHover'></div>
-              <a className='fadeLabel'>Shop Now</a>
-              <div className='fadeLine'></div>
-
-              <a className='fadeHoverBtn'>Checknow</a>
-          
-            </div>
+            <ProductCard2 />
 
           </div>        
 
-          <div className='fadeAdDiv gridDivlg' style={{ backgroundImage: `url(${Img1})` }}>
-            
-            <div className='fadeHover'></div>
-            <a className='fadeLabel'>Shop Now</a>
-            <div className='fadeLine'></div>
-
-            <a className='fadeHoverBtn'>Checknow</a>
-        
-          </div>
+          <ProductCard2 customClass1 = "gridDivlg" />
         
         </div>
       </div>

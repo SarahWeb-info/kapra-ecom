@@ -12,8 +12,8 @@ export default function Footer() {
       let accordianItem = e.currentTarget.closest('.accordianItem');
       let accordianBtn = accordianItem.querySelector('.accordianBtn');
       let accordianBody = accordianItem.querySelector('.accordianBody');
-      
-      if(accordianBody.style.display === 'none'){
+
+      if(accordianBody.style.display === 'none' || accordianBody.style.display.length === 0){
         accordianBody.style.display = "flex";
         accordianBtn.style.transform= 'rotate(180deg)';
         accordianBtn.innerHTML = '-';

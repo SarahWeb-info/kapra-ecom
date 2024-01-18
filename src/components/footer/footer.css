@@ -25,13 +25,14 @@
 }
 .accordianHeading{
     margin-bottom: 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
     font-size: 1.1rem;
     text-transform: uppercase;
 }
 .accordianItem a , .accordianItem p{
     color: var(--color);
     text-decoration: none;
+    margin: 2px 0;
 }
 .accordianItem>div:first-child{
     width: 100%;
@@ -66,7 +67,6 @@
     display: inline-flex;
     justify-content: space-around;
     align-items: center;
-    border-bottom: 0.5px solid var(--highlighter);
 }
 .social{
     display: inline-flex;
@@ -76,9 +76,10 @@
     margin: 0 1vw;
 }
 .copyright{
-    font-weight:lighter;
+    color: var(--borderColor);
+    text-align: center;
+    font-style: italic;
     margin: 0;
-
 }
 
 @media screen and (min-width : 768px){

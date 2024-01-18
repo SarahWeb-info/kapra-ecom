@@ -1,23 +1,17 @@
-import React , { useState , useEffect , useContext , useRef  } from 'react';
-import context from '../../context/frontend/context';
+import React , { useState , useEffect , useContext  } from 'react';
+import menuContext from '../../context/frontend/context';
 
 import './navbar.css';
 import CrossBTn from '../globalHelpers/CrossBTn';
 import { BsFilterLeft , BsSearch , BsTruck  ,BsPerson , BsHeart , BsCart ,BsChevronRight} from "react-icons/bs";
 
-import BrandMobile from '../../imgs/smpLogo-Mobile.png';
-import BrandDesktop from '../../imgs/smpLogo-desktop.png';
 import MyCarousal from "../MyCarousal";
 import {categoryList , navCarouselData} from '../../backend/navData';
-import handleResize from '../../functions/handleResize';
-import TruncateText from '../../functions/TrancateText';
+import TruncateText from '../../frontendFunc/TrancateText';
 
 function MyNavbar() {
-
-  const [mobileSetup, setMobileSetup] = useState(handleResize);
-  
   const [shortenedNavLength , setShortenedNavLength] = useState(categoryList.length);
-
+  
   const navResponsiveSetup =()=>{
     for(let i in categoryList){
     
@@ -27,6 +21,32 @@ function MyNavbar() {
       }
     }
   }
+
+  const [mobileSetup, setMobileSetup] = useState(false);
+  const detectingResize = () => {
+    let windowWidth = window.innerWidth;
+
+    if (windowWidth < 992) {
+      setMobileSetup(true);
+    } else {
+      setMobileSetup(false);
+    }
+  }
+
+  useEffect(() => {
+    detectingResize(); // Initial setup
+
+    const handleResize = () => {
+      detectingResize();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+
+  }, []);
 
   const [navbarPosition, setNavbarPosition] = useState('relative');
   
@@ -38,7 +58,6 @@ function MyNavbar() {
   };
   
   useEffect(() => {
-    window.addEventListener('resize', () => setMobileSetup(handleResize));
     window.addEventListener('scroll', handleScroll);
     
     if (!mobileSetup) {
@@ -46,12 +65,11 @@ function MyNavbar() {
     }
     
     return () => {
-      window.removeEventListener('resize', () => setMobileSetup(handleResize));
       window.removeEventListener('scroll', handleScroll);
     };
   }, [window.innerWidth]);
-    
-  const { updateCart , updateLogin , updateSearch } = useContext(context);
+  
+  const { updateCart , updateLogin , updateSearch } = useContext(menuContext);
   const [ showNav , setShowNav ] = useState();
 
   const clearNavDisplay =()=>{
@@ -116,8 +134,55 @@ function MyNavbar() {
     }  
   }
 
+  const hoverDropdown =(e , mouseEvent )=>{
+    if(!mobileSetup){
+      const timeouts = [];
 
-return (
+      const dropParent = e.currentTarget.closest('.dropParent');
+      const activeDropdown = dropParent.querySelector('.myDropdown');
+      const activeDropdownLinks = activeDropdown.querySelectorAll('a');
+      
+      if (mouseEvent === "enter") {
+        activeDropdown.style.display = "inline-flex";
+
+        activeDropdownLinks.forEach((element, index) => {
+          const timeoutId = setTimeout(() => {
+            element.style.opacity = '1';
+          }, 100 * index); 
+          timeouts.push(timeoutId);
+        });
+      
+        // Check if the dropdown overflows the window's inner width
+        const dropdownPos = activeDropdown.getBoundingClientRect();
+        const windowInnerWidth = window.innerWidth;
+        
+        if (dropdownPos.left < 0) {
+          activeDropdown.style.left = '0px';
+          activeDropdown.style.transform = 'translateX(0)';
+
+        }
+
+        if (dropdownPos.right > windowInnerWidth) {
+          // Adjust the position of the dropdown to fit within the window
+          activeDropdown.style.left = windowInnerWidth - dropdownPos.right + 'px';
+          console.log("overflowing dropdown");
+        }  
+
+      }else{
+        activeDropdown.style.display = "none";
+
+        activeDropdownLinks.forEach((element, index) => {
+          const timeoutId = setTimeout(() => {
+            element.style.opacity = '0';
+          }, 100 * index); 
+          timeouts.push(timeoutId);
+        });
+
+      }
+    }
+  }
+
+ return (
   <div className='myNavbar full-X-Block'  style={{ position: navbarPosition }}>
 
     <MyCarousal 
@@ -126,19 +191,19 @@ return (
         customContent={navCarouselData}
     />
   
-    <div className='navHeader'>
+    <div className='inlineCenter navHeader'>
       {mobileSetup && 
         <button className='noBtn' onClick={showNavFunc}><BsFilterLeft /></button>
       }   
 
-      <div className='navBrand'>
+      <a className='navBrand' href='/'>
         {mobileSetup && 
-          <img src={BrandMobile} alt="Brand logo" />
+          <img src={require(`../../imgs/smpLogo-Mobile.png`)} alt="Brand logo" />
         }   
         {!mobileSetup && 
-          <img src={BrandDesktop} alt="Brand logo" />
+          <img src={require(`../../imgs/smpLogo-desktop.png`)} alt="Brand logo" />
         }
-      </div>
+      </a>
 
       <div className='navFilters'>
          
@@ -196,9 +261,9 @@ return (
         }
 
     return (
-      <div key={index} className='dropParent'>
+      <div key={index} className='dropParent' onMouseEnter={(e) => hoverDropdown(e , "enter")} onMouseLeave={(e) => hoverDropdown(e , "leave")}>
 
-        <div className='myNavitem' onClick={(e) => toggleDropdown(e)}>
+        <div className='inlineCenter myNavitem' onClick={(e) => toggleDropdown(e)}>
         
           <a href="/collection" >
             {shortenedName}
@@ -210,12 +275,24 @@ return (
         
         </div>
         
-        <div className="myDropdown" >
+        <div className="myDropdown glassBg" >
         
           <div className='droplist'>
-            {item.CatagoryList.map((element, subIndex) => (
-              <a key={subIndex} href="/product" className='myNavitem'>{element.name}</a>
-            ))}
+            {item.CatagoryList.map((element, subIndex) => {
+              
+              let dropNames = element.name;
+        
+              if (dropNames.includes('-')) {
+                dropNames = dropNames.split('-')[1];
+              }
+      
+              if (dropNames.length > 25) {
+                dropNames = TruncateText(dropNames, 25);
+              }
+              return(
+                <a key={subIndex} href="/collection" className='myNavitem'>{dropNames}</a>
+              ) 
+            })}
           </div>
         
         </div>
@@ -225,21 +302,36 @@ return (
   })}
 
   {!mobileSetup && (
-    <div className='dropParent'>
+    <div className='dropParent'  onMouseEnter={(e) => hoverDropdown(e , "enter")} onMouseLeave={(e) => hoverDropdown(e , "leave")}>
 
-      <div className='myNavitem' onClick={(e) => toggleDropdown(e)}>
+      <div className='inlineCenter myNavitem' onClick={(e) => toggleDropdown(e)}>
         <button className='myLabels'>More<BsChevronRight /></button>
       </div>
 
-      <div className="myDropdown">
+      <div className="myDropdown  glassBg">
         <div className='droplist'>
 
         {
-        categoryList && categoryList.slice(shortenedNavLength, categoryList.length).map((item, index) => (
-          <a key={index} href="http://" className='myNavitem'>{item.CatagoryName}jj</a>
-        ))
-        }
+          categoryList && 
+            categoryList
+              .slice(shortenedNavLength, categoryList.length)
+              .map((item, index) => {
 
+                let shortenedName = item.CatagoryName;
+        
+                if (shortenedName.includes('-')) {
+                  shortenedName = shortenedName.split('-')[1];
+                }
+        
+                if (shortenedName.length > 25) {
+                  shortenedName = TruncateText(shortenedName, 25);
+                }
+        
+                return(
+                  <a key={index} href="http://" className='myNavitem'>{shortenedName}</a>
+                )
+              })
+        }
         </div>
       </div>
     </div>

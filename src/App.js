@@ -15,7 +15,7 @@ import ContactUs from './tabs/ContactUs';
 import FAQs from './tabs/Faqs';
 import Docs from './tabs/Docs';
 
-import State from './context/frontend/States';
+import State from './context/frontend/SideDivStates';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 

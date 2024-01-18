@@ -37,21 +37,23 @@
 .customDarkBtn{
     text-decoration: none;
     z-index: 2;
-    color: var(--bg);
+    color: var(--bg) !important;
     background-color: var(--color) !important;
     border-radius: 3.34vw;
     border: 0.5px solid var(--borderColor);
     transition: 1.5s;
     width: fit-content;
-    min-width: 12vw;
-    max-width: 100px;
+    /* min-width: 12vw; */
+    /* max-width: 100px; */
     height: auto;
     max-height: var(--buttonHeight);
-    padding: 6px 3px;
+    padding: 0.5vw 1vw;
+    margin: 2px;
     overflow: hidden;
     font-weight: 500;
     font-size: medium;
     text-align: center;
+    white-space: pre;
 }
 .customDarkBtn a{
     color: var(--bg);

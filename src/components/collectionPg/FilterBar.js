@@ -4,24 +4,23 @@ import { TfiLayoutColumn2 , TfiLayoutColumn2Alt ,TfiLayoutColumn3 , TfiLayoutCol
 export default function FilterBar({ title = "Collection" , productLength ="16" , grid2display = false , grid3display = true , selectGrid }) {
     
   return (
-    <div className='collectionPgTitle'>
+    <div className='inlineCenter filterBar'>
         
         <div>
           <h1>{title}</h1>
           <small>{productLength} Products</small>
         </div>
 
-        <div className='d-inline-flex align-items-end'>
-            <p>View</p>
-          <button className='noBtn px-2' onClick={()=>selectGrid(2)}>
+        <div>
+          <button onClick={()=>selectGrid(2)}>
             {!grid2display ? <TfiLayoutColumn2 /> : <TfiLayoutColumn2Alt />}
           </button>
 
-          <button className='noBtn  px-2' onClick={()=>selectGrid(4)}>
+          <button onClick={()=>selectGrid(4)}>
             {!grid3display ? <TfiLayoutColumn3 /> : <TfiLayoutColumn3Alt />}
           </button>
           
-          <p><TfiPanel />Filter & Sort by</p>
+          <button><TfiPanel />Filter & Sort by</button>
         </div>
       </div>
   )

@@ -1,65 +1,40 @@
-.productCard-Responsive , .productCard-Column {
-    width: 30vw;
-    min-width: 200px;
-    max-width: 500px;
-    height: 60vh;
-    min-height: 220px;
-    max-height: 500px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.highlighted{
-    --colouredDiv : var(--highlighter);
-    --font : var(--bg);
-    --buttonBase : var(--highlighter);
-}
-
-.productCard{
-    border: 1px solid green;
-    background-color: transparent;
-    overflow: hidden;
-    border-radius: 1.5%;
-    position: relative;
-}
-.productCard button {
-    border: 1px solid var(--font);
-    border-radius: 3.34vw;
-    color: var(--font);
-    background-color: var(--buttonBase);
-    
-}
-
 .colouredDiv{
     display: block;
     width: 100%;
-    height: 100%;
-    background-color: var(--colouredDiv);
+    height: 80%;
     position: absolute;
-    top : 20%;
+    bottom : 0;
+    right: 0;
     z-index: 0;
-    border-top-right-radius: 1.5%;
-    border-top-left-radius: 1.5%;
+    border-radius: 1.5%;
+    box-shadow:var(--shadow);
+    transition: 1.5s;   
+    background-color: transparent;
+}
+
+.productCard{
+    background-color: transparent;
+    border-radius: 1.5%;
+    position: relative;
+    padding: 0 12px 10px 12px;
+    transition: 0.5s;
 }
 
 .productImg{
+    width: 96%;
+    height: 60%;
     z-index: 1;
     background-color: transparent;
-    width: 75%;
-    height: 50%;
-    overflow: hidden;
     position: relative;
-    display: block;
-    box-sizing: border-box;
-    border: 1px solid red;
-    border-top-right-radius: 1.5%;
-    border-top-left-radius: 1.5%;
+    border-radius: 1.5%;
+    box-shadow:var(--shadow);
+    transition: 2s;
 }
+
 .productImg img{
+    width: 100%;
     height: 100%;
-    width: auto;
-    
+    border-radius: 1.5%;
 }
 .productImg-Btns{
     z-index: 1;
@@ -68,10 +43,16 @@
 }
 .productImg-Btns button{
     transition: 1s;
-    height: 10%;
-    width: 10%;
+    height: fit-content;
+    width: auto;
+    font-size: 1.2rem;
     position: absolute;
-    bottom: 3%;
+    bottom: 5%;
+    color : var(--bg);
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: var(--shadowOut);
 }
 .productImg-Btns>button:first-child{
     left : 5%;
@@ -86,7 +67,109 @@
     bottom: 10%;
 }
 
-.productDetail{
-    z-index: 1;
-    color : var(--font);
+
+.productColumn-imgHover:hover .productImg{
+    height: 30%;
 }
+.col-hoverBtn{
+    display: none;
+    opacity: 0;
+    transition:opacity 1s;
+}
+.productColumn-imgHover:hover .col-hoverBtn{
+    display: block;
+    opacity: 1;
+}
+
+.resizeImgHover{
+    overflow: hidden;
+}
+
+.resizeImgHover img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top : 0;
+    left : 50%;
+    transform: translateX( -50%);
+    z-index: 0;
+    transition: 1s;
+}
+
+.resizeImgHover:hover img{
+    width: 120%;
+    height: 120% ;
+}
+
+.productCard-Column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productTitle {
+    text-transform: capitalize;
+    font-weight : 600 ;
+    font-size : 1.5rem ;
+    z-index: 2;
+    text-align: center;
+}
+
+.productPara{
+    z-index: 2;
+    display: block;
+    height: fit-content;
+    max-height: 100px;
+    text-align: justify;
+    overflow: hidden;
+    line-height: 1.2; 
+}
+
+.half{
+    width: 50% !important;
+}
+
+.full{
+    width: 100% !important;
+    text-align: center;
+}
+
+.qauntityDiv{
+    display: inline-flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--font);
+    border-radius: 3.34vw;
+    border : 0.6px solid var(--borderColor);
+    transition: background 1s;
+    width: fit-content;
+    min-width: 10vw;
+    height: auto;
+    max-height: var(--buttonHeight);
+    overflow: hidden;
+    box-shadow: var(--shadowIn);
+}
+
+.qauntityDiv p{
+    margin: 0;
+}
+
+.qauntityDiv button{
+    border: 0px;
+    outline: 0px;
+    width: fit-content;
+    height: fit-content;
+    padding: 0 10px;
+    margin: 0;  
+    font-size: larger;
+}
+
+.qauntityDiv button:hover{
+    color: var(--colorInverse);
+    border: 0px !important;
+    outline: 0px !important;
+}
+
+
+/* @media screen and (min-width : 992px){
+} */

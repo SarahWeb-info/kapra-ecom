@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Context from "./context";
 
-const States =(props)=>{
+const SideDivStates =(props)=>{
     const [ fadeBg , setFadeBg ] = useState(false);
     const [cart, setCart] = useState(false);
     const [login, setLogin] = useState(false);
@@ -36,4 +36,4 @@ const States =(props)=>{
     )
 }
 
-export default States ;
+export default SideDivStates ;

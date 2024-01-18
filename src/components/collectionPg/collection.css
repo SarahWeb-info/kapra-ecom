@@ -1,0 +1,77 @@
+.filterBar{
+  width: 94vw;
+  height: auto; 
+  overflow: hidden;
+  padding-bottom: 2vh;
+  margin: 0 3vw;
+}
+
+.filterBar>div{
+  width: fit-content;
+  height: fit-content;
+}
+
+.filterBar button{
+  font-size: 1.3rem;
+  font-weight: lighter;
+  color: var(--color);
+  background-color: transparent;
+  padding: 0;
+  margin: auto 8px;
+  height: 100%;
+  width: fit-content;
+  border: 0px;
+  outline: 0px;
+}
+
+.collectionVeiw{
+    border-top: 1px solid var(--borderColor);
+    border-bottom: 1px solid var(--borderColor);
+    margin: 3px 3vw;
+    padding: 2vh 0;
+    width: 94vw;
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.grid2{
+  gap: 5px;
+  height: 100%;
+  width: 40vw;
+  display: grid; 
+  grid-template-areas:
+   'img title'
+   'img para'
+   'img body';
+   text-align: center;
+   align-items: center;
+}
+
+.grid2 .colouredDiv{
+    width: 80%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.grid2 .productImg{
+  grid-area: img;
+  height: 100%;
+  width: 20vw;
+}
+
+.grid2 .productTitle{
+  grid-area: title;
+}
+
+.grid2 .productPara{
+  grid-area: para;
+  width: fit-content;
+}
+
+.grid2 .cardBody{
+  grid-area: body;
+}
