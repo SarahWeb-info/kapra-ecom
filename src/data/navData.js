@@ -9,7 +9,7 @@ let navCarouselData = [    {
     titleContent: (<small>Best sellers.<a href="">Shop Now!</a></small>),
   },
 ];
-  
+
 const getDataObj = () => {
     newData = newData[1][1];
     let catArr = [];

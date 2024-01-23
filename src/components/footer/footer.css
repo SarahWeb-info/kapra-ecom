@@ -23,31 +23,20 @@
     max-width: 1200px;
     transition: 1s;
 }
-.accordianHeading{
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-transform: uppercase;
-}
-.accordianItem a , .accordianItem p{
-    color: var(--color);
-    text-decoration: none;
+
+.accordianItem a , .accordianItem p , .accordianBody span {
     margin: 2px 0;
 }
-.accordianItem>div:first-child{
+
+.accordianBtnDiv{
     width: 100%;
     display: inline-flex;
     justify-content: space-between;
     align-items: first baseline;
 }
 
-.accordianBody{
-    overflow: hidden;
-    display: none;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: flex-start;
-    transition: 1s;
+.accordianBtnDiv>p{
+    margin-bottom: 1rem;
 }
 .accordianBtn{
     cursor: pointer;
@@ -60,6 +49,19 @@
     background-color: transparent;
     font-size: 2rem;
     transition: 0.2s;
+}
+
+.accordianBody{
+    overflow: hidden;
+    display: none;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    transition: 1s;
+}
+.accordianBody label{
+    margin-left: 1vw;
+
 }
 
 .socialDiv{
@@ -83,10 +85,10 @@
 }
 
 @media screen and (min-width : 768px){
-    .accordianBtn{
+    .secondFooter .accordianBtn{
         display: none;
     }
-    .accordianBody{
+    .secondFooter .accordianBody{
         display:flex;
     }
 }

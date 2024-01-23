@@ -42,11 +42,11 @@ export default function Footer() {
       
       </div>
 
-      <div className='secondFooter d-flex flex-column flex-md-row '>
+      <div className='regularA secondFooter d-flex flex-column flex-md-row '>
 
         <div className='accordianItem' onClick={(e)=>handleAccordianDisplay(e)}>
-          <div>
-            <p className='accordianHeading'>INFORMATION</p>
+          <div className='accordianBtnDiv'>
+            <p className='myLabels'>INFORMATION</p>
             <div>
               <span className='accordianBtn'>+</span>
             </div>
@@ -64,7 +64,7 @@ export default function Footer() {
       
         <div className='accordianItem' onClick={(e)=>handleAccordianDisplay(e)}>
           <div className='accordianBtnDiv'>
-            <p className='accordianHeading'>Customer Care</p>
+            <p className='myLabels'>Customer Care</p>
             <div>
               <span className='accordianBtn'>+</span>
             </div>
@@ -81,7 +81,7 @@ export default function Footer() {
       
         <div className='accordianItem' onClick={(e)=>handleAccordianDisplay(e)}>
           <div className='accordianBtnDiv'>
-            <p className='accordianHeading'>Contact Us</p>
+            <p className='myLabels'>Contact Us</p>
             <div>
               <span className='accordianBtn'>+</span>
             </div>

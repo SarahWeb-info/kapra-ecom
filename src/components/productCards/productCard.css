@@ -7,9 +7,9 @@
     right: 0;
     z-index: 0;
     border-radius: 1.5%;
-    box-shadow:var(--shadow);
     transition: 1.5s;   
     background-color: transparent;
+    box-shadow: var(--shadow);
 }
 
 .productCard{
@@ -20,14 +20,78 @@
     transition: 0.5s;
 }
 
-.productImg{
+.productCard-Column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    text-align: center;
+}
+.productCard-Column .productImg{
     width: 96%;
     height: 60%;
+    min-width: 100px;
+    min-height: 70px;
+}
+
+.productCard-Row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    display: grid;
+    grid-template-areas: 
+    'productImg .'
+    'productImg .'
+    'productImg productPara'
+    'productImg productTitle'
+    'productImg productPrice'
+    'productImg productQuantity'
+    'productImg productRating'
+    'productImg cartBtn'
+    ;
+    gap: 5px;
+    align-items: flex-end;
+    text-align: left;
+}
+
+.productCard-Row .productImg{
+    grid-area: productImg;
+    width: 20vw;
+    height: 100%;
+}
+
+.productCard-Row .productTitle {
+    max-height: fit-content;
+    grid-area: productTitle;
+}
+
+.productCard-Row .productPara{
+    max-height: fit-content;
+    grid-area: productPara;
+}
+.productCard-Row .productPrice{
+    max-height: fit-content;
+    grid-area: productPrice;
+}
+.productCard-Row .qauntityDiv{
+    max-height: fit-content;
+    grid-area: productQuantity;
+}
+.productCard-Row  .productRating{
+    max-height: fit-content;
+    grid-area: productRating;
+}
+.productCard-Row .cartBtn{
+    max-height: fit-content;
+    grid-area: cartBtn;
+}
+
+.productImg{
     z-index: 1;
     background-color: transparent;
     position: relative;
     border-radius: 1.5%;
-    box-shadow:var(--shadow);
+    /* box-shadow:var(--shadow); */
     transition: 2s;
 }
 
@@ -67,7 +131,6 @@
     bottom: 10%;
 }
 
-
 .productColumn-imgHover:hover .productImg{
     height: 30%;
 }
@@ -101,75 +164,10 @@
     height: 120% ;
 }
 
-.productCard-Column {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.productTitle {
-    text-transform: capitalize;
-    font-weight : 600 ;
-    font-size : 1.5rem ;
-    z-index: 2;
-    text-align: center;
-}
-
-.productPara{
-    z-index: 2;
-    display: block;
-    height: fit-content;
-    max-height: 100px;
-    text-align: justify;
-    overflow: hidden;
-    line-height: 1.2; 
-}
-
 .half{
     width: 50% !important;
 }
 
 .full{
     width: 100% !important;
-    text-align: center;
 }
-
-.qauntityDiv{
-    display: inline-flex;
-    justify-content: space-evenly;
-    align-items: center;
-    color: var(--font);
-    border-radius: 3.34vw;
-    border : 0.6px solid var(--borderColor);
-    transition: background 1s;
-    width: fit-content;
-    min-width: 10vw;
-    height: auto;
-    max-height: var(--buttonHeight);
-    overflow: hidden;
-    box-shadow: var(--shadowIn);
-}
-
-.qauntityDiv p{
-    margin: 0;
-}
-
-.qauntityDiv button{
-    border: 0px;
-    outline: 0px;
-    width: fit-content;
-    height: fit-content;
-    padding: 0 10px;
-    margin: 0;  
-    font-size: larger;
-}
-
-.qauntityDiv button:hover{
-    color: var(--colorInverse);
-    border: 0px !important;
-    outline: 0px !important;
-}
-
-
-/* @media screen and (min-width : 992px){
-} */

@@ -14,6 +14,7 @@ import Wishlist from './tabs/Wishlist';
 import ContactUs from './tabs/ContactUs';
 import FAQs from './tabs/Faqs';
 import Docs from './tabs/Docs';
+import ErrorPg from './tabs/ErrorPg';
 
 import State from './context/frontend/SideDivStates';
 
@@ -36,6 +37,7 @@ export default function App() {
         <Route path="/contactUs" element={<ContactUs />} />
         <Route path="/faqs" element={<FAQs />} />
         <Route path="/docs" element={<Docs />} />
+        <Route path="*" element={<ErrorPg />} />
       </Routes>
 
       <Footer />

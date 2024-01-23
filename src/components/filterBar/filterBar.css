@@ -1,0 +1,27 @@
+.filterBar{
+    width: 94vw;
+    height: auto; 
+    overflow: hidden;
+    padding-bottom: 2vh;
+    margin: 0 3vw;
+  }
+  
+  .filterBar>div{
+    width: fit-content;
+    height: fit-content;
+  }
+  
+  .filterBar button{
+    font-size: 1.3rem;
+    font-weight: lighter;
+    color: var(--color);
+    background-color: transparent;
+    padding: 0;
+    margin: auto 8px;
+    height: 100%;
+    width: fit-content;
+    border: 0px;
+    outline: 0px;
+    display: inline-flex;
+  }
+  

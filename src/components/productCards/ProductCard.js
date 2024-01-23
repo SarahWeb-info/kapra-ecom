@@ -1,30 +1,29 @@
-import React , {useState} from 'react';
-import { BsHeart, BsCart , BsStarFill , BsDashLg , BsPlusLg} from 'react-icons/bs';
+import React from 'react';
+import { BsHeart, BsCart } from 'react-icons/bs';
 import { SiCodereview } from 'react-icons/si';
 import './productCard.css';
-import TruncateText from '../../frontendFunc/TrancateText';
-import StarRating from './StarRating';
 
-export default function ProductDialog({ myCard  , detailFunc = null , miniCartFunc = null , cartFunc = null  }) {
+import ProductText from '../productText/ProductText';
+import ProductPrice from '../productPrice/ProductPrice';
+import StarRating from '../productStarRating/ProductStarRating';
 
-  const { main, colouredDiv, img , title =null , para = null , prices = null , rating = null  ,availability = null , quantity = false , cartBtn = null , additionaldata = null } = myCard;
-  
+export default function ProductCard({ myCard  , detailFunc = null , miniCartFunc = null }) {
+
+  const { main, colouredDiv, img , title =null , para = null , prices = null , rating = null } = myCard;
+
   return (
-    <div className={`${main.mainClass}`} style={main.style} >
-    { colouredDiv && <div className={`colouredDiv ${colouredDiv.additionalClass}`}></div> }
+    <div className={`productCard ${main.mainClass}`} style={main.style} >
+    { colouredDiv && <div className={` ${colouredDiv.additionalClass} colouredDiv`}></div> }
 
     { img && cardImg( img , miniCartFunc , detailFunc ) }
 
-    { title && cardTitle( title ) }
-    { para && cardPara( para ) }
+    { title && <ProductText  textClass = "productTitle"  text = {title.title}  maxTextLength = {title.maxTextLength}  /> }
+    { para && <ProductText  textClass = "productPara"  text = {para.para}  maxTextLength = {para.maxTextLength}  /> }
+  
+    { prices && <ProductPrice priceClass = {prices.show}  currency = {prices.currency}  discountPrice = {prices.discount}  origPrice = {prices.origPrice} /> }
+    { rating && <StarRating additionalClass={rating.show} totalStars={rating.total} goldenStars ={rating.achieved} /> }
 
-    { prices && cardPrice( prices ) }
-    { availability && cardAvailability(availability) }
-
-    { rating && cardRating( rating ) }
-    { quantity && quantityDiv()}
-    { cartBtn && <button className='customDarkBtn col-hoverBtn cartBtn'>{cartBtn}</button> }
-    { additionaldata && <div className='additionaldata'>{additionaldata}</div> }
+    <a className='customDarkBtn col-hoverBtn cartBtn' href='/product' >EXPLORE</a>
     
   </div>
   );
@@ -48,88 +47,4 @@ function cardImg(imgObj , miniCartFunc , detailFunc) {
       )}
     </div>
   );
-}
-
-function shortenText(shortenedName, size) {
-
-  if (shortenedName.includes('-')) {
-    shortenedName = shortenedName.split('-')[1];
-  }
-
-  if (shortenedName.length > size) {
-    shortenedName = TruncateText(shortenedName,  size );
-  }
-
-  return shortenedName;
-}
-
-function cardTitle(titleInfo) {
-  let shortenedText = shortenText(titleInfo.title, titleInfo.maxlength);
-
-  return <span className='productTitle'>{shortenedText}</span>;
-}
-
-function cardPara(paraInfo) {
-  let shortenedText = shortenText(paraInfo.para, paraInfo.maxlength);
-
-  return <span className='productPara'>{shortenedText}</span>;
-}
-
-function cardAvailability(stockInfo) {
-  
-    return( 
-        <div className='yScroll'>
-            {stockInfo.slice(0, 12).map((item, index) => {
-            return(
-                <div  key={index}>
-                <b>{item.attr} :</b><span>{item.value}</span>
-                </div>  
-            );
-            })}
-        </div>  
-    );
-
-} 
-
-function cardPrice(priceInfo) {
-  return (
-  <span className={`${priceInfo.show}`}>
-    {priceInfo.discount && (
-      <span style={{ textDecoration: 'line-through', color: 'red' , whiteSpace : 'pre'}}>
-        {priceInfo.currency}{priceInfo.discount}{' '}
-      </span>
-    )}
-    {priceInfo.currency}<strong>{priceInfo.origPrice}</strong>
-  </span>);
-}
-
-function cardRating(rating) {
-  return (
-    <div className={`${rating.show}`}>
-      <StarRating totalStars={rating.total} goldenStars ={rating.achieved} />
-    </div>
-  );
-}
-
-function quantityDiv() {
-
-    let quantity = 1 ;
-
-    const minusQuantity=()=>{
-        if (parseInt(quantity)>0) {
-            quantity-- ; 
-         }
-    }
-    
-    const plusQuantity=()=>{
-        quantity++ ; 
-    }
-    
-    return (
-      <div className='qauntityDiv'>
-        <button onClick={minusQuantity}><BsDashLg /></button>
-        <p>{quantity}</p>
-        <button onClick={plusQuantity}><BsPlusLg /></button>
-      </div>
-  )
 }

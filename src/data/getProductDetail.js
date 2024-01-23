@@ -29,10 +29,10 @@ const getProductObj = () => {
     priceListing.push(obj);
   }
   
-  let propertyName = newData.sku.productSKUPropertyList.skuPropertyName ; 
-  let productPropertyList = newData.sku.productSKUPropertyList.skuPropertyValues;
+  let propertyName = newData.sku.productSKUPropertyList[0].skuPropertyName ; 
+  let productPropertyList = newData.sku.productSKUPropertyList[0].skuPropertyValues;
   let propertyListingArr = [];
-
+  
   for(const i in productPropertyList){
     let color = productPropertyList[i].skuColorValue ; 
     let colorStr = productPropertyList[i].skuPropertyTips ; 

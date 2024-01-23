@@ -1,6 +1,6 @@
 import React , { useContext  } from 'react';
 import context from '../../context/frontend/context';
-import FadeBg from '../globalHelpers/FadeBg';
+import FadeBg from '../FadeBg';
 import SearchDiv from './SearchSideDiv';
 import LoginDiv from './LoginSideDiv';
 import CartDiv from './CheckoutSideDiv';

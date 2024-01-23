@@ -1,6 +1,6 @@
 import React,{useState , useEffect} from 'react';
 import { BsSearch } from "react-icons/bs";
-import CrossBTn from '../globalHelpers/CrossBTn';
+import CrossBTn from '../crossBtn/CrossBTn';
 import Img from '../../imgs/img1.jpg';
 
 export default function CheckoutSideDiv({ onClose }) {
@@ -65,12 +65,12 @@ export default function CheckoutSideDiv({ onClose }) {
       }
   
    return (
-  <div className="sideMenu" style={{right : `${showDiv}`}}>
-    <div className='searchSideDiv'>
-
-      <CrossBTn title="search our site"  onClose={handleHide} />     
+  <div className="regularBg regularA sideMenu" style={{right : `${showDiv}`}}>
+    <CrossBTn title="search our site"  onClose={handleHide} />     
+    
+    <div className='sideMenuBody columnEvenly searchSideDiv'>
       
-      <div className='quickList'>
+      <div className='columnCenter quickList'>
           <div className='customInputDiv'>
             <input type="text" placeholder='Search' />
             <button className='noBtn' style={{fontSize : '1rem'}}><BsSearch/></button>

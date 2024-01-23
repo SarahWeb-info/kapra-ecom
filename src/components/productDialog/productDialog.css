@@ -1,0 +1,99 @@
+:root{
+    --dialogWidth : 95vw;
+    --dialogHeight : 40vh;
+}
+
+.dialog{
+    z-index: 105;
+    width: auto;
+    height: auto;
+    max-height: 80vh;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    align-items: center;
+}
+
+.dialog>div{
+    position: relative;
+    width: var(--dialogWidth);
+    height: var(--dialogHeight);
+    overflow: hidden;
+}
+
+.productTag{
+    z-index: 3;
+    position: absolute;
+    font-size: 1rem;
+    padding: 5px;
+    white-space : pre;
+    bottom : 0 ;
+    right : 0 ;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 10%;
+}
+
+.dialogBanner .carousel{
+    height: var(--dialogHeight);
+    width: var(--dialogWidth);
+}
+
+.dialogBanner .carousel-item>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dialogBanner .carousel img{
+    overflow: hidden;
+    height: var(--dialogHeight) !important;
+    width: auto;
+}
+.dialogBanner img{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.dialogDetail{
+    padding: 2%;
+}
+.dialogDetail * {
+    margin: 1px 0;
+}
+.productFeatures{
+    height: 80%;
+    width: 100%;
+    overflow-y: auto;
+}
+.productFeatures *{
+    margin: 3px 0;
+}
+
+@media screen and (min-width : 850px){
+    :root{
+        --dialogWidth : 40vw;
+        --dialogHeight : 80vh;
+    }
+    .dialog{   
+        flex-direction: row;
+        padding: 0;
+    }
+    .dialogDetail{
+        padding: 10% 2% 2% 2%;
+    }
+    .dialogDetail * {
+        margin: 2px 0;
+    }
+    .productTag{
+        left :0;
+        top : 0;
+        right: auto;
+        bottom: auto;
+        border-top-left-radius: 0;
+        border-bottom-right-radius: 10%;
+    }
+
+}

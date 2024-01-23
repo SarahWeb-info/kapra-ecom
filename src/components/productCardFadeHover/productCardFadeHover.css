@@ -1,0 +1,90 @@
+.fadeAdDiv{
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.fadeAdDiv a{text-decoration: none;}
+
+.fadeHover{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top : 0;
+    left : 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    transition: 1s;
+    opacity: 0;
+}
+.fadeAdDiv:hover .fadeHover{
+    opacity: 1;
+}
+
+.fadeLabel{
+    z-index: 2;
+    position: absolute;
+    top : 40%;
+    left : 100%;
+    color: var(--bg);
+    font-size: 1.3rem;
+    white-space: pre;
+    transition: 0.8s;
+}
+.fadeAdDiv:hover .fadeLabel{
+    left : 50%;
+    transform: translate(-50%);
+}
+
+.fadeLine{
+    z-index: 2;
+    display: block;
+    position: absolute;
+    top: 60%;
+    left : 50%;
+    transform: translateX(-50%);
+    background-color: var(--bg);
+    width: 0% !important;
+    height: 2px !important;
+    transition: 0.8s;
+}
+.fadeAdDiv:hover .fadeLine{
+    width: 70% !important;
+}
+
+.fadeHoverBtn{
+    position: absolute;
+    z-index: 2;
+    bottom: 5%;
+    left : 50%;
+    transform: translateX(-50%);
+    color: var(--color);
+    background-color: var(--bg);
+    width: fit-content;
+    height: auto;
+    border-radius: 5%;
+    border: 0px ;
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    white-space: pre;   
+    padding:3px 5px;
+    -webkit-box-shadow: 0 5px 20px rgb(0 0 0 / 53%);
+    box-shadow:  0 5px 20px rgb(0 0 0 / 53%);
+    cursor: pointer;
+}
+.fadeHoverBtn:hover{
+    color : var(--highlighter);
+}
+
+@media screen and (max-height : 3700px){
+    .fadeLine{
+        top: 60%;
+    }
+}
+@media screen and (min-height : 3700px){
+    .fadeLine{
+        top: 50%;
+    }
+}

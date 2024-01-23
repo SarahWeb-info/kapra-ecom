@@ -1,35 +1,13 @@
 import React from 'react'
 
+import {homeBanner} from '../data/homePgData';
 import HomeSliderContainer from '../components/sliderLayout/HomeSliderContainer';
 import MyCarousel from '../components/MyCarousal';
-import ProductCard2 from '../components/productCards/ProductCard2';
+import ProductCardFadeHover from '../components/productCardFadeHover/ProductCardFadeHover';
 
 import '../css/home.css';
 
 export default function Home() {
-
-  let homeBanner = [    {
-    titleContent: null,
-    btnContent: 'Explore Now',
-    link : '/collection' ,
-    imgContent: 'img1',
-    altContent: 'Get Dynamic Web Apps',
-  },
-  {
-    titleContent: null,
-    btnContent: 'Explore Now',
-    link : '/collection' ,
-    imgContent: 'img2',
-    altContent: 'Get Dynamic Web Apps',
-  },
-  {
-    titleContent: null,
-    btnContent: 'Explore Now',
-    link : '/collection' ,
-    imgContent: 'img3',
-    altContent: 'Get Dynamic Web Apps',
-  },
-];
 
   return (
 
@@ -43,8 +21,8 @@ export default function Home() {
           customContent={homeBanner}
       />
 
-      <HomeSliderContainer heading = "Unstitched"  bannerImg = "img1" />
-      <HomeSliderContainer heading = "Ready to Wear"  bannerImg = "img2" />
+      <HomeSliderContainer heading = "Grocery"  bannerImg = "img1" catagroy = "food" />
+      <HomeSliderContainer heading = "Home Appliances"  bannerImg = "img2" catagroy = "home-appliances" />
 
       <video
         id="myVideo"
@@ -65,13 +43,13 @@ export default function Home() {
 
         <div className='gridDiv-container'>
         
-          <ProductCard2 customClass1 = "gridDivlg" />
+          <ProductCardFadeHover customClass1 = "gridDivlg" />
 
           <div className='d-flex flex-column'>
 
-            <ProductCard2 />
+            <ProductCardFadeHover />
 
-            <ProductCard2 />
+            <ProductCardFadeHover />
 
           </div>        
 
@@ -81,18 +59,16 @@ export default function Home() {
 
           <div className='d-flex flex-column'>
 
-            <ProductCard2 />
+            <ProductCardFadeHover />
 
-            <ProductCard2 />
+            <ProductCardFadeHover />
 
           </div>        
 
-          <ProductCard2 customClass1 = "gridDivlg" />
+          <ProductCardFadeHover customClass1 = "gridDivlg" />
         
         </div>
       </div>
-
-
 
     </div>
   )

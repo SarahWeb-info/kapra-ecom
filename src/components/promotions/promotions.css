@@ -1,4 +1,4 @@
-:root{
+/* :root{
     --dialogWidth : 95vw;
     --dialogHeight : 40vh;
 }
@@ -27,23 +27,6 @@
     overflow: hidden;
 }
 
-/* .dialogAd span{
-    display: inline-flex;
-    align-items: center;
-} */
-
-/* 
-.dialogAd button{
-    background-color: var(--color);
-    color: var(--bg);
-    transition: background 1s;
-}
-
-.dialogAd button:hover{
-    background-color: var(--borderColor);
-    border: 0.3px solid var(--color);
-} */
-
 .dialogBanner p{
     position: absolute;
     left: 50%;
@@ -68,7 +51,6 @@
     width: auto;
 }
 .dialogBanner img{
-    /* width: var(--dialogWidth); */
     width: 100%;
     height: auto;
     overflow: hidden;
@@ -85,22 +67,6 @@
 .productDetail *{
     width: 100%;
 }
-.miniCart{
-    background-color: transparent;
-    padding: 1% 0.5%;
-    width: auto;
-    max-width: 350px;
-    min-width: 200px;
-    height: auto;
-    min-height: 350px;
-    
-    z-index: 120;
-}
-.miniCart>div{
-    padding: 2%;
-}
-
-
 
 .bellAd{
     z-index: 102;   
@@ -199,4 +165,4 @@
         padding: 0;
     }
     
-}
+} */

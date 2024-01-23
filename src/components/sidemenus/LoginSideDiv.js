@@ -1,5 +1,5 @@
 import React , {useState , useEffect } from 'react';
-import CrossBTn from '../globalHelpers/CrossBTn';
+import CrossBTn from '../crossBtn/CrossBTn';
 
 export default function CheckoutSideDiv({ onClose }) {
 
@@ -25,7 +25,7 @@ export default function CheckoutSideDiv({ onClose }) {
   }
     
   return (
-  <div className="sideMenu" style={{right : `${showDiv}`}}>  
+  <div className="regularBg regularA sideMenu" style={{right : `${showDiv}`}}>  
     <div className='loginSideDiv' >
     <CrossBTn title="Login"  onClose={handleHide} />     
 
@@ -41,10 +41,9 @@ export default function CheckoutSideDiv({ onClose }) {
           <input type="text" id="signInPassword" />
         </div>
 
-
         <a href="http://" target="_blank" rel="noopener noreferrer">Forgot your password? </a>
 
-        <button type="submit" className='sideMenuBtns'>Sign In</button>
+        <button type="submit" className='highLightedBtn'>Sign In</button>
 
         <a href="http://" target="_blank" rel="noopener noreferrer">New Customer? Create an account</a>
       </form>

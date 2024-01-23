@@ -5,33 +5,9 @@
     position: fixed;
     top : 0;
     transition: 0.8s;
-    background-color: var(--bg);
-    color: var(--color);
     border: 1px solid var(--color);
     z-index: 25;
-}
-
-.sideMenu a{
-    text-decoration: none;
-    color: var(--color);
-    text-transform: capitalize;
-}
-.sideMenu a:hover{
-    color: var(--highlighter);
-}
-.sideMenuBtns{
-    border-radius: 3.34vw;
-    margin: 2vh 0;
-    background-color: var(--highlighter);
-    border: 0px;
-    color: var(--bg);
-    font-weight: 600;
-    height: 5vh;
-    box-shadow: inset 0 3px 10px #81818133 ,  0 3px 10px #81818133;
-}
-
-.sideMenuBtns:hover{
-    box-shadow: inset 0 5px 18px #81818133 ,  0 3px 10px #81818133;
+    overflow: hidden;
 }
 
 
@@ -44,24 +20,19 @@
     padding:1vh 2vw ;
 }
 
+.sideMenuBody{
+    padding: 2vh 2vw;
+}
+
 .searchSideDiv{
     width: 100%;
     height: 100vh;
-    overflow: hidden;
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly
 }
 
 .quickList{
     width: 100%;
     height: auto;
     margin: 2vh auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 .quickList>div {

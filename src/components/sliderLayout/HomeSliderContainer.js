@@ -1,8 +1,8 @@
 import React from 'react'
-import productsList from '../../backend/getProductList';
+import productsList from '../../data/getProductList';
 import Slider from './Slider';
 
-export default function HomeSliderContainer({mainClass = "homeSliderContainer" ,  heading='Collection' , bannerImg = "img1" }) {
+export default function HomeSliderContainer({mainClass = "homeSliderContainer" ,  heading='Collection' , bannerImg = "img1" , catagroy }) {
 
   return (
     <div className={mainClass}>

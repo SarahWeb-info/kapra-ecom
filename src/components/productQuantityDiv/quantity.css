@@ -2,16 +2,14 @@
     display: inline-flex;
     justify-content: space-evenly;
     align-items: center;
+    background-color: transparent;
     color: var(--font);
     border-radius: 3.34vw;
-    border : 0.6px solid var(--borderColor);
-    transition: background 1s;
+    /* transition: background 1s; */
     width: fit-content;
     min-width: 10vw;
-    height: auto;
-    max-height: var(--buttonHeight);
+    height: var(--buttonHeight);
     overflow: hidden;
-    box-shadow: var(--shadowIn);
 }
 
 .qauntityDiv p{
@@ -26,10 +24,11 @@
     padding: 0 10px;
     margin: 0;  
     font-size: larger;
+    background-color: transparent !important;
 }
 
 .qauntityDiv button:hover{
-    color: var(--colorInverse);
+    /* color: var(--colorInverse); */
     border: 0px !important;
     outline: 0px !important;
 }

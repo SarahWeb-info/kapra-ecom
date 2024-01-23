@@ -1,7 +1,7 @@
 import React , {useState , useEffect} from 'react'
 import { BsX , BsBellFill } from "react-icons/bs";
 import Img from "../../imgs/img1.jpg";
-import "../../css/dialogs.css";
+import "./promotions.css";
 
 export default function Promotions() {
     

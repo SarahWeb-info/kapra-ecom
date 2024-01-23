@@ -1,7 +1,8 @@
 import React from 'react'
 import Img1 from '../../imgs/img1.jpg';
+import './productCardFadeHover.css';
 
-export default function ProductCard2({customClass1 = "gridDiv"}) {
+export default function ProductCardFadeHover({customClass1 = "gridDiv"}) {
   return (
     <div className={`fadeAdDiv ${customClass1}`} style={{ backgroundImage: `url(${Img1})` }}>
             

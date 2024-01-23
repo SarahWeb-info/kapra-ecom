@@ -64,3 +64,19 @@
     /* color: var(--color); */
 }
 
+.highLightedBtn{
+    border-radius: 3.34vw;
+    margin: 2vh 0;
+    background-color: var(--highlighter);
+    border: 0px;
+    color: var(--bg);
+    font-weight: 600;
+    height: 5vh;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow);
+}
+
+.highLightedBtn:hover{
+    box-shadow: inset 0px 0px 6px 2px #00000026, 5px 5px 15px -11px #000000;
+}

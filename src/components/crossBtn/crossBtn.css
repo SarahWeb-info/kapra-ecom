@@ -32,5 +32,6 @@
 }
 
 .crossBtn:hover{
+    text-shadow: 1px 1px 7px rgba(0,0,0,1);
     transform: rotate(180deg);
 }

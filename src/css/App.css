@@ -31,12 +31,19 @@
     border: 0px;
 }
 
+
 .columnCenter{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.columnStart{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start ;
 }
 
 .columnBetween{  
@@ -46,16 +53,30 @@
     justify-content: space-between;
 }
 
-.inlineCenter{
+.columnEvenly{  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.inlineBetween{
     width: 100%;
     display: inline-flex;
     justify-content:space-between;
     align-items: center;
 }
 
+.inlineCenter{
+    display: inline-flex;
+    justify-content:center;
+    align-items: center;
+}
+
 .allowWrap{
     flex-wrap: wrap;
 }
+
 .centerFixed{
     position: fixed;
     top : 50%;
@@ -70,22 +91,49 @@
     -webkit-backdrop-filter: blur(38px);
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
 .fadeBg{
     width: 100vw;
     height: 100vh;
-    
     margin: 0;
-    z-index: 11;
+    z-index: 25;
     background-color: rgba(0, 0, 0, 0.211);
     position: fixed;
     top : 0 ;
     left :0;
 }
 
+.shadow{
+    box-shadow:var(--shadow);
+}
+.shadowIn{
+    box-shadow:var(--shadowIn);
+}
+.regularBg{
+    background-color: var(--bg);
+    color: var(--color);
+}
+.invertBg{
+    background-color: var(--color);
+    color: var(--bg);
+}
+.highlighter {
+    color: var(--highlighter);
+}
 .alertBg{
     color: var(--bg);
     background-color: var(--alert);
 }  
+
+.regularA a {
+    text-decoration: none;
+    color: var(--color);
+    text-transform: capitalize;
+}
+.regularA a:hover{
+    color: var(--highlighter);  
+}
+
 .myBadge{
     width: fit-content;
     height: auto;
@@ -148,6 +196,23 @@
 .customInputDiv input:focus-visible{
     border: 0px;
     outline: 0px;
+}
+
+.carousel-control-next>span, .carousel-control-prev>span {
+    background-color: gray;
+    border-radius: 13%;
+}
+
+.errorPg{
+    width: 100vw;
+    height: 60vh;
+    overflow: hidden;
+}
+.errorPg img{
+    width: 30vw;
+    min-width: 200px;
+    max-width: 500px;
+    height: auto;
 }
 
 @keyframes slideIn {

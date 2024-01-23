@@ -7,17 +7,17 @@ const SideDivStates =(props)=>{
     const [login, setLogin] = useState(false);
     const [search, setSearch] = useState(false);
 
-    const updateCart =()=>{
+    const cartDisplayFunc =()=>{
         setFadeBg(true);
         setCart(true);
     }
 
-    const updateLogin =()=>{
+    const loginDisplayFunc =()=>{
         setFadeBg(true);
         setLogin(true);
     }
 
-    const updateSearch =()=>{
+    const searchDisplayFunc =()=>{
         setFadeBg(true);
         setSearch(true);
     }
@@ -30,7 +30,7 @@ const SideDivStates =(props)=>{
     }
 
     return(
-        <Context.Provider value={{fadeBg ,cart , updateCart ,login , updateLogin ,search, updateSearch ,closeBtn}} >
+        <Context.Provider value={{fadeBg ,cart , cartDisplayFunc ,login , loginDisplayFunc ,search, searchDisplayFunc , closeBtn }} >
             {props.children}
         </Context.Provider>
     )

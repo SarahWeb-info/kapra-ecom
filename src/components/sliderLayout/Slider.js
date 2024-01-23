@@ -1,6 +1,6 @@
 import React, { useState , useEffect} from 'react';
 import { BsArrowLeftShort ,  BsArrowRightShort } from "react-icons/bs";
-import ProductCardLight from "../productCards/ProductCardLight";
+import ProductCard from "../productCards/ProductCard";
 import './slider.css';
 
 export default function Slider({ productsList = []}) {
@@ -66,7 +66,7 @@ export default function Slider({ productsList = []}) {
   return (
     <div className='slider'>
 
-        <div className='inlineCenter sliderNavigations'>
+        <div className='inlineBetween sliderNavigations'>
             <span className='sliderNavLeft' onClick={sliderNavRight} style={{opacity : `${leftArrowOpacity}`}}>
             <BsArrowLeftShort />
             </span>
@@ -89,15 +89,15 @@ export default function Slider({ productsList = []}) {
             };
             
             let myCard = {
-              main: { mainClass: "productCard columnBetween productColumn-imgHover", style: styling },
-              colouredDiv: { additionalClass: "noColour" },
-              img: { imgSrc: `${item.img}`, imgBtns: ['cart', 'heart', 'detail'] },
-              para: { para: `${item.title}`, maxlength: 60 },
+              main: { mainClass: "productCard productCard-Column productColumn-imgHover", style: styling },
+              colouredDiv: { additionalClass: "shadow" },
+              img: { imgSrc: `${item.img}`, imgBtns: [] },
+              para: { para: `${item.title}`, maxTextLength: 60 },
               prices: { currency: `${item.currency}`, discount: `${item.discount}`, origPrice: `${item.price}`, show: "full" },
             };
 
             return (
-              <ProductCardLight
+              <ProductCard
                 key={index}
                 myCard={myCard}
               />
