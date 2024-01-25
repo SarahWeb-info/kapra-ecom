@@ -1,6 +1,6 @@
 import React , {useState , useContext} from 'react';
 import '../css/productPg.css';
-import dialogsDisplayContext from "../context/frontend/context";
+import dialogsDisplayContext from "../context/context";
 import productDetail from '../data/getProductDetail';
 import ProductText from '../components/productText/ProductText';
 import StarRating from '../components/productStarRating/ProductStarRating';
@@ -71,7 +71,7 @@ export default function Product() {
     <>
     { addCart && <AddCartDialog onClose = {closeAddCart} goToCart={confirmAddCart} propertyName = {productDetail.propertyName} productImgArr={productDetail.propertyListingArr} productPriceArr={productDetail.priceListing}  />}
     
-    <div className='productPgMain'>
+    <div className='pageDiv inlineCenter alignStretch allowWrap ' style={{gap : '1vw'}}>
       
       <div className='productPgImg'>
         <img src={dispalyImg} alt="" />
@@ -84,10 +84,10 @@ export default function Product() {
         </div>
       </div>
       
-      <div>
-        <b>
+      <div className='productPgDescription'>
+        <h1>
           { productDetail.title && <ProductText  textClass = "py-4"  text = {productDetail.title}  maxTextLength = {300}  /> }  
-        </b>
+        </h1>
 
         <div className='inlineBetween'>
           
@@ -131,32 +131,48 @@ export default function Product() {
           </>
         }      
 
-        <div className='productFeatures' style={{height : 'fit-content'}}>
-          <b>Additional Features</b>
-          {productDetail.additionalFeaturesArr.map((item, index) => {
-            return(
-              <div  key={index}>
-                <b>{item.attr} :</b><span>{item.value}</span>
-              </div>  
-            );
-          })}           
-        </div>  
-          <b>Packaging</b>
-          <p><b>Package Size : </b><span>{productDetail.packagingSize}</span></p>
-          <p><b>Weight : </b><span>{productDetail.packageWeight}</span></p>
-          <p><b>Tracking Id : </b><span>{productDetail.trackingId}</span></p>
-          <p><b>Delivery Option Code : </b><span>{productDetail.deliveryOptionCode}</span></p>
-          <p><b>Warrenty Code : </b><span>{productDetail.warrantyStr}</span></p>
-          <p><b>Warenty : </b><span>{productDetail.productWarrenty}</span></p>
-          <b>About Seller</b>
-          <p><b>Seller Name : </b><span>{productDetail.sellerName}</span></p>
-          <p><b>Seller Id : </b><span>{productDetail.sellerId}</span></p>
-          <img src={productDetail.sellerLogo} alt="" width="200px" height = "auto"/>
-          <p><b>Seller Feedback : </b><span>{productDetail.sellerFeedback}</span></p>
-
       </div>
 
     </div>
+
+    <div className='pageDiv flexColumn justify-content-center align-items-start allowWrap ' style={{padding: '2vw' , height : 'auto' , maxHeight : '20vh'}}>
+      <b>Additional Features</b>
+      {productDetail.additionalFeaturesArr.map((item, index) => {
+        return(
+          <div key={index}>
+            <b>{item.attr} :</b><span>{item.value}</span>
+          </div>  
+        );
+      })}           
+    </div>  
+        
+    <div className='pageDiv allowWrap moreProductDetail'>
+        <ul>
+          <p>Packaging</p>
+          <li><b>Package Size : </b><span>{productDetail.packagingSize}</span></li>
+          <li><b>Weight : </b><span>{productDetail.packageWeight}</span></li>
+          <li><b>Delivery Option Code : </b><span>{productDetail.deliveryOptionCode}</span></li>
+          <li></li>
+        </ul>
+
+        <ul>
+          <p>Seller</p>
+          <li><b>Seller Id : </b><span>{productDetail.sellerId}</span></li>
+          <li><b>Seller Name : </b><span>{productDetail.sellerName}</span></li>
+          <li><b>Seller Feedback : </b><a href={productDetail.sellerFeedback}>{productDetail.sellerFeedback}</a></li>
+          <li><img src={productDetail.sellerLogo} alt="" /></li>
+        </ul>
+
+        <ul>
+          <p>Warrenty & Tracking </p>
+          <li><b>Warenty : </b><span>{productDetail.productWarrenty}</span></li>
+          <li><b>Warrenty Code : </b><span>{productDetail.warrantyStr}</span></li>
+          <li><b>Tracking Id : </b><span>{productDetail.trackingId}</span></li>
+          <li></li>
+        </ul>
+
+    </div>
+    
     </>
   )
 }

@@ -1,0 +1,27 @@
+.signUpForm{
+    width: auto;
+    max-width: 500px;
+    height: auto;
+    text-align: center;
+}
+
+.signUpForm * {
+    margin: 1vh 0;
+}
+
+.signUpForm label {
+    white-space: pre;
+}
+
+.signUpForm input {
+ width: 70%;
+}
+.signUpForm input , .signUpForm input:active , .signUpForm input:focus-visible{
+    border: 0;
+    outline: 0;
+    border-bottom: 1px solid var(--borderColor);
+}
+
+.signUpForm input:focus-visible{
+    border-bottom: 1px solid var(--color);
+}

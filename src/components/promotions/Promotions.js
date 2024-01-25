@@ -66,7 +66,7 @@ export default function Promotions() {
     <>
     <div className='fadeBg' onClick={hideFadeBg} style={{zIndex:'104'}}></div>
     
-    <div className='centerFixed dialog'>
+    <div className='centerFixed regularBg dialog'>
         <button onClick={hideFadeBg} className='cross'><BsX /></button>
         
         <div className='dialogBanner'>
@@ -74,11 +74,11 @@ export default function Promotions() {
             <p>AVAILABLE NOW</p>
         </div>
 
-        <div className='dialogDetail align-items-center'>
+        <div className='flexColumn  align-content-center  dialogDetail' style={{ justifyContent : 'space-evenly'}}>
         
             <h4>JOIN OUR MAILING LIST TO </h4>
             <p className='text-right'>Be the first one to know about the latest trends and promotions.</p>
-            <div className='customInputDiv'>
+            <div className='customInputDiv borderRadius-334'>
                 <input type="text" placeholder='Your email address'/>
                 <button className='customDarkBtn'>Subscribe</button>
             </div>

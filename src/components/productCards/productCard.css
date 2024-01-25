@@ -9,7 +9,6 @@
     border-radius: 1.5%;
     transition: 1.5s;   
     background-color: transparent;
-    box-shadow: var(--shadow);
 }
 
 .productCard{
@@ -35,15 +34,12 @@
 }
 
 .productCard-Row{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     display: grid;
     grid-template-areas: 
     'productImg .'
     'productImg .'
-    'productImg productPara'
     'productImg productTitle'
+    'productImg productPara'
     'productImg productPrice'
     'productImg productQuantity'
     'productImg productRating'
@@ -61,6 +57,7 @@
 }
 
 .productCard-Row .productTitle {
+    width: fit-content;
     max-height: fit-content;
     grid-area: productTitle;
 }

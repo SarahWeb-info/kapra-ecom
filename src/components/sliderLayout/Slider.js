@@ -91,7 +91,7 @@ export default function Slider({ productsList = []}) {
             let myCard = {
               main: { mainClass: "productCard productCard-Column productColumn-imgHover", style: styling },
               colouredDiv: { additionalClass: "shadow" },
-              img: { imgSrc: `${item.img}`, imgBtns: [] },
+              img: { imgSrc: `${item.img}`},
               para: { para: `${item.title}`, maxTextLength: 60 },
               prices: { currency: `${item.currency}`, discount: `${item.discount}`, origPrice: `${item.price}`, show: "full" },
             };

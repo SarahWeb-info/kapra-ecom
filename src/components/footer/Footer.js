@@ -34,7 +34,7 @@ export default function Footer() {
 
         <div>
           <p>Subscribe to our newsletter</p>
-          <div className='customInputDiv'>
+          <div className='customInputDiv borderRadius-334'>
             <input type="text" placeholder='Your email address' />
             <button  className='customDarkBtn'>Subscribe</button>
           </div>
@@ -105,22 +105,22 @@ export default function Footer() {
         
         <div className='tooltip-Parent'>
           <TiSocialFacebook/>
-          <div className='myTooltip toolUp'>Follow us on WhatsApp</div>  
+          <div className='myTooltip invertBg toolUp'>Follow us on WhatsApp</div>  
         </div>
         
         <div className='tooltip-Parent'>
           <BsInstagram/>
-          <div className='myTooltip toolUp'>Follow us on WhatsApp</div>  
+          <div className='myTooltip invertBg toolUp'>Follow us on WhatsApp</div>  
         </div>
         
         <div className='tooltip-Parent'>
           <TiSocialLinkedin/>
-          <div className='myTooltip toolUp'>Follow us on WhatsApp</div>  
+          <div className='myTooltip invertBg toolUp'>Follow us on WhatsApp</div>  
         </div>
 
         <div className='tooltip-Parent'>
           <BsWhatsapp />
-          <div className='myTooltip toolUp'>Follow us on WhatsApp</div>  
+          <div className='myTooltip invertBg toolUp'>Follow us on WhatsApp</div>  
         </div>
 
       </div>

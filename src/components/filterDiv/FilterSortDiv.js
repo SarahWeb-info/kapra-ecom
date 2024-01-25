@@ -55,7 +55,7 @@ export default function FilterSortDiv({ handleFilter , hideAll }) {
   };
 
   return (
-    <div className="regularBg regularA sideMenu" style={{left : `${showDiv}`, zIndex : '26'}}>  
+    <div className="regularBg regularAsideMenu width-100p-Height-Auto" style={{left : `${showDiv}`, zIndex : '26'}}>  
         <CrossBTn title="Filter"  onClose={hideAll} />     
         <form className='sideMenuBody filterForm'  onSubmit={handleSubmit} >
 

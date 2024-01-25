@@ -49,7 +49,7 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
           </Carousel>
       </div>
 
-        <div className='columnEvenly dialogDetail'>
+        <div className='flexColumn  align-content-center  dialogDetail' style={{ justifyContent : 'space-evenly'}}>
 
         { productDetail.title && <ProductText  textClass = "py-4"  text = {productDetail.title}  maxTextLength = {100}  /> }  
           

@@ -34,7 +34,7 @@ export default function AddCartDialog({ onClose , goToCart ,propertyName="" , pr
     <>
       <div className='fadeBg'  onClick={hideFadeBg} style={{zIndex:'104'}}></div>
       
-      <div className='centerFixed  regularBg columnStart p-5' style={{zIndex:'105' , width : 'fit-content' , height : 'fit-content'}}> 
+      <div className='centerFixed  regularBg flexColumn justify-content-center align-items-start p-5' style={{zIndex:'105' , width : 'fit-content' , height : 'fit-content'}}> 
         <button onClick={hideFadeBg} className='cross'><BsX /></button>
         
         {productImgArr && 
@@ -59,7 +59,7 @@ export default function AddCartDialog({ onClose , goToCart ,propertyName="" , pr
           </div>      
           </>
         }
-        <button className='my-2 customDarkBtn'  onClick={attributeDisplay ? showCart: null } > Add to Cart </button>
+        <button className='my-2 customDarkBtn' disabled={!attributeDisplay}  onClick={showCart} > Add to Cart </button>
 
       </div>
     </>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Context from "./context";
+import Context from "../context";
 
 const SideDivStates =(props)=>{
     const [ fadeBg , setFadeBg ] = useState(false);

@@ -32,7 +32,7 @@ export default function MiniCart({ onClose , goToCart , productId , propTitle , 
         
         <button onClick={hideFadeBg} className='cross'><BsX /></button>
 
-        <div className='columnEvenly' style={{background: 'white'}}>
+        <div className='flexColumn  align-content-center ' style={{background: 'white' , justifyContent : 'space-evenly'}}>
           
           <ProductText  textClass = "productTitle"  text = {title}  maxTextLength = {50}  />
 

@@ -1,5 +1,5 @@
 import React , { useContext , useEffect, useState  } from 'react';
-import context from '../context/frontend/context';
+import context from '../context/context';
 
 export default function FadeBg() {
     const {closeBtn} = useContext(context);

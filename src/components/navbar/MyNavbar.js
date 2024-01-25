@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import dialogsDisplayContext from '../../context/frontend/context';
+import dialogsDisplayContext from '../../context/context';
 import './navbar.css';
 import CrossBTn from '../crossBtn/CrossBTn';
 import { BsFilterLeft, BsSearch, BsTruck, BsPerson, BsHeart, BsCart, BsChevronRight } from 'react-icons/bs';
@@ -9,11 +9,11 @@ import TruncateText from '../productText/TrancateText';
 
 function MyNavbar() {
 
-  const [shortenedNavLength, setShortenedNavLength] = useState(categoryList.length);
-  const [mobileSetup, setMobileSetup] = useState(false);
-  const { cartDisplayFunc, loginDisplayFunc, searchDisplayFunc } = useContext(dialogsDisplayContext);
-  const [showNav, setShowNav] = useState();
-  const [navbarPosition, setNavbarPosition] = useState('relative');
+  const [ shortenedNavLength , setShortenedNavLength ] = useState( categoryList.length ) ;
+  const [ mobileSetup , setMobileSetup ] = useState( false ) ;
+  const { cartDisplayFunc, loginDisplayFunc, searchDisplayFunc } = useContext( dialogsDisplayContext ) ;
+  const [ showNav , setShowNav ] = useState();
+  const [ navbarPosition , setNavbarPosition ] = useState( 'relative' );
 
   // Function to handle responsive setup of navigation items in desktop Setup (the rest of the categories will be in the More Dropdown)
   const navResponsiveSetup = () => {
@@ -177,38 +177,36 @@ function MyNavbar() {
   };
 
   return (
-    <div className="myNavbar full-X-Block" style={{ position: navbarPosition }}>
+    <div className="myNavbar" style={{ position: `${navbarPosition}` }}>
+      
       <MyCarousal class1="navCarousel" cusInterval={1000} customContent={navCarouselData} />
 
       <div className="inlineBetween navHeader">
+
         {mobileSetup && (
-          <button className="noBtn" onClick={showNavFunc}>
+          <button className="noBtn" onClick={ showNavFunc }>
             <BsFilterLeft />
           </button>
         )}
 
         <a className="navBrand" href="/">
-          {mobileSetup ? (
-            <img src={require(`../../imgs/smpLogo-Mobile.png`)} alt="Brand logo" />
-          ) : (
-            <img src={require(`../../imgs/smpLogo-desktop.png`)} alt="Brand logo" />
-          )}
+          <img src={mobileSetup ? require(`../../imgs/smpLogo-Mobile.png`) : require(`../../imgs/smpLogo-desktop.png`)} alt="Brand logo" />
         </a>
 
-        <div className="navFilters">
+        <div className="flexInline align-items-end justify-content-end navFilters">
           <div className="tooltip-Parent">
             <button onClick={searchDisplayFunc}>
               <BsSearch />
             </button>
-            <div className="myTooltip">Search</div>
+            <div className="myTooltip invertBg">Search</div>
           </div>
 
           {!mobileSetup && (
             <div className="tooltip-Parent">
-              <a href="">
+              <a href="/OrderDetails">
                 <BsTruck />
               </a>
-              <div className="myTooltip">Order Details</div>
+              <div className="myTooltip invertBg">Order Details</div>
             </div>
           )}
 
@@ -217,16 +215,16 @@ function MyNavbar() {
               <button onClick={loginDisplayFunc}>
                 <BsPerson />
               </button>
-              <div className="myTooltip">Login</div>
+              <div className="myTooltip invertBg">Login</div>
             </div>
           )}
 
           {!mobileSetup && (
             <div className="tooltip-Parent">
-              <a href="">
+              <a href="/wishlist">
                 <BsHeart />
               </a>
-              <div className="myTooltip">Wishlist</div>
+              <div className="myTooltip invertBg">Wishlist</div>
             </div>
           )}
 
@@ -234,7 +232,7 @@ function MyNavbar() {
             <button onClick={cartDisplayFunc}>
               <BsCart />
             </button>
-            <div className="myTooltip">Cart</div>
+            <div className="myTooltip invertBg">Cart</div>
           </div>
         </div>
       </div>
@@ -268,7 +266,7 @@ function MyNavbar() {
                 </div>
 
                 <div className="myDropdown glassBg">
-                  <div className="droplist">
+                  <div className="flexColumn align-items-start droplist">
                     {item.CatagoryList.map((element, subIndex) => {
                       let dropNames = element.name;
 
@@ -297,7 +295,7 @@ function MyNavbar() {
             </div>
 
             <div className="myDropdown glassBg">
-              <div className="droplist">
+              <div className="flexColumn align-items-start droplist">
                 {categoryList &&
                   categoryList
                     .slice(shortenedNavLength, categoryList.length)

@@ -1,90 +1,44 @@
 .sideMenu{
     width: 100%;
-    max-width: 400px;
     height: 100vh;
+    max-width: 400px;
     position: fixed;
     top : 0;
     transition: 0.8s;
     border: 1px solid var(--color);
     z-index: 25;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-
-.sideMenuTitles{
-    font-weight: 600;
-    border-top:  1px solid var(--color);
-    border-bottom:  1px solid var(--color);
-    font-size : 1rem;
-    box-shadow: 0 3px 10px #81818133;
-    padding:1vh 2vw ;
-}
-
-.sideMenuBody{
+/* replace this with p-2vh-2vw */
+.sideMenuBody{ 
     padding: 2vh 2vw;
 }
 
-.searchSideDiv{
-    width: 100%;
-    height: 100vh;
-}
-
-.quickList{
-    width: 100%;
-    height: auto;
-    margin: 2vh auto;
-}
-
-.quickList>div {
-    padding: 2px 3vw ;
-    margin: 2vh auto;
-}
-
-.quickList>div:nth-child(2){
-    font-size: small;
-    text-transform: capitalize;
-}
-
-.quickProductEg{
-    width: 100%;
-    height: auto;
+.scrollingDiv{
     max-height: 55vh;
     overflow-x: hidden;
-    overflow-y: auto;
-    
-    box-shadow: inset 0 3px 10px #81818133;
+    overflow-y: auto;   
 }
-.quickProductEg>div{
-    display: flex;
+.scrollingDiv>div{
     padding: 1vw;
-    height: 21vh;
+    height: 100%;
+    max-height: 21vh;
 }
-.quickProductEg>div a{
+.scrollingDiv>div a{
     width: 40%;
     height: auto;
 }
-.quickProductEg img{
-    width: 100%;
-    height: auto;
-}
 
-.loginSideDiv form{
-    padding: 2vh 2vw;
-    width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
 
 .loginSideDiv>form div{
     border: 1px solid var(--color);
     border-radius: 0.2vw;
     margin: 2vh 0;
     padding: 0.5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     height: 8vh;
 }
 
@@ -104,5 +58,26 @@
 
 .loginSideDiv input:not(:focus-visible) {
     display: none;
+}
+.loginSideDivGrid{
+    margin: 2vh 0;
+    padding: 0.5vw;
+    gap : 1vh;
+}
+.loginSideDivGrid a{
+    width: 45%;
+    height: auto;
+    min-height: 100px;
+    box-shadow: var(--shadow);
+    border-radius: 13%;
+
+}
+.loginSideDivGrid a small{
+    color : var(--borderColor);
+}
+.showA{
+    text-decoration: underline;
+    margin: 1vh 1vw;
+    padding: 0.5vw;
 }
 

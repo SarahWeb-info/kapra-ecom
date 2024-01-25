@@ -1,6 +1,9 @@
 import React,{useState , useEffect} from 'react';
 import { BsSearch } from "react-icons/bs";
 import CrossBTn from '../crossBtn/CrossBTn';
+import ProductText from '../productText/ProductText';
+import ProductPrice from '../productPrice/ProductPrice';
+
 import Img from '../../imgs/img1.jpg';
 
 export default function CheckoutSideDiv({ onClose }) {
@@ -8,44 +11,44 @@ export default function CheckoutSideDiv({ onClose }) {
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       },
       {
         img : Img ,
         title : "Three peice kurti",
-        priceBefore : "4000" ,
-        sale : "20%"
+        discountPrice : "4000" ,
+        origPrice : "500"
       }
     ]
 
@@ -65,64 +68,57 @@ export default function CheckoutSideDiv({ onClose }) {
       }
   
    return (
-  <div className="regularBg regularA sideMenu" style={{right : `${showDiv}`}}>
+  <div className="regularBg regularA justify-content-between sideMenu" style={{right : `${showDiv}`}}>
     <CrossBTn title="search our site"  onClose={handleHide} />     
     
-    <div className='sideMenuBody columnEvenly searchSideDiv'>
-      
-      <div className='columnCenter quickList'>
-          <div className='customInputDiv'>
+      <div className='quickList columnCenter'>
+          <div className='customInputDiv m-2vh-Auto p-2 borderRadius-334'>
             <input type="text" placeholder='Search' />
             <button className='noBtn' style={{fontSize : '1rem'}}><BsSearch/></button>
           </div>
 
-          <div>
-            <span>Quick List :</span>
-            <p>            
-              <a href="http://">cat 1</a> ,
-              <a href="http://">cat 2</a> ,
-              <a href="http://">cat 3</a> ,
-              <a href="http://">cat 4</a> ,
-              <a href="http://">cat 5</a> ,
-              <a href="http://">cat 6</a>
-            </p>  
-          </div>
+          <p>Quick List :</p>
+          <p>            
+            <a href="http://">cat 1</a> ,
+            <a href="http://">cat 2</a> ,
+            <a href="http://">cat 3</a> ,
+            <a href="http://">cat 4</a> ,
+            <a href="http://">cat 5</a> ,
+            <a href="http://">cat 6</a>
+          </p>  
       </div> 
 
       <div>
-        <div className='sideMenuTitles'>
-          Need Some Inspiration ?
-        </div>  
+        <div className='width-100p-Height-Auto p-2vh-2vw shadowOut'>
+            Need Some Inspiration ?
+        </div>
         
-        <div className='quickProductEg'>
-          
+        <div className='scrollingDiv '>  
         {smpData.map((product , index) => {
-          let priceAfter =parseInt(product.priceBefore, 10) -  (parseInt(product.priceBefore, 10) / parseInt(product.sale, 10));
 
           return (
-            <div key={index}>
+            <div key={index} className='flexInline align-items-center' >
 
-              <a href=""><img src={product.img} alt="" /></a>
+              <a href=""><img src={product.img} className=' width-100p-Height-Auto shadowOut' alt=""/></a>
               
-              <span>
-                <a href="http://">{product.title}</a>
-                <p style={{textTransform : 'uppercase'}}>
-                  <span style={{ textDecoration: 'line-through' }}>PKR {product.priceBefore} </span>
-                  <span style={{ color : 'var(--highlighter)'}}>PKR {priceAfter}</span>
-                </p>
-              </span>
+              <div className='myLabels flexColumn'>
+                
+                <ProductText  textClass = "productTitle"  text = {product.title}  maxTextLength = {30}  />
+
+                <ProductPrice currency = "$"  discountPrice = {product.discountPrice}  origPrice = {product.origPrice} /> 
+
+              </div>
             </div>
           );
         })}
-
         </div>
 
-        <div className='sideMenuTitles'>
-          <a href="http://" target="_blank" rel="noopener noreferrer">Veiw All  </a>
-        </div>
+        <h5 className='p-2vh-2vw shadowOut'>
+        <a href="http://" style={{textDecoration : 'underline' , color : 'var(--highlighter)'}} rel="noopener noreferrer">Veiw All  </a>
+        </h5>
+
       </div>
        
     </div>
-  </div> 
   )
 }

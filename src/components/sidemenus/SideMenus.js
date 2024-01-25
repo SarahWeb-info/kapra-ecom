@@ -1,5 +1,5 @@
 import React , { useContext  } from 'react';
-import context from '../../context/frontend/context';
+import context from '../../context/context';
 import FadeBg from '../FadeBg';
 import SearchDiv from './SearchSideDiv';
 import LoginDiv from './LoginSideDiv';

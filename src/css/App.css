@@ -31,39 +31,31 @@
     border: 0px;
 }
 
+.p-2vh-2vw{
+    padding: 2vh 2vw;
+}
+.m-2vh-Auto{
+    margin: 2vh auto;
+}
+.width-100p-Height-Auto{
+    width: 100%;
+    height: auto;
+}
+
+.flexColumn{
+    display: flex;
+    flex-direction: column;
+}
+.flexInline{
+    display: flex;
+    flex-direction: row;
+}
 
 .columnCenter{
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-.columnStart{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start ;
-}
-
-.columnBetween{  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.columnEvenly{  
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.inlineBetween{
-    width: 100%;
-    display: inline-flex;
-    justify-content:space-between;
     align-items: center;
 }
 
@@ -73,8 +65,11 @@
     align-items: center;
 }
 
-.allowWrap{
-    flex-wrap: wrap;
+.inlineBetween{
+    width: 100%;
+    display: inline-flex;
+    justify-content:space-between;
+    align-items: center;
 }
 
 .centerFixed{
@@ -82,6 +77,12 @@
     top : 50%;
     left : 50%;
     transform: translate(-50% , -50%);
+}
+
+.pageDiv{
+    width: 80%;
+    margin: 1vh 10%;
+    line-height: 1.2;
 }
 
 .glassBg{
@@ -109,6 +110,14 @@
 .shadowIn{
     box-shadow:var(--shadowIn);
 }
+.shadowOut{
+    box-shadow: var(--shadowOut);
+}
+
+.borderRadius-334{
+    border-radius: 3.34vw;
+}
+
 .regularBg{
     background-color: var(--bg);
     color: var(--color);
@@ -117,6 +126,8 @@
     background-color: var(--color);
     color: var(--bg);
 }
+
+
 .highlighter {
     color: var(--highlighter);
 }
@@ -134,16 +145,6 @@
     color: var(--highlighter);  
 }
 
-.myBadge{
-    width: fit-content;
-    height: auto;
-    max-height: var(--buttonHeight);
-    border-radius: 20%;
-    padding: 1.5px 3px;
-    line-height: 1;
-    font-size: 0.7rem;
-    text-transform: lowercase;
-}
 .yScroll{
     height: 10rem;
     overflow-y: auto;
@@ -159,8 +160,6 @@
 .myTooltip{
     font-size: 0.8rem !important ;
     position: absolute !important;
-    background-color: var(--color);
-    color: var(--bg);
     border-radius: 8%;
     padding: 4px;
     display: none;
@@ -178,7 +177,6 @@
 .customInputDiv{
     display: inline-flex;
     border: 1px solid var(--color);
-    border-radius: 3.34vw;
     overflow: hidden;
     background-color: rgba(0, 0, 0, 0.166);
     width: fit-content;
@@ -186,7 +184,7 @@
     height: auto;
     max-height: var(--buttonHeight);
     padding-left:1.5%;
-    
+    box-shadow: var(--shadowOut);
 }
 .customInputDiv input{
     border : 0px;
@@ -234,10 +232,6 @@
 }
 
 @media screen and (min-width : 992px){
-    :root{
-        --navHeight : 21vh;
-      }
-      
       .yScroll{
         height:auto;
         min-height: 10vh;
