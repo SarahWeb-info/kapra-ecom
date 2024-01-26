@@ -1,4 +1,5 @@
-const getData = (data) => { 
+const getData = async (data) => { 
+    
     try {
   
       if (Array.isArray(data)) {
@@ -18,4 +19,5 @@ const getData = (data) => {
     }
   
 };
-export default getData;
+
+export {getData};

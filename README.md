@@ -183,12 +183,12 @@ backend :
 1-
 (i)- context api is used for the display of GLOBAL sidemenus ,i.e cart , search , login
 
-2 -the rapid api for product listing
+2 -the rapid api for product listing -https://rapidapi.com/sparior/api/aliexpress-ecommerce
  i- catagory api navbar 
  ii- productListing for home & collection pg
  iii- productDetail for product pg and product Dialog
 
-Note : catagory and productlisting API are called in the first load of the page and the data is stored in the file (for retrive and use) . The productDetail API is called when the product pg is load or the product dialog is open .  
-Task : Make 3 files of API request and 2 temperary data files to store data for catagory and product listing (should these data files be contextAPI variables ?) .
+Note : catagory and productlisting API are called in the first load of the page and the data is stored in context (for retrive and use) . The productDetail API is called when the product pg is load or the product dialog is open .  
+Task : Make 3 files of API request.
 
 3 - if the user is logged in : the order data is saved in the user database ELSE in local storage ( with time stamp) .

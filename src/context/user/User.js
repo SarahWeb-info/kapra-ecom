@@ -1,43 +1,63 @@
 import { useState , useEffect } from 'react';
-import Context from "../context";
+import Context from "./userContext";
 
 const User =(props)=>{
     // login notifications are saved in local storage
     // retrive this data from the database (temp : local storage and save it in context)
     // login contain login(email)* , password* , name  
-    // orders will contain all orders with userStatus {to pay , orderStatus(processing,delivering,canceled) , reviews}
-    // wishlist will also contain user Algorithm
+    // ordersData will contain all ordersData with userStatus {to pay , orderStatus(processing,delivering,canceled) , reviews}
+    // wishlistData will also contain user Algorithm
 
-    const [loggedIn, setLoggedIn] = useState(false);
     const [loginData, setLoginData] = useState(null);
-    const [wishlist, setWishlist] = useState(null);
-    const [orders, setOrders] = useState(null);
+    const [wishlistData, setWishlistData] = useState(null);
+    const [ordersData, setOrdersData] = useState(null);
     
-    const updateLoginData =()=>{
+    const updateLoginDataFunc =()=>{
         setLoginData(localStorage.getItem("loginData"));
+        if (loginData) {
+            localStorage.setItem("loggedIn", true);
+        }else{
+            localStorage.setItem("loggedIn", false);
+        }
     }
 
-    const updateWishlist =()=>{
-        setWishlist(localStorage.getItem("wishlist"));
+    const updateWishlistFunc =()=>{
+        setWishlistData(localStorage.getItem("wishlistData"));
     }
 
-    const updateOrders =()=>{
-        setOrders(localStorage.getItem("orders"));
+    const updateOrdersFunc =()=>{
+        setOrdersData(localStorage.getItem("ordersData"));
     }
 
-    useEffect(() => {
+    const signInFunc =()=>{
         setLoginData(localStorage.getItem("loginData"));
         
         if (loginData) {
-            setLoggedIn(true);
-            updateWishlist();
-            updateOrders();
+            localStorage.setItem("loggedIn", true);
+            updateWishlistFunc();
+            updateOrdersFunc();
+        }    
+    }
+
+    const signOutFunc =()=>{
+        localStorage.removeItem("loggedIn");
+        localStorage.removeItem("wishlistData");
+        localStorage.removeItem("ordersData");
+        localStorage.removeItem("loginData");
+    }
+
+    useEffect(() => {
+        
+        if (localStorage.getItem("loginData")) {
+            signInFunc();
+        }else{
+            signOutFunc();
         }
 
     }, [loginData]);
 
     return(
-    <Context.Provider value={{ loggedIn , loginData , wishlist , orders , updateLoginData , updateWishlist , updateOrders }} >
+    <Context.Provider value={{ loginData , wishlistData , ordersData , updateLoginDataFunc , updateWishlistFunc , updateOrdersFunc , signInFunc , signOutFunc }} >
         {props.children}
     </Context.Provider>
     )

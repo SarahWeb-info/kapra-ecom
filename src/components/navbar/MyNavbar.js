@@ -1,24 +1,27 @@
 import React, { useState, useEffect, useContext } from 'react';
-import dialogsDisplayContext from '../../context/context';
+import MyContext from '../../context/globalContext/globalContext';
+import {navCarouselData} from '../../data/navData';
+import { useLocation } from 'react-router-dom';
 import './navbar.css';
 import CrossBTn from '../crossBtn/CrossBTn';
 import { BsFilterLeft, BsSearch, BsTruck, BsPerson, BsHeart, BsCart, BsChevronRight } from 'react-icons/bs';
 import MyCarousal from '../MyCarousal';
-import { categoryList, navCarouselData } from '../../data/navData';
 import TruncateText from '../productText/TrancateText';
 
 function MyNavbar() {
 
-  const [ shortenedNavLength , setShortenedNavLength ] = useState( categoryList.length ) ;
+  const { pathname } = useLocation();
+
+  const { catagoryData , cartDisplayFunc, loginDisplayFunc, searchDisplayFunc } = useContext( MyContext ) ;
+  const [ shortenedNavLength , setShortenedNavLength ] = useState( catagoryData.length ) ;
   const [ mobileSetup , setMobileSetup ] = useState( false ) ;
-  const { cartDisplayFunc, loginDisplayFunc, searchDisplayFunc } = useContext( dialogsDisplayContext ) ;
   const [ showNav , setShowNav ] = useState();
   const [ navbarPosition , setNavbarPosition ] = useState( 'relative' );
 
   // Function to handle responsive setup of navigation items in desktop Setup (the rest of the categories will be in the More Dropdown)
   const navResponsiveSetup = () => {
     if (window.innerWidth > 992) {
-      for (let i in categoryList) {
+      for (let i in catagoryData) {
         if (i * 180 > window.innerWidth) {
           setShortenedNavLength(i);
           break;
@@ -241,11 +244,11 @@ function MyNavbar() {
         {mobileSetup && <CrossBTn onClose={hideNavFunc} />}
 
         <div className="inlineBetween myNavitem">
-          <a href="/"><b>Home</b></a>
+          <a href="/" className={pathname === "/" ? 'myNavActive' : ''}>Home</a>
         </div>
 
-        {categoryList &&
-          categoryList.slice(0, shortenedNavLength).map((item, index) => {
+        {catagoryData &&
+          catagoryData.slice(0, shortenedNavLength).map((item, index) => {
             let shortenedName = item.CatagoryName;
 
             if (shortenedName.length > 13) {
@@ -296,9 +299,9 @@ function MyNavbar() {
 
             <div className="myDropdown glassBg">
               <div className="flexColumn align-items-start droplist">
-                {categoryList &&
-                  categoryList
-                    .slice(shortenedNavLength, categoryList.length)
+                {catagoryData &&
+                  catagoryData
+                    .slice(shortenedNavLength, catagoryData.length)
                     .map((item, index) => {
                       let shortenedName = item.CatagoryName;
 

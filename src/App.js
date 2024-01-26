@@ -4,6 +4,7 @@ import './css/buttons.css';
 
 import MyNavbar from './components/navbar/MyNavbar';
 import Promotions from './components/promotions/Promotions';
+import DialogAd from "./components/productDialog/ProductAdDialog";
 import SideMenus from './components/sidemenus/SideMenus';
 import Footer from './components/footer/Footer';
 
@@ -18,19 +19,19 @@ import FAQs from './tabs/Faqs';
 import Docs from './tabs/Docs';
 import ErrorPg from './tabs/ErrorPg';
 
-import State from './context/frontend/SideDivStates';
+import MyContext from './context/globalContext/GlobalState';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 export default function App() {
 
   return (
-    <State>
+    <MyContext>
     <BrowserRouter>
       <MyNavbar />
       <SideMenus />
       <Promotions />
-
+      <DialogAd />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/collection" element={<Collection />} />
@@ -46,6 +47,6 @@ export default function App() {
 
       <Footer />
     </BrowserRouter>
-    </State>
+    </MyContext>
   );
 }

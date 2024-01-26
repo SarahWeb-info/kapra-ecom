@@ -1,8 +1,9 @@
-import React from 'react'
-import productsList from '../../data/getProductList';
+import React , {useContext} from 'react'
+import MyContext from '../../context/globalContext/globalContext';
 import Slider from './Slider';
 
 export default function HomeSliderContainer({mainClass = "homeSliderContainer" ,  heading='Collection' , bannerImg = "img1" , catagroy }) {
+  const { productData } = useContext( MyContext ) ;
 
   return (
     <div className={mainClass}>
@@ -26,7 +27,7 @@ export default function HomeSliderContainer({mainClass = "homeSliderContainer" ,
           <span>Sale</span>
         </div>
          
-        <Slider productsList={productsList} />
+        <Slider productsList={productData} />
       </div>
     </div>  
   )

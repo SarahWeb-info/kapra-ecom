@@ -12,7 +12,7 @@ export default function Home() {
   return (
 
     <div>
-      
+
       <MyCarousel 
           class1 = "topCarousel" 
           class2="exploreBanner topCarousel-inner" 

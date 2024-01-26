@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect , useContext} from 'react';
 import "../css/collection.css";
+import MyContext from '../context/globalContext/globalContext';
 
 import FilterBar from '../components/filterBar/FilterBar';
-import productsList from '../data/getProductList';
 import ProductDialog from "../components/productDialog/ProductDialog";
 import CartDiv from '../components/sidemenus/CheckoutSideDiv';
 import MiniCart from "../components/miniCart/MiniCart";
@@ -11,7 +11,8 @@ import FilterDiv from '../components/filterDiv/FilterSortDiv';
 
 export default function Collection() {
 
-    const totalProducts = productsList.length;
+    const { productData } = useContext( MyContext ) ;
+    const totalProducts = productData.length;
     const [grid1display, setGrid1display] = useState(false);
     const [grid2display, setGrid2display] = useState(false);
     const [grid3display, setGrid3display] = useState(false);
@@ -155,7 +156,7 @@ export default function Collection() {
 
             <div className='inlineCenter collectionVeiw'>
 
-                {productsList && productsList
+                {productData && productData
                     .slice(0, lastNumber)
                     .map((item, index) => {
 
@@ -179,7 +180,7 @@ export default function Collection() {
                                 marginTop: `10px`
                             };
                             if (window.innerWidth > 1200) {
-                                mainClass = 'productCard-Row  productColumn-imgHover';    
+                                mainClass = 'productCard-Row';    
                             }
     
                         } else if (grid3display) {

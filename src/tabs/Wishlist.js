@@ -1,5 +1,5 @@
 import React , {useContext} from 'react'
-import dialogsDisplayContext from '../context/context';
+import MyContext from '../context/globalContext/globalContext';
 
 import ProductImg from '../components/productImg/ProductImg';
 import ProductText from '../components/productText/ProductText';
@@ -13,7 +13,7 @@ export default function Wishlist() {
     marginRight: `10px`,
   };
   
-  const { cartDisplayFunc } = useContext(dialogsDisplayContext);
+  const { cartDisplayFunc } = useContext(MyContext);
 
   return (
     <div className='pageDiv'>

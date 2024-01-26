@@ -1,33 +1,27 @@
-import data from './catagoryData';
-import getData from './filterData';
-let newData = getData(data);
-
-let navCarouselData = [    {
-    titleContent: (<small>Fixed delivery charges,Rs 100/-</small>),
+const navCarouselData = [
+  {
+    titleContent: (<small>Fixed delivery charges, Rs 100/-</small>),
   },
   {
-    titleContent: (<small>Best sellers.<a href="">Shop Now!</a></small>),
+    titleContent: (<small>Best sellers. <a href="">Shop Now!</a></small>),
   },
 ];
 
-const getDataObj = () => {
-    newData = newData[1][1];
-    let catArr = [];
+const getDataObj = (newData) => {
+  let catArr = [];
 
-    for (let i in newData) {
-        let catName = i;
-        let catData = newData[i];
+  for (let i in newData[1][1]) {
+    let catName = i;
+    let catData = newData[1][1][i];
 
-        let catObj = {
-            CatagoryName: catName,
-            CatagoryList: catData.map(item => ({ name: item.name, id: item.id }))
-        };
+    let catObj = {
+      CatagoryName: catName,
+      CatagoryList: catData.map(item => ({ name: item.name, id: item.id }))
+    };
 
-        catArr.push(catObj);
-    }
-    return catArr;
+    catArr.push(catObj);
+  }
+  return catArr;
 }
 
-const categoryList = getDataObj();
-
-export {categoryList , navCarouselData};
+export { getDataObj, navCarouselData };

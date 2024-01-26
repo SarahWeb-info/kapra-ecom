@@ -1,4 +1,7 @@
-let data = {
+import { getData } from "./filterData";
+
+const catagoryDataApi = async () => {
+  let result = {
     "meta": {
       "version": "v1.0",
       "status": 200,
@@ -2201,6 +2204,33 @@ let data = {
         }
       ]
     }
-  }
+  }  
+  return result = getData(result);
+};
 
-export default data ;
+// const catagoryDataApi = async () => {
+  
+//   const url = 'https://aliexpress-ecommerce.p.rapidapi.com/v1/aliexpress/categories';
+//   const options = {
+//     method: 'GET',
+//     headers: {
+//       'X-RapidAPI-Key': '10a4ba1cd4msh1ea4162312a54efp1c67bdjsnec864ab7b06e',
+//       'X-RapidAPI-Host': 'aliexpress-ecommerce.p.rapidapi.com'
+//     }
+//   };
+
+//   try {
+//     const response = await fetch(url, options);
+//     let result = await response.json(); 
+    
+//     if (response.status === 200) {
+//       result = getData(result); // filtering data in using format 
+//     }
+//     return result;
+  
+//   } catch (error) {
+//     return error;
+//   }
+// };
+
+export {catagoryDataApi};

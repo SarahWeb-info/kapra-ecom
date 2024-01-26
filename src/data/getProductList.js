@@ -1,8 +1,4 @@
-import data from './sampleData';
-import getData from './filterData';
-let newData = getData(data);
-
-const getDataObj = () => {
+const getDataObj = (newData) => {
     newData = newData[1][1];
     let productsArr = [];
   
@@ -44,7 +40,5 @@ const getDataObj = () => {
     return productsArr ;       
 }
 
-let productsList = getDataObj();
-
-export default  productsList;
+export  {getDataObj};
 

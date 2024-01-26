@@ -1,8 +1,8 @@
 import React , { useContext , useEffect, useState  } from 'react';
-import context from '../context/context';
+import context from '../context/globalContext/globalContext';
 
 export default function FadeBg() {
-    const {closeBtn} = useContext(context);
+    const {closeBtnFunc} = useContext(context);
     const [position , setPosition ] = useState('translateY(-100vh)');
 
     useEffect(() => {
@@ -12,6 +12,6 @@ export default function FadeBg() {
     }, []);
 
   return (
-    <div className='fadeBg' onClick={closeBtn} style={{transform:`${position}`}}></div>
+    <div className='fadeBg' onClick={closeBtnFunc} style={{transform:`${position}`}}></div>
   )
 }

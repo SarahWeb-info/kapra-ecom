@@ -1,7 +1,10 @@
-import React, {useState } from 'react';
+import React, {useState  , useEffect} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {  BsX } from "react-icons/bs";
-import productDetail from '../../data/getProductDetail';
+
+import {productListDataApi} from "../../data/productDetailData";
+import {getProductObj} from '../../data/getProductDetail';
+
 import ProductText from '../productText/ProductText';
 import ProductPrice from '../productPrice/ProductPrice';
 import StarRating from '../productStarRating/ProductStarRating';
@@ -10,6 +13,17 @@ import QuantityDiv from '../productQuantityDiv/QuantityDiv';
 import './productDialog.css';
 
 export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,discountPrice}) {
+
+  let data = "";
+  let productDetailObj = "";
+
+  useEffect(() => {
+    const getData = async ()=>{
+      data = await productListDataApi();
+      productDetailObj = getProductObj(data);
+    }
+    getData();
+  }, []);
 
   const [quantity, setQuantity] = useState(1);
   const handleQuantityChange=(x)=>{
@@ -37,7 +51,7 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
         
         <div className='alertBg productTag '>40%</div>
           <Carousel>
-          {productDetail.allImagesArr.map((item, index) => {
+          {productDetailObj.allImagesArr.map((item, index) => {
             return(
               <Carousel.Item key={index}>
                 <div>
@@ -51,13 +65,13 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
 
         <div className='flexColumn  align-content-center  dialogDetail' style={{ justifyContent : 'space-evenly'}}>
 
-        { productDetail.title && <ProductText  textClass = "py-4"  text = {productDetail.title}  maxTextLength = {100}  /> }  
+        { productDetailObj.title && <ProductText  textClass = "py-4"  text = {productDetailObj.title}  maxTextLength = {100}  /> }  
           
           <div className='inlineBetween'>
-            { origPrice && <ProductPrice currency = {productDetail.priceCurrency}  discountPrice = {discountPrice}  origPrice = {origPrice} /> }
+            { origPrice && <ProductPrice currency = {productDetailObj.priceCurrency}  discountPrice = {discountPrice}  origPrice = {origPrice} /> }
             
             <p>
-              {productDetail.inventory > 0 ? (
+              {productDetailObj.inventory > 0 ? (
                 <i style={{ color: 'green' }}>In stock</i>
               ) : (
                 <i style={{ color: 'red' }}>Sold Out</i>
@@ -68,7 +82,7 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
           </div>
           
           <div className='inlineBetween'>                
-            { productDetail.starRating && <StarRating goldenStars ={productDetail.starRating} /> }          
+            { productDetailObj.starRating && <StarRating goldenStars ={productDetailObj.starRating} /> }          
           </div>
 
           <div className='inlineBetween'>
@@ -80,7 +94,7 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
           </div>  
 
           <div className='productFeatures'>
-            {productDetail.additionalFeaturesArr.slice(0, 12).map((item, index) => {
+            {productDetailObj.additionalFeaturesArr.slice(0, 12).map((item, index) => {
               return(
                 <div  key={index}>
                   <b>{item.attr} :</b><span>{item.value}</span>

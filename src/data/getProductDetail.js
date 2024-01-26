@@ -1,8 +1,4 @@
-import data from './productDetailData';
-import getData from './filterData';
-let newData = getData(data);
-
-const getProductObj = () => {
+const getProductObj = (newData) => {
 
   newData = newData[1][1];
     
@@ -105,4 +101,4 @@ const getProductObj = () => {
     return productDetail ;       
 }
 
-export default  getProductObj();
+export { getProductObj };
