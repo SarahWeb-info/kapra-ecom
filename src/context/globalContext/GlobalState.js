@@ -1,9 +1,4 @@
 import { useState , useEffect } from 'react';
-import { catagoryDataApi } from "../../data/catagoryData";
-import { getDataObj as formatCatagoryList } from "../../data/navData";
-import { productListData } from '../../data/productListData';
-import { getDataObj as formatProductList } from "../../data/getProductList";
-
 import Context from "./globalContext";
 
 const GlobalState =(props)=>{
@@ -91,30 +86,8 @@ const GlobalState =(props)=>{
 
     }, [loginData]);
 
-    let catagoryData =null ;
-    let catagoryDataObj =null ;
-    
-    useEffect(() => {
-        const getData_Catagory = async () =>{
-            catagoryData = await catagoryDataApi();
-            catagoryDataObj = formatCatagoryList(catagoryData);
-        }
-        getData_Catagory();
-    }, []); 
-
-    let productData = null ;
-    let productDataObj =null ;
-    
-    useEffect(() => {
-        const getData_product = async () =>{
-            productData = await productListData();
-            productDataObj = formatProductList(catagoryData);
-        }
-        getData_product();
-    }, []); 
-
     return(
-        <Context.Provider value={{catagoryData ,productData , fadeBg ,cartDisplay , cartDisplayFunc ,loginDisplay , loginDisplayFunc ,searchDisplay, searchDisplayFunc , closeBtnFunc , loginData ,loggedInStatus , wishlistData , ordersData , updateLoginDataFunc , updateWishlistFunc , updateOrdersFunc , signInFunc , signOutFunc }} >
+        <Context.Provider value={{ fadeBg ,cartDisplay , cartDisplayFunc ,loginDisplay , loginDisplayFunc ,searchDisplay, searchDisplayFunc , closeBtnFunc , loginData ,loggedInStatus , wishlistData , ordersData , updateLoginDataFunc , updateWishlistFunc , updateOrdersFunc , signInFunc , signOutFunc }} >
             {props.children}
         </Context.Provider>
     )

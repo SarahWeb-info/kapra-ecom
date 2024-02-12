@@ -7,6 +7,7 @@ import ProductPrice from '../productPrice/ProductPrice';
 import Img from '../../imgs/img1.jpg';
 
 export default function CheckoutSideDiv({ onClose }) {
+  
     const [ emptyCart , setEmptyCart] = useState(false);
     const [ showDiv , setShowDiv ] = useState(' -100%');
     

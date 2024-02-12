@@ -11,6 +11,7 @@ import Footer from './components/footer/Footer';
 import Home from './tabs/Home' ; 
 import Collection from './tabs/Collection';
 import Product from './tabs/Product';
+// import ProductDetails from './ProductDetails';
 import Wishlist from './tabs/Wishlist';
 import OrderDetails from './tabs/OrderDetail';
 import ContactUs from './tabs/ContactUs';
@@ -34,8 +35,9 @@ export default function App() {
       <DialogAd />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/collection" element={<Collection />} />
-        <Route path="/product" element={<Product />} />
+        <Route path="/collection/:param" element={<Collection />} />
+        <Route path="/product/:param" element={<Product />} />
+        {/* <Route path="/productDetails/:param" element={<ProductDetails />} /> */}
         <Route path="/wishlist" element={<Wishlist />} />
         <Route path="/OrderDetails" element={<OrderDetails />} />
         <Route path="/contactUs" element={<ContactUs />} />

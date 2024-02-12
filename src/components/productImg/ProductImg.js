@@ -1,8 +1,7 @@
 import React from 'react'
 import { BsHeart, BsCart } from 'react-icons/bs';
-import { SiCodereview } from 'react-icons/si';
 
-export default function ProductImg({imgObj , miniCartFunc = null , detailFunc=null , wishListFunc = null}) {
+export default function ProductImg({imgObj , cartFunc = null , detailFunc=null , wishListFunc = null}) {
     let {imgSrc ,imgAlt = "" , imgClass = "" ,  imgBtns = null } = imgObj ;
 
     return (
@@ -12,9 +11,9 @@ export default function ProductImg({imgObj , miniCartFunc = null , detailFunc=nu
   
         {imgBtns && (
           <div className='productImg-Btns'>
-            {imgBtns.includes('cart') && <button  onClick={detailFunc && (() => miniCartFunc())}><BsCart /></button>}
+            {imgBtns.includes('cart') && <button  onClick={cartFunc && (() => cartFunc())}><BsCart /></button>}
             {imgBtns.includes('heart') && <button onClick={wishListFunc && (() => wishListFunc())} ><BsHeart /></button>}
-            {imgBtns.includes('detail') && <button  onClick={detailFunc && (() => detailFunc())}><SiCodereview /></button>}
+            {imgBtns.includes('detail') && <button  onClick={detailFunc && (() => detailFunc())}><BsCart /></button>}
           </div>
         )}
       </div>

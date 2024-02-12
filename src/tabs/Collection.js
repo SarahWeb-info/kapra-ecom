@@ -1,18 +1,53 @@
-import React, {useState, useEffect , useContext} from 'react';
+import React, {useState, useEffect } from 'react';
+import  {findAlgorithmCatagory}  from '../data/catagoryAlgorithm';
+import { useParams } from 'react-router-dom';
 import "../css/collection.css";
-import MyContext from '../context/globalContext/globalContext';
+import {addToWishData} from '../data/addWishlist';
 
 import FilterBar from '../components/filterBar/FilterBar';
 import ProductDialog from "../components/productDialog/ProductDialog";
 import CartDiv from '../components/sidemenus/CheckoutSideDiv';
-import MiniCart from "../components/miniCart/MiniCart";
 import ProductCard from '../components/productCards/ProductCard';
 import FilterDiv from '../components/filterDiv/FilterSortDiv';
 
 export default function Collection() {
 
-    const { productData } = useContext( MyContext ) ;
-    const totalProducts = productData.length;
+    // Fetch params from the URL path
+    const { param } = useParams();
+    const [collection, setCollection] = useState([]);
+    let callOnce = 0;
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+        let data = await findAlgorithmCatagory(param);
+            if (data) {
+                data = data[0].data ; 
+                setCollection(JSON.parse(data));
+            }
+        };
+        
+        if (callOnce === 0) {
+        fetchData();
+        callOnce = 1;
+        }
+
+    }, []);
+
+    const totalProducts = collection.length;
+    const showProduct = 6;
+    const [lastNumber,setlastNumber] = useState(showProduct);
+
+    if (totalProducts > showProduct) {
+        setlastNumber(showProduct);
+    }
+
+    const nextBtn = () => {
+        if (lastNumber + showProduct < totalProducts) {
+            setlastNumber(lastNumber + showProduct);
+        }
+    }
+
     const [grid1display, setGrid1display] = useState(false);
     const [grid2display, setGrid2display] = useState(false);
     const [grid3display, setGrid3display] = useState(false);
@@ -43,15 +78,10 @@ export default function Collection() {
     }
 
     const [showDialog, setShowDialog] = useState(false);
-    const [productId, setProductId] = useState(0);
-    const [currency, setCurrency] = useState("$");
-    const [origPrice, setOrigPrice] = useState("");
-    const [discount, setDiscount] = useState("");
+    const [productData , setProductData ] = useState(null);
 
-    const showDialogFunc = (id, origPrice, discountPrice) => {
-        setProductId(id);
-        setOrigPrice(origPrice);
-        setDiscount(discountPrice);
+    const showDialogFunc = (item) => {
+        setProductData(item);
         setShowDialog(true);
     }
 
@@ -59,35 +89,14 @@ export default function Collection() {
         setShowDialog(false);
     }
 
-    const [showMiniCart,
-        setShowMiniCart] = useState(false);
-    const [productTitle,
-        setProductTitle] = useState(0);
-
-    const showMiniCartFunc = (id, title, currency, origPrice, discountPrice) => {
-        setProductId(id);
-        setProductTitle(title);
-        setCurrency(currency);
-        setOrigPrice(origPrice);
-        setDiscount(discountPrice);
-        setShowMiniCart(true);
+    const wishListFunc =( item , id )=>{
+        addToWishData(item , id );
     }
 
-    const hideMiniCart = () => {
-        setShowMiniCart(false);
-    }
-
-    const [fadeBg,
-        setFadeBg] = useState('translateY(-100vh)');
-    const [cart,
-        setCart] = useState(false);
+    const [fadeBg, setFadeBg] = useState('translateY(-100vh)');
+    const [cart, setCart] = useState(false);
     const [showFilterDiv , setShowFilterDiv] = useState(false);
 
-    const showCart = () => {
-        setShowDialog(false);
-        setFadeBg('translateY(0)');
-        setCart(true);
-    }
     const hideAll = (x) => {
         setFadeBg('translateY(-100vh)');
         setCart(false);
@@ -104,47 +113,23 @@ export default function Collection() {
         hideAll();
     }
 
-    const showProduct = 6;
-    const [lastNumber,
-        setlastNumber] = useState(showProduct);
-
-    const nextBtn = () => {
-        if (lastNumber + showProduct < totalProducts) {
-            setlastNumber(lastNumber + showProduct);
-        }
-    }
-
-
     return (
         <div>
 
-            {showDialog && <ProductDialog
-                onClose={() => hideDialog()}
-                goToCart={showCart}
-                itemId={productId}
-                origPrice={origPrice}
-                discountPrice={discount}/>}
-
-            {showMiniCart && 
-                <MiniCart
-                    onClose={() => hideMiniCart()}
-                    goToCart={showCart}
-                    productId = {productId}
-                    propTitle={productTitle}
-                    currency = {currency}
-                    origPrice={origPrice}
-                    discountPrice={discount}
-                />
-            }
+            {showDialog && 
+                <ProductDialog
+                    onClose={() => hideDialog()}
+                    item={productData}
+                }
 
             {showFilterDiv && <FilterDiv handleFilter={handleFilter}  hideAll={hideAll}/>}    
 
             <div
                 className='fadeBg'
                 onClick={hideAll}
-                style={{
-                transform: `${fadeBg}`
-            }}></div>
+                style={{ transform: `${fadeBg}` }}>
+            </div>
+            
             {cart && <CartDiv onClose={hideAll}/>}
 
             <FilterBar
@@ -152,14 +137,19 @@ export default function Collection() {
                 grid2display={grid2display}
                 grid3display={grid3display}
                 displayFilterDiv={displayFilterDiv} 
-                selectGrid={selectGrid}/>
+                selectGrid={selectGrid}
+            />
 
             <div className='inlineCenter collectionVeiw'>
+                {collection.length=== 0 && 
+                    <p>
+                        This category is currently out of stock. Subscribe for the restocking alert.
+                    </p>
+                }
 
-                {productData && productData
+                {collection && collection
                     .slice(0, lastNumber)
                     .map((item, index) => {
-
 
                         let mainClass = 'productCard-Column productColumn-imgHover';
 
@@ -182,7 +172,7 @@ export default function Collection() {
                             if (window.innerWidth > 1200) {
                                 mainClass = 'productCard-Row';    
                             }
-    
+                            
                         } else if (grid3display) {
                             styling = {
                                 width: `20vw`,
@@ -199,7 +189,7 @@ export default function Collection() {
                                 marginTop: `10px`
                             };
                         }
-
+                        
                         let myCard = {
                             main: {
                                 mainClass: `${mainClass}`,
@@ -209,38 +199,39 @@ export default function Collection() {
                                 additionalClass: "noColour"
                             },
                             img: {
-                                imgSrc: `${item.img}`,
-                                imgBtns: ['cart', 'detail']
+                                imgSrc: `${item.images[0]}`,
+                                imgBtns: ['detail', 'heart']
                             },
+                            id : `${item.id}`,
                             para: {
                                 para: `${item.title}`,
                                 maxTextLength: 60
                             },
                             prices: {
-                                currency: `${item.currency}`,
-                                discount: `${item.discount}`,
+                                currency: `$`,
+                                discount: `${item.discountPercentage}`,
                                 origPrice: `${item.price}`,
                                 show: "full"
                             }
                         };
 
                         return (
-                        <ProductCard
-                            key={index}
-                            myCard={myCard}
-                            hoverBtn={false}
-                            detailFunc=
-                            {()=> showDialogFunc( `${item.id}` , `${item.discount}` , `${item.price}` )}
-                            miniCartFunc=
-                            {()=>showMiniCartFunc( `${item.title}` , `${item.currency}` , `${item.discount}` , `${item.price}` )}
-                        />);
+                            
+                            <ProductCard
+                                key={index}
+                                myCard={myCard}
+                                hoverBtn={false}
+                                detailFunc=
+                                {()=> showDialogFunc( item )}
+                                wishListFunc=
+                                {()=>wishListFunc( item , item.id)}
+                            />
+                        );
                     })}
-
             </div>
 
             <div className='columnCenter py-2'>
-                {lastNumber + showProduct < totalProducts && <button className='customDarkBtn' onClick={nextBtn}>More Products</button>
-}
+                {lastNumber + showProduct < totalProducts && <button className='customDarkBtn' onClick={nextBtn}>More Products</button>}
             </div>
 
         </div>

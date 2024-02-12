@@ -183,12 +183,38 @@ backend :
 1-
 (i)- context api is used for the display of GLOBAL sidemenus ,i.e cart , search , login
 
-2 -the rapid api for product listing -https://rapidapi.com/sparior/api/aliexpress-ecommerce
+2 -the rapid api for product listing -https://rapidapi.com/ecommdatahub/api/aliexpress-datahub
  i- catagory api navbar 
  ii- productListing for home & collection pg
  iii- productDetail for product pg and product Dialog
 
-Note : catagory and productlisting API are called in the first load of the page and the data is stored in context (for retrive and use) . The productDetail API is called when the product pg is load or the product dialog is open .  
-Task : Make 3 files of API request.
+Note : 
+No. of API calls :
+on startup :
+- on API request make a  dataUpdateDate with current date + expiryTime in local storage.
+- 1 catagory Call for navbar . (then save the data in context and local storage).
+- 4 product collection calls from query cat ID (for the home page . )(also save in local storage and context) . 
+on click navbar : 
+- 1 product collection call  from query cat ID (for collection page .)
+on click product Card : (either clicking zoom for dialog or for product detail page) . 4 (demanding) product collection calls are saved in local storage , rest are save in session storage .
+
+- 1 product detail call from query product ID.
+
+Backup work for fast browsing : 
+In local storage , 
+-if dataUpdateDate < currentDate & dataUpdateDate != null/undefined  
+    - if  catagoryData != null/undefined 
+    else 
+    - api call and save data to local storage and context
+
+    - on product collection API call , check for the matching products saved local / session storage . if matches and use that data / else make API call .
+
+else if dataUpdateDate => currentDate
+    - give notification of update latest data
+    - API call for catagory data + 4 product collections
+    - save in local storage with latest dataUpdateDate.
+    - save in context
 
 3 - if the user is logged in : the order data is saved in the user database ELSE in local storage ( with time stamp) .
+    - making user algorithm :
+        keep saving the search keypoints and most clicked IDs in user algorithm data . 

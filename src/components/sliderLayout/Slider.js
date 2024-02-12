@@ -5,6 +5,11 @@ import './slider.css';
 
 export default function Slider({ productsList = []}) {
 
+  let maxListLength = 10 ;
+  if (productsList.length <= 10) {
+    maxListLength = productsList.length ; 
+  }
+
   const [productDiv , setProductDiv ] = useState();
   const [leftPosition ,setLeftPosition ] = useState(0);
   let marginPx = 4 ;
@@ -81,19 +86,21 @@ export default function Slider({ productsList = []}) {
         <div className='sliderInner' style={{left : `${leftPosition}px` }}>
 
         {productsList &&
-          productsList.map((item, index) => {
+          productsList.slice(0, maxListLength).map((item, index) => {
             let styling = {
               width: `${productDiv - marginPx}px`,
               minWidth: `${productDiv - marginPx}px`,
               marginRight: `${marginPx + marginPx}px`,
             };
-            
+
             let myCard = {
+
               main: { mainClass: "productCard productCard-Column productColumn-imgHover", style: styling },
               colouredDiv: { additionalClass: "shadow" },
-              img: { imgSrc: `${item.img}`},
+              img: { imgSrc: `${item.images[0]}`},
+              id : `${item.id}`,
               para: { para: `${item.title}`, maxTextLength: 60 },
-              prices: { currency: `${item.currency}`, discount: `${item.discount}`, origPrice: `${item.price}`, show: "full" },
+              prices: { currency: `$`, discount: `${item.discountPercentage}`, origPrice: `${item.price}`, show: "full" },
             };
 
             return (

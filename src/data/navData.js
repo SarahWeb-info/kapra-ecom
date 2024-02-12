@@ -1,3 +1,8 @@
+import axios from "axios";
+import countAPIcalls from "./countAPIcalls";
+import  {setExpiryDate , findExpiryDate} from './setExpiryDate';
+
+// this data is for nav carousal
 const navCarouselData = [
   {
     titleContent: (<small>Fixed delivery charges, Rs 100/-</small>),
@@ -7,21 +12,42 @@ const navCarouselData = [
   },
 ];
 
-const getDataObj = (newData) => {
-  let catArr = [];
+const collectNavData = async () =>{
+  try {
+      const isExpired = findExpiryDate();
+      let data = localStorage.getItem('Nav Data');
+  
+      if (isExpired && data){
+          data = JSON.parse(data);
 
-  for (let i in newData[1][1]) {
-    let catName = i;
-    let catData = newData[1][1][i];
+      }else if (!isExpired && !data) {
+  
+        try {
+          const response = await axios.get('https://dummyjson.com/products/categories');
+          console.log("call from nav");
+          // Update 'data' variable
+          data = response.data;
+  
+          // Save data to localStorage
+          localStorage.setItem('Nav Data', JSON.stringify(data));
+          // Set data date
+          setExpiryDate(15);
+  
+        } catch (error) {
+          // Handle any errors that occurred during the request
+          console.error('Error fetching data:', error);
+        
+        } finally {
+          countAPIcalls();
+        }
+      }
+  
+      return data;
 
-    let catObj = {
-      CatagoryName: catName,
-      CatagoryList: catData.map(item => ({ name: item.name, id: item.id }))
-    };
-
-    catArr.push(catObj);
-  }
-  return catArr;
+    } catch (error) {
+      console.error('Error finding category data:', error);
+      return [];
+    }
 }
 
-export { getDataObj, navCarouselData };
+export {navCarouselData , collectNavData };

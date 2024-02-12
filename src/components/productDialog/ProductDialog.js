@@ -1,9 +1,8 @@
 import React, {useState  , useEffect} from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {  BsX } from "react-icons/bs";
-
-import {productListDataApi} from "../../data/productDetailData";
-import {getProductObj} from '../../data/getProductDetail';
+import MyContext from '../../context/globalContext/globalContext';
+import {addToCartData} from '../../data/addCart';
 
 import ProductText from '../productText/ProductText';
 import ProductPrice from '../productPrice/ProductPrice';
@@ -12,18 +11,9 @@ import QuantityDiv from '../productQuantityDiv/QuantityDiv';
 
 import './productDialog.css';
 
-export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,discountPrice}) {
+export default function ProductDialog({ onClose , item }) {
 
-  let data = "";
-  let productDetailObj = "";
-
-  useEffect(() => {
-    const getData = async ()=>{
-      data = await productListDataApi();
-      productDetailObj = getProductObj(data);
-    }
-    getData();
-  }, []);
+  const { cartDisplayFunc } = useContext(MyContext);
 
   const [quantity, setQuantity] = useState(1);
   const handleQuantityChange=(x)=>{
@@ -37,7 +27,8 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
   }
 
   const showCart =()=>{
-    goToCart();
+    addToCartData(item ,item.id , quantity );
+    cartDisplayFunc();
   }
 
   return (
@@ -51,11 +42,11 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
         
         <div className='alertBg productTag '>40%</div>
           <Carousel>
-          {productDetailObj.allImagesArr.map((item, index) => {
+          {item.images.map((imgData, index) => {
             return(
               <Carousel.Item key={index}>
                 <div>
-                  <img src={item} alt="" />
+                  <img src={itemData} alt="" />
                 </div>
               </Carousel.Item>
               );
@@ -65,14 +56,14 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
 
         <div className='flexColumn  align-content-center  dialogDetail' style={{ justifyContent : 'space-evenly'}}>
 
-        { productDetailObj.title && <ProductText  textClass = "py-4"  text = {productDetailObj.title}  maxTextLength = {100}  /> }  
+        { item.title && <ProductText  textClass = "py-4"  text = {item.title}  maxTextLength = {100}  /> }  
           
           <div className='inlineBetween'>
-            { origPrice && <ProductPrice currency = {productDetailObj.priceCurrency}  discountPrice = {discountPrice}  origPrice = {origPrice} /> }
+            { item.price && <ProductPrice currency = "$"  discountPrice = {item.discountPercentage}  origPrice = {item.price} /> }
             
             <p>
-              {productDetailObj.inventory > 0 ? (
-                <i style={{ color: 'green' }}>In stock</i>
+              {item.stock > 0 ? (
+                <i style={{ color: 'green' }}>In stock {item.stock} items</i>
               ) : (
                 <i style={{ color: 'red' }}>Sold Out</i>
               )}
@@ -82,7 +73,7 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
           </div>
           
           <div className='inlineBetween'>                
-            { productDetailObj.starRating && <StarRating goldenStars ={productDetailObj.starRating} /> }          
+            { item.rating && <StarRating goldenStars ={item.rating} /> }          
           </div>
 
           <div className='inlineBetween'>
@@ -91,16 +82,6 @@ export default function ProductDialog({ onClose , goToCart ,itemId,origPrice,dis
 
             <button className='my-2 customDarkBtn' onClick={showCart}> Add to Cart </button>
             <span></span>
-          </div>  
-
-          <div className='productFeatures'>
-            {productDetailObj.additionalFeaturesArr.slice(0, 12).map((item, index) => {
-              return(
-                <div  key={index}>
-                  <b>{item.attr} :</b><span>{item.value}</span>
-                </div>  
-              );
-            })}           
           </div>  
         
       </div> 

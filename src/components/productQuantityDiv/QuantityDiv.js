@@ -7,7 +7,7 @@ export default function QuantityDiv({handleQuantityChange , additionalClass =""}
     const [quantity, setQuantity] = useState(1);
 
     const minusQuantity=()=>{
-        if (parseInt(quantity)>0) {
+        if (parseInt(quantity)>1) {
             setQuantity(parseInt(quantity)-1);
             handleQuantityChange(quantity);
          }
